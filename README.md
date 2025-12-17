@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏆 Toronto Cup Pong Championship - Landing Page
 
-## Getting Started
+A premium, mobile-responsive waitlist landing page for the Toronto Cup Pong Championship tournament series.
 
-First, run the development server:
+## ✨ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Modern Design**: Sleek, professional design that communicates prestige and competition
+- **Fully Responsive**: Mobile-first design that looks great on all devices
+- **Google Sheets Integration**: Form submissions sent directly to Google Sheets
+- **Smooth Animations**: Engaging interactions and scroll effects
+- **SEO Optimized**: Proper meta tags and semantic HTML
+- **Ready for Payments**: Built with Stripe integration in mind for future payment processing
+
+## 🚀 Quick Start
+
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+3. **Open your browser**:
+   Visit [http://localhost:3002](http://localhost:3002)
+
+## 📋 Complete Setup
+
+For detailed setup instructions including Google Sheets integration and deployment, see **[SETUP.md](./SETUP.md)**.
+
+## 🎨 Page Sections
+
+1. **Hero** - Bold headline with event details and CTA button
+2. **About** - Tournament description and key features
+3. **Format** - Bracket structure and competition flow
+4. **Waitlist Form** - Registration with Google Sheets integration
+5. **FAQ** - Common questions and answers
+6. **Footer** - Social media and site links
+
+## 🛠 Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Form Handling**: Next.js API Routes
+- **Data Storage**: Google Sheets via Apps Script
+- **Deployment**: Vercel / Netlify ready
+
+## 📁 Project Structure
+
+```
+pong-landing/
+├── app/
+│   ├── api/
+│   │   └── waitlist/
+│   │       └── route.ts          # Form submission API
+│   ├── layout.tsx                 # Root layout with metadata
+│   ├── page.tsx                   # Main page component
+│   └── globals.css                # Global styles
+├── components/
+│   ├── Hero.tsx                   # Hero section
+│   ├── About.tsx                  # About section
+│   ├── TournamentFormat.tsx       # Format section
+│   ├── WaitlistForm.tsx           # Registration form
+│   ├── FAQ.tsx                    # FAQ section
+│   └── Footer.tsx                 # Footer
+├── .env.local                     # Environment variables (not in git)
+├── .env.example                   # Environment variables template
+├── SETUP.md                       # Complete setup guide
+└── README.md                      # This file
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌐 Deployment
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Vercel (Recommended)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+vercel
+```
 
-## Learn More
+### Netlify
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+netlify deploy --prod
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+See [SETUP.md](./SETUP.md) for detailed deployment instructions.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔧 Customization
 
-## Deploy on Vercel
+### Update Event Details
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Edit components to customize:
+- Event dates and location
+- Pricing and team counts
+- FAQ questions
+- Social media links
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Styling
+
+All styling uses Tailwind CSS classes. The color scheme uses:
+- Primary: Blue (`blue-500`, `blue-600`)
+- Secondary: Purple (`purple-500`, `purple-600`)
+- Accent: Pink (`pink-500`, `pink-600`)
+
+## 📝 Environment Variables
+
+Required environment variables (see `.env.example`):
+
+```env
+GOOGLE_SHEETS_URL=your_google_apps_script_url
+```
+
+## 🤝 Support
+
+For detailed setup help, troubleshooting, and customization guides, see [SETUP.md](./SETUP.md).
+
+## 📄 License
+
+Built for Toronto Cup Pong Championship © 2026
+
+---
+
+**Ready to launch your tournament?** Follow the [SETUP.md](./SETUP.md) guide to complete the Google Sheets integration and deploy!
