@@ -19,35 +19,35 @@ export function Hero() {
         </div>
 
         {/* Main headline */}
-        <h1 className="text-6xl md:text-8xl font-black text-white mb-6 tracking-tight">
+        <h1 className="text-4xl sm:text-6xl md:text-8xl font-black text-white mb-6 tracking-tight">
           TORONTO CUP PONG
           <span className="block mt-2 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
             CHAMPIONSHIP
           </span>
         </h1>
 
-        <div className="text-2xl md:text-3xl font-bold text-slate-300 mb-4">
+        <div className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-300 mb-4">
           The Inaugural Fall Classic
         </div>
 
         {/* Subtitle */}
-        <p className="text-xl md:text-2xl text-slate-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-          Where precision meets competition. Elite teams. High stakes. One champion.
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-400 mb-12 max-w-3xl mx-auto px-4">
+          Where precision meets competition: elite teams high stakes one champion.
         </p>
 
         {/* Stats grid */}
-        <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto mb-12">
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6">
-            <div className="text-3xl md:text-4xl font-bold text-white mb-1">50-100</div>
-            <div className="text-sm text-slate-400 uppercase tracking-wide">Teams</div>
+        <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 max-w-2xl mx-auto mb-12 px-4">
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-6">
+            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1">50-100</div>
+            <div className="text-[10px] sm:text-xs md:text-sm text-slate-400 uppercase tracking-wide">Teams</div>
           </div>
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6">
-            <div className="text-3xl md:text-4xl font-bold text-white mb-1">$40</div>
-            <div className="text-sm text-slate-400 uppercase tracking-wide">Per Duo</div>
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-6">
+            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1">$20</div>
+            <div className="text-[10px] sm:text-xs md:text-sm text-slate-400 uppercase tracking-wide">Per Duo</div>
           </div>
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6">
-            <div className="text-3xl md:text-4xl font-bold text-white mb-1">16</div>
-            <div className="text-sm text-slate-400 uppercase tracking-wide">Team Brackets</div>
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-6">
+            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1">16</div>
+            <div className="text-[10px] sm:text-xs md:text-sm text-slate-400 uppercase tracking-wide">Team Brackets</div>
           </div>
         </div>
 

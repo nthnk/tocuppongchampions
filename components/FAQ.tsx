@@ -5,7 +5,7 @@ import { useState } from 'react';
 const faqs = [
   {
     question: "How much does it cost to enter?",
-    answer: "$40 per duo team. This covers tournament entry, venue access, and eligibility for prizes."
+    answer: "$20 per duo team. This covers tournament entry, venue access, and eligibility for prizes."
   },
   {
     question: "Is this really non-alcoholic?",
@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     question: "Can I register as a solo player?",
-    answer: "Yes, but the cost will remain the same at $40. You will get two shots per turn."
+    answer: "Yes, but the cost will remain the same at $20. You will get two shots per turn."
   },
   {
     question: "What happens after I join the waitlist?",
@@ -45,7 +45,7 @@ export function FAQ() {
   };
 
   return (
-    <section className="py-24 px-6">
+    <section id="faq" className="py-24 px-6">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-6xl font-black text-white mb-6">
@@ -98,13 +98,13 @@ export function FAQ() {
         <div className="mt-12 text-center">
           <p className="text-slate-400 mb-4">Still have questions?</p>
           <a
-            href="mailto:info@torontocuppong.com"
+            href="mailto:nathan@tocuppongchampions.ca"
             className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-semibold transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
-            Contact us at info@torontocuppong.com
+            Contact us at nathan@tocuppongchampions.ca
           </a>
         </div>
       </div>
