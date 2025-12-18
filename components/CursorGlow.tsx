@@ -6,7 +6,7 @@ import * as d3 from 'd3';
 export function CursorGlow() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const positionRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const canvas = canvasRef.current;
