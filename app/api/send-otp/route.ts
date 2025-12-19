@@ -7,10 +7,10 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { teamName, player1Name, player2Name, email } = body;
+    const { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email } = body;
 
     // Validate required fields
-    if (!teamName || !player1Name || !player2Name || !email) {
+    if (!teamName || !player1FirstName || !player1LastName || !player2FirstName || !player2LastName || !email) {
       return NextResponse.json(
         { error: 'All fields are required' },
         { status: 400 }
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     console.log(`🔐 OTP CODE for ${email}: ${otpCode}`);
 
     // Store OTP with form data
-    storeOTP(email, otpCode, { teamName, player1Name, player2Name, email });
+    storeOTP(email, otpCode, { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email });
 
     // Send OTP email via Resend
     try {
@@ -144,8 +144,8 @@ export async function POST(request: NextRequest) {
 
       <div class="team-info">
         <p style="margin: 5px 0;"><strong>Team Name:</strong> ${teamName}</p>
-        <p style="margin: 5px 0;"><strong>Player 1:</strong> ${player1Name}</p>
-        <p style="margin: 5px 0;"><strong>Player 2:</strong> ${player2Name}</p>
+        <p style="margin: 5px 0;"><strong>Player 1:</strong> ${player1FirstName} ${player1LastName}</p>
+        <p style="margin: 5px 0;"><strong>Player 2:</strong> ${player2FirstName} ${player2LastName}</p>
       </div>
 
       <div class="otp-box">
@@ -159,7 +159,7 @@ export async function POST(request: NextRequest) {
       </div>
 
       <p style="color: #4b5563; margin-top: 30px;">
-        Questions? Reply to this email or contact us at <a href="mailto:info@torontocuppong.com" style="color: #2563eb;">info@torontocuppong.com</a>
+        Questions? Reply to this email or contact us at <a href="mailto:info@tocuppongchampions.ca" style="color: #2563eb;">info@tocuppongchampions.ca</a>
       </p>
     </div>
 

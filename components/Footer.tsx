@@ -25,7 +25,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:info@torontocuppong.com" className="text-slate-400 hover:text-blue-400 transition-colors">
+                <a href="mailto:info@tocuppongchampions.ca" className="text-slate-400 hover:text-blue-400 transition-colors">
                   Contact Us
                 </a>
               </li>

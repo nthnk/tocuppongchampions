@@ -7,8 +7,10 @@ type FormStep = 'form' | 'otp';
 export function WaitlistForm() {
   const [formData, setFormData] = useState({
     teamName: '',
-    player1Name: '',
-    player2Name: '',
+    player1FirstName: '',
+    player1LastName: '',
+    player2FirstName: '',
+    player2LastName: '',
     email: '',
   });
   const [otpCode, setOtpCode] = useState('');
@@ -74,8 +76,10 @@ export function WaitlistForm() {
       setSubmitStatus('success');
       setFormData({
         teamName: '',
-        player1Name: '',
-        player2Name: '',
+        player1FirstName: '',
+        player1LastName: '',
+        player2FirstName: '',
+        player2LastName: '',
         email: '',
       });
       setOtpCode('');
@@ -150,7 +154,7 @@ export function WaitlistForm() {
           <div className="bg-blue-600/10 border border-blue-500/20 rounded-xl p-6 text-left max-w-2xl mx-auto">
             <h3 className="text-lg font-bold text-white mb-3">Why Join the Waitlist?</h3>
             <p className="text-slate-300 leading-relaxed mb-4">
-              We're gauging serious interest for this tournament. Once we have enough registrations, we'll send out payment links, book a premium venue in Downtown Toronto, and secure sponsors to make this event happen.
+              We're gauging serious interest for this tournament. Once we have enough registrations, we'll send out payment links, book a premium venue in Downtown Toronto, and set a date for the event.
             </p>
             <div className="flex items-start gap-3 text-yellow-400 bg-yellow-600/10 border border-yellow-500/20 rounded-lg p-4">
               <svg className="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -186,36 +190,60 @@ export function WaitlistForm() {
 
               {/* Player 1 */}
               <div>
-                <label htmlFor="player1Name" className="block text-sm font-semibold text-white mb-2 uppercase tracking-wide">
-                  Player 1 Full Name *
+                <label className="block text-sm font-semibold text-white mb-2 uppercase tracking-wide">
+                  Player 1 *
                 </label>
-                <input
-                  type="text"
-                  id="player1Name"
-                  name="player1Name"
-                  required
-                  value={formData.player1Name}
-                  onChange={handleChange}
-                  placeholder="First Last"
-                  className="w-full px-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all"
-                />
+                <div className="grid grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    id="player1FirstName"
+                    name="player1FirstName"
+                    required
+                    value={formData.player1FirstName}
+                    onChange={handleChange}
+                    placeholder="First Name"
+                    className="w-full px-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all"
+                  />
+                  <input
+                    type="text"
+                    id="player1LastName"
+                    name="player1LastName"
+                    required
+                    value={formData.player1LastName}
+                    onChange={handleChange}
+                    placeholder="Last Name"
+                    className="w-full px-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all"
+                  />
+                </div>
               </div>
 
               {/* Player 2 */}
               <div>
-                <label htmlFor="player2Name" className="block text-sm font-semibold text-white mb-2 uppercase tracking-wide">
-                  Player 2 Full Name *
+                <label className="block text-sm font-semibold text-white mb-2 uppercase tracking-wide">
+                  Player 2 *
                 </label>
-                <input
-                  type="text"
-                  id="player2Name"
-                  name="player2Name"
-                  required
-                  value={formData.player2Name}
-                  onChange={handleChange}
-                  placeholder="First Last"
-                  className="w-full px-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all"
-                />
+                <div className="grid grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    id="player2FirstName"
+                    name="player2FirstName"
+                    required
+                    value={formData.player2FirstName}
+                    onChange={handleChange}
+                    placeholder="First Name"
+                    className="w-full px-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all"
+                  />
+                  <input
+                    type="text"
+                    id="player2LastName"
+                    name="player2LastName"
+                    required
+                    value={formData.player2LastName}
+                    onChange={handleChange}
+                    placeholder="Last Name"
+                    className="w-full px-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all"
+                  />
+                </div>
               </div>
 
               {/* Email */}

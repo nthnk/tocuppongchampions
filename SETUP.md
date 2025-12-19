@@ -25,9 +25,11 @@ npm run dev
 4. Set up the following column headers in row 1:
    - Column A: `Timestamp`
    - Column B: `Team Name`
-   - Column C: `Player 1 Name`
-   - Column D: `Player 2 Name`
-   - Column E: `Email`
+   - Column C: `Player 1 First Name`
+   - Column D: `Player 1 Last Name`
+   - Column E: `Player 2 First Name`
+   - Column F: `Player 2 Last Name`
+   - Column G: `Email`
 
 ### Step 2: Create a Google Apps Script
 
@@ -48,8 +50,10 @@ function doPost(e) {
     sheet.appendRow([
       data.timestamp,
       data.teamName,
-      data.player1Name,
-      data.player2Name,
+      data.player1FirstName,
+      data.player1LastName,
+      data.player2FirstName,
+      data.player2LastName,
       data.email
     ]);
 

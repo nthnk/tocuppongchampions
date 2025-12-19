@@ -15,7 +15,7 @@ export function Hero() {
         {/* Event badge */}
         <div className="inline-flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 rounded-full mb-8 backdrop-blur-sm">
           <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
-          <span className="text-blue-300 font-semibold text-sm tracking-wide uppercase">September 2026 • Downtown Toronto</span>
+          <span className="text-blue-300 font-semibold text-sm tracking-wide uppercase">Downtown Toronto</span>
         </div>
 
         {/* Main headline */}
@@ -32,7 +32,7 @@ export function Hero() {
 
         {/* Subtitle */}
         <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-400 mb-12 max-w-3xl mx-auto px-4">
-          Where precision meets competition: elite teams high stakes one champion.
+          Where precision meets competition: elite teams, high stakes, one champion.
         </p>
 
         {/* Stats grid */}
@@ -42,7 +42,7 @@ export function Hero() {
             <div className="text-[10px] sm:text-xs md:text-sm text-slate-400 uppercase tracking-wide">Teams</div>
           </div>
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-6">
-            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1">$20</div>
+            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1">$30</div>
             <div className="text-[10px] sm:text-xs md:text-sm text-slate-400 uppercase tracking-wide">Per Duo</div>
           </div>
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-6">

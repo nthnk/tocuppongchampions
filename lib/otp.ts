@@ -6,8 +6,10 @@ interface OTPData {
   email: string;
   formData: {
     teamName: string;
-    player1Name: string;
-    player2Name: string;
+    player1FirstName: string;
+    player1LastName: string;
+    player2FirstName: string;
+    player2LastName: string;
     email: string;
   };
   expiresAt: number;

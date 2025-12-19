@@ -9,9 +9,8 @@ export function ShareSection() {
 
 Join me for Toronto's premier competitive cup pong tournament!
 
-📅 September 2026
 📍 Downtown Toronto
-💰 $20 per duo team
+💰 $30 per duo team
 🏅 Cash prizes for top 3 finishers
 
 Non-alcoholic, skill-based competition. 50-100 teams competing in 16-team brackets.
