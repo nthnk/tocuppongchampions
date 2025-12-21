@@ -13,10 +13,10 @@ export function About() {
           {/* Main description */}
           <div className="space-y-6">
             <p className="text-lg md:text-xl text-slate-300 leading-relaxed">
-              The <span className="font-bold text-white">Toronto Cup Pong Championship</span> is a premier competitive tournament series bringing together the best players from across the region.
+              The <span className="font-bold text-white">Toronto Cup Pong Championship</span> is a laid-back social event where you can hang out, play cup pong, and meet new people. No stress, no pressure—just a fun day with good people and a casual tournament to see who's got the best shot in the city.
             </p>
             <p className="text-lg md:text-xl text-slate-300 leading-relaxed">
-              This is <span className="font-bold text-white">not</span> your typical party game. We're talking precision, strategy, and serious competition in a completely <span className="font-bold text-blue-400">non-alcoholic</span> environment built for the best.
+              Never played before? Perfect! Cup pong is super easy to pick up, and everyone's welcome regardless of skill level. Plus, it's completely <span className="font-bold text-blue-400">non-alcoholic</span>, so you can focus on having fun and actually remember the people you meet.
             </p>
           </div>
 
@@ -29,8 +29,8 @@ export function About() {
                 </svg>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white mb-2">Skill-Based Competition</h3>
-                <p className="text-slate-400">Pure gameplay focused on precision, strategy, and technique</p>
+                <h3 className="text-xl font-bold text-white mb-2">Easy to Play</h3>
+                <p className="text-slate-400">No experience needed—we'll show you the ropes when you arrive</p>
               </div>
             </div>
 
@@ -41,8 +41,8 @@ export function About() {
                 </svg>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white mb-2">Cash Prizes</h3>
-                <p className="text-slate-400">Compete for prize money and championship glory</p>
+                <h3 className="text-xl font-bold text-white mb-2">Fun Prizes</h3>
+                <p className="text-slate-400">Play for prizes or just play for fun—it's all good!</p>
               </div>
             </div>
 
@@ -53,8 +53,8 @@ export function About() {
                 </svg>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white mb-2">Food Trucks & Atmosphere</h3>
-                <p className="text-slate-400">Premium venue with popular food trucks and live DJ</p>
+                <h3 className="text-xl font-bold text-white mb-2">Chill Atmosphere</h3>
+                <p className="text-slate-400">Food, music, and good people—just come ready to have fun</p>
               </div>
             </div>
           </div>

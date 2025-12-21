@@ -2,8 +2,10 @@
 
 import { Header } from '@/components/Header';
 import { Hero } from '@/components/Hero';
-import { About } from '@/components/About';
-import { TournamentFormat } from '@/components/TournamentFormat';
+import { ParallaxCups } from '@/components/ParallaxCups';
+import { ParallaxSection } from '@/components/ParallaxSection';
+import { AboutAnimated } from '@/components/AboutAnimated';
+import { TournamentFormatAnimated } from '@/components/TournamentFormatAnimated';
 import { WaitlistForm } from '@/components/WaitlistForm';
 import { ShareSection } from '@/components/ShareSection';
 import { FAQ } from '@/components/FAQ';
@@ -16,12 +18,21 @@ export default function Home() {
       <CursorGlow />
       <div className="relative z-10">
         <Header />
-        <Hero />
-        <About />
-        <TournamentFormat />
-        <ShareSection />
-        <WaitlistForm />
-        <FAQ />
+        <ParallaxSection speed={0.05}>
+          <Hero />
+        </ParallaxSection>
+        <ParallaxCups />
+        <AboutAnimated />
+        <TournamentFormatAnimated />
+        <ParallaxSection speed={0.1}>
+          <ShareSection />
+        </ParallaxSection>
+        <ParallaxSection speed={0.15}>
+          <WaitlistForm />
+        </ParallaxSection>
+        <ParallaxSection speed={0.09}>
+          <FAQ />
+        </ParallaxSection>
         <Footer />
       </div>
     </main>

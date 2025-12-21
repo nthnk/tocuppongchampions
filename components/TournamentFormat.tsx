@@ -8,7 +8,7 @@ export function TournamentFormat() {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6" />
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Structured competition designed for maximum excitement and fairness
+            Simple, fair, and fun - everyone gets to play at least twice!
           </p>
         </div>
 
@@ -22,7 +22,7 @@ export function TournamentFormat() {
             </div>
             <h3 className="text-2xl font-bold text-white mb-3">16-Team Brackets</h3>
             <p className="text-slate-400 leading-relaxed">
-              Teams are organized into mini-brackets of 16 for balanced competition and faster gameplay
+              We split everyone into mini-brackets so you're not waiting around all day between games
             </p>
           </div>
 
@@ -33,9 +33,9 @@ export function TournamentFormat() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <h3 className="text-2xl font-bold text-white mb-3">Single Elimination</h3>
+            <h3 className="text-2xl font-bold text-white mb-3">Win and Advance</h3>
             <p className="text-slate-400 leading-relaxed">
-              High-stakes matches where every shot counts. Win or go home (or to redemption)
+              Every match matters - win to move forward, lose and you drop to the redemption bracket
             </p>
           </div>
 
@@ -46,9 +46,9 @@ export function TournamentFormat() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
             </div>
-            <h3 className="text-2xl font-bold text-white mb-3">Losers Bracket</h3>
+            <h3 className="text-2xl font-bold text-white mb-3">Redemption Bracket</h3>
             <p className="text-slate-400 leading-relaxed">
-              First-round losers get a second chance in the losers bracket to fight back (guaranteed minimum two matches)
+              Lose your first game? No worries - you get another shot in the redemption bracket. Everyone plays at least twice!
             </p>
           </div>
         </div>
@@ -85,7 +85,7 @@ export function TournamentFormat() {
             <div className="relative">
               <div className="bg-gradient-to-br from-pink-600 to-red-600 rounded-xl p-6 text-center">
                 <div className="text-3xl font-black text-white mb-2">3</div>
-                <p className="text-sm font-semibold text-white">Losers Bracket</p>
+                <p className="text-sm font-semibold text-white">Redemption Round</p>
               </div>
               <div className="hidden md:block absolute top-1/2 -right-2 w-4 h-4">
                 <svg className="text-slate-600" fill="currentColor" viewBox="0 0 20 20">

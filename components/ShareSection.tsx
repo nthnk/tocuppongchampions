@@ -7,13 +7,13 @@ export function ShareSection() {
 
   const shareText = `🏆 Toronto Cup Pong Championship - The Inaugural Fall Classic 🏆
 
-Join me for Toronto's premier competitive cup pong tournament!
+Come hang, compete, and meet new people at Toronto's most fun cup pong tournament!
 
 📍 Downtown Toronto
-💰 $30 per duo team
-🏅 Cash prizes for top 3 finishers
+💰 $40 per duo team
+🏅 Cash prizes + bragging rights for top teams
 
-Non-alcoholic, skill-based competition. 50-100 teams competing in 16-team brackets.
+Non-alcoholic, everyone's welcome. Let's find Toronto's best cup pong duo!
 
 Sign up for the waitlist:`;
 
@@ -43,7 +43,7 @@ Sign up for the waitlist:`;
         <div className="bg-gradient-to-br from-blue-600/10 to-purple-600/10 border border-blue-500/20 rounded-2xl p-8 md:p-12 backdrop-blur-sm">
           <div className="space-y-6 mb-8">
             <p className="text-lg md:text-xl text-slate-300 leading-relaxed text-center">
-              The more teams we get, the more <span className="font-bold text-white">meaningful</span> the championship becomes.
+              The more people who join, the more <span className="font-bold text-white">epic</span> this event becomes!
             </p>
 
             <div className="grid md:grid-cols-2 gap-6">
@@ -54,8 +54,8 @@ Sign up for the waitlist:`;
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white mb-2">Secure the Venue</h3>
-                  <p className="text-slate-400">More signups = better venue options in prime Downtown Toronto locations</p>
+                  <h3 className="text-lg font-bold text-white mb-2">Get a Better Venue</h3>
+                  <p className="text-slate-400">More signups = cooler location in Downtown Toronto</p>
                 </div>
               </div>
 
@@ -67,13 +67,13 @@ Sign up for the waitlist:`;
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-white mb-2">Bigger Prize Pool</h3>
-                  <p className="text-slate-400">More teams means larger prizes and greater bragging rights</p>
+                  <p className="text-slate-400">More teams = bigger prizes and even better bragging rights</p>
                 </div>
               </div>
             </div>
 
             <p className="text-center text-slate-400 text-lg mt-8">
-              Share with your friends, teammates, and anyone who loves competition!
+              Share with your friends and anyone looking for a fun way to meet people!
             </p>
           </div>
 

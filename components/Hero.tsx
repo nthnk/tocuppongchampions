@@ -5,11 +5,17 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-pink-600/20 animate-pulse" style={{ animationDuration: '4s' }} />
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url(/pong-background.jpg)' }}
+      />
+
+      {/* Dark overlay for text visibility */}
+      <div className="absolute inset-0 bg-black/40" />
 
       {/* Grid pattern overlay */}
-      <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
+      <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 text-center">
         {/* Event badge */}
@@ -26,28 +32,28 @@ export function Hero() {
           </span>
         </h1>
 
-        <div className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-300 mb-4">
+        <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4">
           The Inaugural Fall Classic
         </div>
 
         {/* Subtitle */}
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-400 mb-12 max-w-3xl mx-auto px-4">
-          Where precision meets competition: elite teams, high stakes, one champion.
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-12 max-w-3xl mx-auto px-4" style={{ color: '#e3e4e6' }}>
+          Meet new people, make memories, and find out who's Toronto's best cup pong duo.
         </p>
 
         {/* Stats grid */}
         <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 max-w-2xl mx-auto mb-12 px-4">
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-6">
             <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1">50-100</div>
-            <div className="text-[10px] sm:text-xs md:text-sm text-slate-400 uppercase tracking-wide">Teams</div>
+            <div className="text-[10px] sm:text-xs md:text-sm uppercase tracking-wide" style={{ color: '#e3e4e6' }}>Teams</div>
           </div>
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-6">
-            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1">$30</div>
-            <div className="text-[10px] sm:text-xs md:text-sm text-slate-400 uppercase tracking-wide">Per Duo</div>
+            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1">$40</div>
+            <div className="text-[10px] sm:text-xs md:text-sm uppercase tracking-wide" style={{ color: '#e3e4e6' }}>Per Duo</div>
           </div>
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-6">
             <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1">16</div>
-            <div className="text-[10px] sm:text-xs md:text-sm text-slate-400 uppercase tracking-wide">Team Brackets</div>
+            <div className="text-[10px] sm:text-xs md:text-sm uppercase tracking-wide" style={{ color: '#e3e4e6' }}>Team Brackets</div>
           </div>
         </div>
 

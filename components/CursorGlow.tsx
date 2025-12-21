@@ -1,11 +1,10 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import * as d3 from 'd3';
 
 export function CursorGlow() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const positionRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
+  const positionRef = useRef({ x: -100, y: -100, targetX: -100, targetY: -100 });
   const animationFrameRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
@@ -14,7 +13,7 @@ export function CursorGlow() {
 
     const ctx = canvas.getContext('2d', {
       alpha: true,
-      desynchronized: true, // GPU optimization
+      desynchronized: true,
       willReadFrequently: false
     });
     if (!ctx) return;
@@ -52,92 +51,101 @@ export function CursorGlow() {
       if (!inExclusionZone) {
         positionRef.current.targetX = e.clientX;
         positionRef.current.targetY = e.clientY;
+      } else {
+        // Move ball off screen when in exclusion zone
+        positionRef.current.targetX = -100;
+        positionRef.current.targetY = -100;
       }
     };
     window.addEventListener('mousemove', handleMouseMove);
 
-    // Color scale using d3
-    const colorScale = d3.scaleLinear<string>()
-      .domain([0, 0.5, 1])
-      .range(['#3b82f6', '#8b5cf6', '#ec4899']); // blue -> purple -> pink
-
     // Animation loop with easing
     let lastTime = performance.now();
     const animate = (currentTime: number) => {
-      const deltaTime = (currentTime - lastTime) / 16.67; // Normalize to 60fps
+      const deltaTime = (currentTime - lastTime) / 16.67;
       lastTime = currentTime;
 
       // Smooth easing
-      const ease = 0.1 * deltaTime;
+      const ease = 0.15 * deltaTime;
       positionRef.current.x += (positionRef.current.targetX - positionRef.current.x) * ease;
       positionRef.current.y += (positionRef.current.targetY - positionRef.current.y) * ease;
 
-      // Clear canvas with GPU-accelerated compositing
+      // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const { x, y } = positionRef.current;
+      const ballRadius = 30;
 
-      // Create radial gradient for glow effect
-      const gradient = ctx.createRadialGradient(x, y, 0, x, y, 300);
+      // Draw ping pong ball shadow
+      ctx.save();
+      ctx.globalAlpha = 0.3;
+      const shadowGradient = ctx.createRadialGradient(x, y + 35, 0, x, y + 35, 25);
+      shadowGradient.addColorStop(0, 'rgba(0, 0, 0, 0.4)');
+      shadowGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = shadowGradient;
+      ctx.fillRect(x - 25, y + 10, 50, 50);
+      ctx.restore();
 
-      // Use d3 color interpolation for smooth color transitions
-      const time = Date.now() / 2000;
-      const colorValue1 = Math.abs(Math.sin(time));
-      const colorValue2 = Math.abs(Math.cos(time + Math.PI / 3));
+      // Draw main ping pong ball
+      const ballGradient = ctx.createRadialGradient(
+        x - ballRadius * 0.3,
+        y - ballRadius * 0.3,
+        0,
+        x,
+        y,
+        ballRadius
+      );
+      ballGradient.addColorStop(0, '#FFFFFF');
+      ballGradient.addColorStop(0.4, '#F8F8F8');
+      ballGradient.addColorStop(0.8, '#E0E0E0');
+      ballGradient.addColorStop(1, '#C0C0C0');
 
-      // Convert d3 color to rgba with opacity
-      const color1 = d3.rgb(colorScale(colorValue1));
-      const color2 = d3.rgb(colorScale(colorValue2));
+      ctx.beginPath();
+      ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+      ctx.fillStyle = ballGradient;
+      ctx.fill();
 
-      gradient.addColorStop(0, `rgba(${color1.r}, ${color1.g}, ${color1.b}, 0.5)`);
-      gradient.addColorStop(0.3, `rgba(${color2.r}, ${color2.g}, ${color2.b}, 0.25)`);
-      gradient.addColorStop(0.6, `rgba(${color1.r}, ${color1.g}, ${color1.b}, 0.125)`);
-      gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      // Add highlight
+      const highlightGradient = ctx.createRadialGradient(
+        x - ballRadius * 0.4,
+        y - ballRadius * 0.4,
+        0,
+        x - ballRadius * 0.4,
+        y - ballRadius * 0.4,
+        ballRadius * 0.5
+      );
+      highlightGradient.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
+      highlightGradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.4)');
+      highlightGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
 
-      // Draw glow with GPU-accelerated blend mode
-      ctx.globalCompositeOperation = 'screen';
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.beginPath();
+      ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+      ctx.fillStyle = highlightGradient;
+      ctx.fill();
 
-      // Add central bright spot
-      const centralGradient = ctx.createRadialGradient(x, y, 0, x, y, 100);
-      centralGradient.addColorStop(0, `rgba(${color1.r}, ${color1.g}, ${color1.b}, 0.38)`);
-      centralGradient.addColorStop(0.5, `rgba(${color2.r}, ${color2.g}, ${color2.b}, 0.19)`);
-      centralGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      // Draw seam curves
+      ctx.strokeStyle = 'rgba(220, 220, 220, 0.6)';
+      ctx.lineWidth = 1.5;
 
-      ctx.fillStyle = centralGradient;
-      ctx.fillRect(x - 100, y - 100, 200, 200);
+      // Top curve
+      ctx.beginPath();
+      ctx.arc(x, y, ballRadius * 0.7, -Math.PI * 0.3, Math.PI * 0.3);
+      ctx.stroke();
 
-      // Multiple bubble particles for depth
-      const particleCount = 3;
-      for (let i = 0; i < particleCount; i++) {
-        const offset = (time + i * Math.PI * 2 / particleCount) % (Math.PI * 2);
-        const radius = 50 + i * 30;
-        const particleX = x + Math.cos(offset) * 40;
-        const particleY = y + Math.sin(offset) * 40;
+      // Bottom curve
+      ctx.beginPath();
+      ctx.arc(x, y, ballRadius * 0.7, Math.PI * 0.7, Math.PI * 1.3);
+      ctx.stroke();
 
-        const particleGradient = ctx.createRadialGradient(
-          particleX, particleY, 0,
-          particleX, particleY, radius
-        );
+      // Add subtle glow around the ball
+      const glowGradient = ctx.createRadialGradient(x, y, ballRadius, x, y, ballRadius + 20);
+      glowGradient.addColorStop(0, 'rgba(255, 255, 255, 0.3)');
+      glowGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
 
-        const particleColorValue = (i / particleCount + time / 2) % 1;
-        const particleColor = d3.rgb(colorScale(particleColorValue));
-        particleGradient.addColorStop(0, `rgba(${particleColor.r}, ${particleColor.g}, ${particleColor.b}, 0.25)`);
-        particleGradient.addColorStop(0.5, `rgba(${particleColor.r}, ${particleColor.g}, ${particleColor.b}, 0.125)`);
-        particleGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-
-        ctx.fillStyle = particleGradient;
-        ctx.fillRect(
-          particleX - radius,
-          particleY - radius,
-          radius * 2,
-          radius * 2
-        );
-      }
-
-      // Reset composite operation
-      ctx.globalCompositeOperation = 'source-over';
+      ctx.beginPath();
+      ctx.arc(x, y, ballRadius + 20, 0, Math.PI * 2);
+      ctx.fillStyle = glowGradient;
+      ctx.fill();
 
       animationFrameRef.current = requestAnimationFrame(animate);
     };
@@ -158,10 +166,9 @@ export function CursorGlow() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
+      className="fixed inset-0 pointer-events-none z-50"
       style={{
-        mixBlendMode: 'screen',
-        willChange: 'transform', // GPU acceleration hint
+        willChange: 'transform',
       }}
     />
   );

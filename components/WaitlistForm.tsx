@@ -149,12 +149,12 @@ export function WaitlistForm() {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6" />
           <p className="text-xl text-slate-400 mb-6">
-            Secure your spot for Toronto's most prestigious cup pong championship
+            Reserve your spot and be part of something fun!
           </p>
           <div className="bg-blue-600/10 border border-blue-500/20 rounded-xl p-6 text-left max-w-2xl mx-auto">
             <h3 className="text-lg font-bold text-white mb-3">Why Join the Waitlist?</h3>
             <p className="text-slate-300 leading-relaxed mb-4">
-              We're gauging serious interest for this tournament. Once we have enough registrations, we'll send out payment links, book a premium venue in Downtown Toronto, and set a date for the event.
+              We're seeing how many people are interested! Once we hit our target number, we'll lock in an awesome venue in Downtown Toronto, send out payment details, and set a date. The more people who sign up, the better this event will be!
             </p>
             <div className="flex items-start gap-3 text-yellow-400 bg-yellow-600/10 border border-yellow-500/20 rounded-lg p-4">
               <svg className="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -375,8 +375,8 @@ export function WaitlistForm() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <div>
-                <h4 className="font-bold text-green-400 mb-1">Welcome to the waitlist!</h4>
-                <p className="text-sm text-green-300">We'll email you with venue details and payment information soon.</p>
+                <h4 className="font-bold text-green-400 mb-1">You're on the list!</h4>
+                <p className="text-sm text-green-300">We'll email you with all the details once we lock in the venue. See you there!</p>
               </div>
             </div>
           )}

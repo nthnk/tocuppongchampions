@@ -5,39 +5,39 @@ import { useState } from 'react';
 const faqs = [
   {
     question: "How much does it cost to enter?",
-    answer: "$30 per duo team. This covers tournament entry, venue access, and eligibility for prizes."
+    answer: "$40 per duo team. That's it! This gets you tournament entry, venue access, and a shot at the prizes."
   },
   {
     question: "Is this really non-alcoholic?",
-    answer: "Yeah, we just want to crown a cup pong champion in Toronto without having to deal with the liquor licensing laws."
+    answer: "Yep! We just want to find Toronto's best cup pong duo without dealing with liquor licensing. Plus, everyone stays sharp and can actually remember if they won or lost."
   },
   {
     question: "What's the tournament format?",
-    answer: "Teams compete in 16-team mini-brackets using single elimination. First-round losers advance to a losers bracket for a second chance to advance. Each team is guaranteed two matches. Tournament format is set to change as we finalize the total number of teams."
+    answer: "We organize teams into 16-team mini-brackets. Win and you advance, lose and you drop to the redemption bracket for another chance. Everyone is guaranteed at least two games! The exact format might adjust based on how many teams sign up."
   },
   {
     question: "When will the venue be announced?",
-    answer: "Venue details will be emailed to all registered teams approximately 30 days before the event. Depending on the number of signups, we will be able to secure a premium location in Downtown Toronto, so please share this event with your friends!"
+    answer: "We'll email all registered teams about 30 days before the event. The more people who sign up, the better venue we can secure in Downtown Toronto - so spread the word!"
   },
   {
     question: "Can I register as a solo player?",
-    answer: "No, this tournament is for pairs. If you need a partner, email info@tocuppongchampions.ca and we will help you find a partner!"
+    answer: "Not directly, but we've got you! Email info@tocuppongchampions.ca and we'll help match you with a partner. This is a great way to meet someone new before the event."
   },
   {
     question: "What happens after I join the waitlist?",
-    answer: "You'll receive a confirmation email immediately. As we finalize venue and payment details, you'll get updates via email with instructions to secure your team's spot."
+    answer: "You'll get a confirmation email right away. As we lock in the venue and payment system, we'll send you updates with everything you need to secure your spot."
   },
   {
     question: "Are there prizes?",
-    answer: "Yes! Prize pool details will be announced closer to the event. Expect cash prizes for top 3 finishers, plus awards for tournament champions."
+    answer: "Absolutely! We'll announce the full prize pool closer to the event. Expect cash prizes for the top 3 teams, plus awards and major bragging rights for the champions."
   },
   {
     question: "What should we bring?",
-    answer: "Just yourselves! All equipment is provided. We recommend comfortable athletic clothing and a competitive mindset."
+    answer: "Just yourself and a friend! We provide all the equipment. Wear something comfortable - and bring your best game face (optional but encouraged)."
   },
   {
     question: "Why is the event 18+ if there's no alcohol?",
-    answer: "We're creating a competitive, professional atmosphere designed for adult participants. The 18+ age requirement ensures that all attendees can fully engage with the event's energy and vibe, maintaining the mature, high-stakes environment that makes this championship special."
+    answer: "We want to keep the vibe mature and social - this is designed as a fun adult hangout where people can meet others with similar interests. Think of it as a chill day out with a competitive twist!"
   }
 ];
 
