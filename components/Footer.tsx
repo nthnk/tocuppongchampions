@@ -9,7 +9,7 @@ export function Footer() {
               TO CUP PONG CHAMPIONS
             </h3>
             <p className="text-slate-400 leading-relaxed">
-              The premier competitive cup pong championship series in Toronto.
+              Toronto's premier cup pong tournament where you meet friends and compete for the title.
             </p>
           </div>
 
