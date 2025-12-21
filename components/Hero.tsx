@@ -33,7 +33,7 @@ export function Hero() {
         </h1>
 
         <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4">
-          The Inaugural Fall Classic
+          Coming Soon Spring 2026
         </div>
 
         {/* Subtitle */}

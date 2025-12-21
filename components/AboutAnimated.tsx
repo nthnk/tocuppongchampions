@@ -68,7 +68,7 @@ export function AboutAnimated() {
                 transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s',
               }}
             >
-              The <span className="font-bold text-white">Toronto Cup Pong Championship</span> is a social event where you can play cup pong and meet new people. No stress, no pressure—just good vibes and a casual tournament to find the best duo in the city.
+              The <span className="font-bold text-white">Toronto Cup Pong Championship</span> is a social event where you can play cup pong and meet new people. But it's not just about the tournament—we'll have <span className="font-bold text-white">food trucks</span>, a <span className="font-bold text-white">live DJ</span>, and a <span className="font-bold text-white">best duo costume contest</span> with cash prizes!
             </p>
             <p
               className="text-lg md:text-xl text-slate-300 leading-relaxed"
