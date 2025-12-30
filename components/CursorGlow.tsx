@@ -28,9 +28,10 @@ export function CursorGlow() {
 
     // Mouse move handler with exclusion zones
     const handleMouseMove = (e: MouseEvent) => {
-      // Check if cursor is in header or footer
+      // Check if cursor is in header, footer, or game canvas
       const header = document.querySelector('header');
       const footer = document.querySelector('footer');
+      const gameCanvas = document.querySelector('canvas[class*="cursor-default"]');
 
       let inExclusionZone = false;
 
@@ -44,6 +45,18 @@ export function CursorGlow() {
       if (footer) {
         const footerRect = footer.getBoundingClientRect();
         if (e.clientY >= footerRect.top) {
+          inExclusionZone = true;
+        }
+      }
+
+      if (gameCanvas) {
+        const gameRect = gameCanvas.getBoundingClientRect();
+        if (
+          e.clientX >= gameRect.left &&
+          e.clientX <= gameRect.right &&
+          e.clientY >= gameRect.top &&
+          e.clientY <= gameRect.bottom
+        ) {
           inExclusionZone = true;
         }
       }

@@ -9,6 +9,7 @@ import { TournamentFormatAnimated } from '@/components/TournamentFormatAnimated'
 import { WaitlistForm } from '@/components/WaitlistForm';
 import { ShareSection } from '@/components/ShareSection';
 import { FAQ } from '@/components/FAQ';
+import { CupPongGame } from '@/components/CupPongGame';
 import { Footer } from '@/components/Footer';
 import { CursorGlow } from '@/components/CursorGlow';
 
@@ -33,6 +34,7 @@ export default function Home() {
         <ParallaxSection speed={0.09}>
           <FAQ />
         </ParallaxSection>
+        <CupPongGame />
         <Footer />
       </div>
     </main>
