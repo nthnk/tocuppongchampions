@@ -48,7 +48,7 @@ export function Hero() {
             <div className="text-[10px] sm:text-xs md:text-sm uppercase tracking-wide" style={{ color: '#e3e4e6' }}>Teams</div>
           </div>
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-6">
-            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1">$40</div>
+            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1">$20</div>
             <div className="text-[10px] sm:text-xs md:text-sm uppercase tracking-wide" style={{ color: '#e3e4e6' }}>Per Duo</div>
           </div>
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-6">

@@ -5,7 +5,7 @@ import { useState } from 'react';
 const faqs = [
   {
     question: "How much does it cost to enter?",
-    answer: "$40 per duo team. That's it! This gets you tournament entry, venue access, and a shot at the prizes."
+    answer: "$20 per duo team. That's it! This gets you tournament entry, venue access, and a shot at the prizes."
   },
   {
     question: "Is this really non-alcoholic?",

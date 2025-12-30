@@ -10,7 +10,7 @@ export function ShareSection() {
 Come hang, compete, and meet new people at Toronto's most fun cup pong tournament!
 
 📍 Downtown Toronto
-💰 $40 per duo team
+💰 $20 per duo team
 🏅 Cash prizes + bragging rights for top teams
 
 Non-alcoholic, everyone's welcome. Let's find Toronto's best cup pong duo!
