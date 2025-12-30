@@ -46,7 +46,7 @@ export function CupPongGame() {
   });
 
   const cupsRef = useRef<Cup[]>([]);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | undefined>(undefined);
   const dragStartRef = useRef<{ x: number; y: number } | null>(null);
   const ballStartPosRef = useRef<{ x: number; y: number } | null>(null);
   const currentAttemptsRef = useRef<number>(0);
