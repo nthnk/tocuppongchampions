@@ -68,7 +68,7 @@ export function AboutAnimated() {
                 transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s',
               }}
             >
-              The <span className="font-bold text-white">Toronto Cup Pong Championship</span> will be the largest cup pong tournament Toronto has ever seen. Come play cup pong and meet new friends! Our first event will be a mini-tournament hosted at a downtown bar on February 28, 2026.
+              The <span className="font-bold text-white">Toronto Cup Pong Championship</span> will be the largest cup pong tournament Toronto has ever seen. Come play cup pong and meet new friends! Our first event will be a mini-tournament hosted at a downtown Toronto bar in late February - March 2026.
             </p>
             <p
               className="text-lg md:text-xl text-slate-300 leading-relaxed"

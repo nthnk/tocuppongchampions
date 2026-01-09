@@ -5,7 +5,7 @@ import { useState } from 'react';
 const faqs = [
   {
     question: "How much does it cost to enter?",
-    answer: "$5 per duo team. That's it! This gets you tournament entry and access to compete with other cup pong enthusiasts at a downtown Toronto bar."
+    answer: "$10 per duo team. That's it! This gets you tournament entry and access to compete with other cup pong enthusiasts at a downtown Toronto bar."
   },
   {
     question: "Will there be alcohol?",
@@ -17,14 +17,14 @@ const faqs = [
   },
   {
     question: "When and where is this happening?",
-    answer: "The event is scheduled for February 28, 2026 at a downtown Toronto bar. We'll email all registered teams with the exact venue details as we finalize arrangements!"
+    answer: "The event is planned for late February - March 2026 at a downtown Toronto bar. We'll email all registered teams with the exact date and venue details as we finalize arrangements!"
   },
   {
     question: "Can I register as a solo player?",
     answer: "Not directly, but we've got you! Email info@tocuppongchampions.ca and we'll help match you with a partner. This is a great way to meet someone new before the event."
   },
   {
-    question: "How do I pay the $5?",
+    question: "How do I pay the $10?",
     answer: "Payment instructions will be sent to you in the confirmation email after you sign up. We'll provide all the details you need to complete your registration."
   },
   {
@@ -33,7 +33,7 @@ const faqs = [
   },
   {
     question: "What's included in the entry fee?",
-    answer: "Your $5 entry fee covers tournament participation and equipment. Food and drinks are available for purchase from the bar throughout the event."
+    answer: "Your $10 entry fee covers tournament participation and equipment. Food and drinks are available for purchase from the bar throughout the event."
   },
   {
     question: "What should we bring?",

@@ -233,19 +233,19 @@ export async function POST(request: NextRequest) {
       </div>
 
       <div class="payment-section">
-        <h3>💰 Payment Instructions - $5 Entry Fee</h3>
+        <h3>💰 Payment Instructions - $10 Entry Fee</h3>
         <p style="color: #92400e; margin-bottom: 15px;">
-          To complete your registration, please pay the $5 entry fee using one of these options:
+          To complete your registration, please pay the $10 entry fee using one of these options:
         </p>
 
         <div class="payment-option">
           <h4>Option 1: Cash on Event Day</h4>
-          <p>Bring $5 cash with you to the event. We'll collect payment when you check in.</p>
+          <p>Bring $10 cash with you to the event. We'll collect payment when you check in.</p>
         </div>
 
         <div class="payment-option">
           <h4>Option 2: E-Transfer on Event Day</h4>
-          <p>Send $5 via e-transfer to: <strong>nknathankoo@gmail.com</strong></p>
+          <p>Send $10 via e-transfer to: <strong>nknathankoo@gmail.com</strong></p>
           <p style="font-size: 13px; color: #6b7280;">We'll send e-transfer details closer to the event date.</p>
         </div>
 
@@ -258,15 +258,15 @@ export async function POST(request: NextRequest) {
         <h3>What Happens Next?</h3>
         <ul>
           <li>We'll email you the exact <strong>venue location</strong> in the coming weeks</li>
-          <li>Event is scheduled for <strong>February 28, 2026</strong> at a downtown Toronto bar</li>
+          <li>Event is planned for <strong>late February - March 2026</strong> at a downtown Toronto bar</li>
           <li>Bring your A-game and have fun!</li>
         </ul>
       </div>
 
       <div class="info-box">
         <p><strong>📍 Event Details</strong></p>
-        <p>• <strong>When:</strong> February 28, 2026</p>
-        <p>• <strong>Where:</strong> Downtown Toronto Bar (venue TBA)</p>
+        <p>• <strong>When:</strong> Late February - March 2026</p>
+        <p>• <strong>Where:</strong> Somewhere in Downtown Toronto (venue TBD)</p>
         <p>• <strong>Format:</strong> Max 64 teams, 16-team brackets, double elimination</p>
         <p>• <strong>What's Included:</strong> Tournament entry & equipment</p>
         <p>• <strong>Food & Drinks:</strong> Available for purchase at the bar</p>
@@ -287,7 +287,7 @@ export async function POST(request: NextRequest) {
     </div>
 
     <div class="footer">
-      <p>Toronto Cup Pong Championship • February 28, 2026 • Downtown Toronto</p>
+      <p>Toronto Cup Pong Championship • Late February - March 2026 • Downtown Toronto</p>
       <p style="margin-top: 10px;">Where precision meets competition</p>
     </div>
   </div>
