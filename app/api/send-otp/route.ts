@@ -164,7 +164,7 @@ export async function POST(request: NextRequest) {
     </div>
 
     <div class="footer">
-      <p>Toronto Cup Pong Championship • September 2026 • Downtown Toronto</p>
+      <p>Toronto Cup Pong Championship • February 28, 2026 • Downtown Toronto</p>
       <p style="margin-top: 10px;">Where precision meets competition</p>
     </div>
   </div>

@@ -33,7 +33,7 @@ export function Hero() {
         </h1>
 
         <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4">
-          Coming Soon Spring 2026
+          February 28, 2026
         </div>
 
         {/* Subtitle */}
@@ -44,11 +44,11 @@ export function Hero() {
         {/* Stats grid */}
         <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 max-w-2xl mx-auto mb-12 px-4">
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-6">
-            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1">50-100</div>
+            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1">MAX 64</div>
             <div className="text-[10px] sm:text-xs md:text-sm uppercase tracking-wide" style={{ color: '#e3e4e6' }}>Teams</div>
           </div>
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-6">
-            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1">$20</div>
+            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1">$5</div>
             <div className="text-[10px] sm:text-xs md:text-sm uppercase tracking-wide" style={{ color: '#e3e4e6' }}>Per Duo</div>
           </div>
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-6">
@@ -62,7 +62,7 @@ export function Hero() {
           onClick={scrollToWaitlist}
           className="group relative inline-flex items-center gap-3 px-12 py-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xl font-bold rounded-full hover:from-blue-500 hover:to-purple-500 transition-all duration-300 shadow-2xl shadow-blue-500/50 hover:shadow-blue-500/70 hover:scale-105"
         >
-          <span>Join the Waitlist</span>
+          <span>Sign Up Now</span>
           <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>

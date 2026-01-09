@@ -68,7 +68,7 @@ export function AboutAnimated() {
                 transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s',
               }}
             >
-              The <span className="font-bold text-white">Toronto Cup Pong Championship</span> is a social event where you can play cup pong and meet new people. But it's not just about the tournament—we'll have <span className="font-bold text-white">food trucks</span>, a <span className="font-bold text-white">live DJ</span>, and a <span className="font-bold text-white">best duo costume contest</span> with cash prizes!
+              The <span className="font-bold text-white">Toronto Cup Pong Championship</span> will be the largest cup pong tournament Toronto has ever seen. Come play cup pong and meet new friends! Our first event will be a mini-tournament hosted at a downtown bar on February 28, 2026.
             </p>
             <p
               className="text-lg md:text-xl text-slate-300 leading-relaxed"
@@ -78,8 +78,7 @@ export function AboutAnimated() {
                 transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.25s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.25s',
               }}
             >
-              Never played before? Perfect! Everyone's welcome regardless of skill level. Plus, it's completely{' '}
-              <span className="font-bold text-blue-400">non-alcoholic</span>, so you can focus on having fun and actually remember the people you meet.
+              Never played before? Perfect! Everyone's welcome regardless of skill level. The bar will have drinks and food available for purchase, so you can enjoy the full bar experience while competing with friends.
             </p>
           </div>
 
@@ -106,12 +105,12 @@ export function AboutAnimated() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z M15 13a3 3 0 11-6 0 3 3 0 016 0z"
                   />
                 ),
                 gradient: 'from-purple-600 to-pink-600',
-                title: 'Fun Prizes',
-                description: "Play for prizes or just play for fun—it's all good!",
+                title: 'Content Creation',
+                description: "Help us capture the energy and fun—your games could go viral!",
                 delay: 0.3,
               },
               {
@@ -124,8 +123,8 @@ export function AboutAnimated() {
                   />
                 ),
                 gradient: 'from-pink-600 to-red-600',
-                title: 'Chill Atmosphere',
-                description: 'Food, music, and good people—just come ready to have fun',
+                title: 'Bar Vibes',
+                description: 'Downtown Toronto bar with food and drinks available for purchase',
                 delay: 0.4,
               },
             ].map((feature, index) => (

@@ -5,39 +5,43 @@ import { useState } from 'react';
 const faqs = [
   {
     question: "How much does it cost to enter?",
-    answer: "$20 per duo team. That's it! This gets you tournament entry, venue access, and a shot at the prizes."
+    answer: "$5 per duo team. That's it! This gets you tournament entry and access to compete with other cup pong enthusiasts at a downtown Toronto bar."
   },
   {
-    question: "Is this really non-alcoholic?",
-    answer: "Yep! We just want to find Toronto's best cup pong duo without dealing with liquor licensing. Plus, everyone stays sharp and can actually remember if they won or lost."
+    question: "Will there be alcohol?",
+    answer: "Yes! This is a bar event, so alcohol will be available for purchase. However, drinks and food are not included in the entry fee—you can purchase them directly from the bar."
   },
   {
     question: "What's the tournament format?",
-    answer: "We organize teams into 16-team mini-brackets. Win and you advance, lose and you drop to the redemption bracket for another chance. Everyone is guaranteed at least two games! The exact format might adjust based on how many teams sign up."
+    answer: "This is a smaller, more intimate tournament with a max of 64 teams. We organize teams into 16-team mini-brackets. Win and you advance, lose and you drop to the redemption bracket for another chance. Everyone is guaranteed at least two games!"
   },
   {
-    question: "When will the venue be announced?",
-    answer: "We'll email all registered teams about 30 days before the event. The more people who sign up, the better venue we can secure in Downtown Toronto - so spread the word!"
+    question: "When and where is this happening?",
+    answer: "The event is scheduled for February 28, 2026 at a downtown Toronto bar. We'll email all registered teams with the exact venue details as we finalize arrangements!"
   },
   {
     question: "Can I register as a solo player?",
     answer: "Not directly, but we've got you! Email info@tocuppongchampions.ca and we'll help match you with a partner. This is a great way to meet someone new before the event."
   },
   {
-    question: "What happens after I join the waitlist?",
-    answer: "You'll get a confirmation email right away. As we lock in the venue and payment system, we'll send you updates with everything you need to secure your spot."
+    question: "How do I pay the $5?",
+    answer: "Payment instructions will be sent to you in the confirmation email after you sign up. We'll provide all the details you need to complete your registration."
   },
   {
-    question: "Are there prizes?",
-    answer: "Absolutely! We'll announce the full prize pool closer to the event. Expect cash prizes for the top 3 teams, plus awards and major bragging rights for the champions."
+    question: "What happens after I sign up?",
+    answer: "You'll get a confirmation email right away with payment instructions. We'll also send you updates about the venue, date, and everything else you need to know before the event."
+  },
+  {
+    question: "What's included in the entry fee?",
+    answer: "Your $5 entry fee covers tournament participation and equipment. Food and drinks are available for purchase from the bar throughout the event."
   },
   {
     question: "What should we bring?",
-    answer: "Just yourself and a friend! We provide all the equipment. Wear something comfortable - and bring your best game face (optional but encouraged)."
+    answer: "Just yourself and a friend! We provide all the cup pong equipment. Bring your game face and some cash for food and drinks at the bar."
   },
   {
-    question: "Why is the event 18+ if there's no alcohol?",
-    answer: "We want to keep the vibe mature and social - this is designed as a fun adult hangout where people can meet others with similar interests. Think of it as a chill day out with a competitive twist!"
+    question: "Why is this event happening?",
+    answer: "We're shooting content for our social media and wanted to host a fun mini tournament for friends and anyone who wants to play cup pong. It's a way to test our tournament concept while creating awesome content!"
   }
 ];
 

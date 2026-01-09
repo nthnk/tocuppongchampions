@@ -59,7 +59,7 @@ export function TournamentFormatAnimated() {
               transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s',
             }}
           >
-            A simple bracket system that keeps things fun and fair for everyone
+            A simple, intimate bracket system with max 64 teams—perfect for a fun bar tournament
           </p>
         </div>
 
@@ -79,9 +79,9 @@ export function TournamentFormatAnimated() {
               borderColor: 'border-blue-500/20',
               hoverBorder: 'hover:border-blue-500/40',
               iconGradient: 'from-blue-600 to-purple-600',
-              title: '16-Team Brackets',
+              title: 'Max 64 Teams',
               description:
-                'Small groups of 16 teams so you play with people at similar skill levels',
+                'Smaller, more intimate tournament organized into 16-team brackets for fair competition',
               delay: 0.2,
             },
             {
@@ -201,8 +201,7 @@ export function TournamentFormatAnimated() {
             }}
           >
             <p className="text-center text-slate-300 text-lg">
-              <span className="font-bold text-white">Event duration:</span> Full day of fun with
-              multiple brackets running at once—plenty of time to hang out between matches!
+              <span className="font-bold text-white">Event duration:</span> A fun afternoon/evening at a downtown bar with brackets running—grab drinks, watch games, and compete!
             </p>
           </div>
         </div>
