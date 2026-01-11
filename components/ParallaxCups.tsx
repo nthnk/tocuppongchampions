@@ -38,7 +38,7 @@ export function ParallaxCups() {
   };
 
   return (
-    <section className="relative h-[200vh] overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+    <section className="relative h-[200vh] overflow-hidden" style={{ background: 'linear-gradient(to bottom, #FFFBF7, #FDF6E3, #FFFBF7)' }}>
       {/* Cups */}
       {cups.map((cup) => (
         <div
@@ -75,15 +75,15 @@ export function ParallaxCups() {
       </div>
 
       {/* Ambient lighting effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-900/10 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent, rgba(226, 125, 96, 0.05), transparent)' }} />
 
       {/* Content overlay - centered text */}
       <div className="sticky top-1/2 -translate-y-1/2 z-10 flex items-center justify-center h-screen pointer-events-none">
         <div className="text-center">
-          <h2 className="text-6xl md:text-8xl font-black text-white mb-4 tracking-tight opacity-90">
-            GAME ON
+          <h2 className="text-6xl md:text-8xl font-black mb-4 tracking-tight" style={{ fontFamily: 'Pacifico, cursive', color: '#E27D60', textShadow: '3px 3px 0 #E8A87C' }}>
+            Game On
           </h2>
-          <p className="text-2xl md:text-3xl text-slate-300 font-bold">
+          <p className="text-2xl md:text-3xl font-bold" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.8 }}>
             Prepare for the ultimate showdown
           </p>
         </div>

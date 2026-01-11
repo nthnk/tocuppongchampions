@@ -183,7 +183,7 @@ export function CupPongGame() {
       const pulseTime = Date.now() / 1000;
       const pulseAlpha = 0.3 + Math.sin(pulseTime * 3) * 0.2;
 
-      ctx.fillStyle = `rgba(59, 130, 246, ${pulseAlpha})`;
+      ctx.fillStyle = `rgba(226, 125, 96, ${pulseAlpha})`;
       ctx.beginPath();
       ctx.arc(ball.x, ball.y, ball.radius + 8, 0, Math.PI * 2);
       ctx.fill();
@@ -191,12 +191,12 @@ export function CupPongGame() {
 
     // Strong glow when grabbed/dragging
     if (ball.isGrabbed || ball.isDragging) {
-      ctx.fillStyle = 'rgba(59, 130, 246, 0.6)';
+      ctx.fillStyle = 'rgba(226, 125, 96, 0.6)';
       ctx.beginPath();
       ctx.arc(ball.x, ball.y, ball.radius + 12, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.fillStyle = 'rgba(59, 130, 246, 0.4)';
+      ctx.fillStyle = 'rgba(226, 125, 96, 0.4)';
       ctx.beginPath();
       ctx.arc(ball.x, ball.y, ball.radius + 18, 0, Math.PI * 2);
       ctx.fill();
@@ -220,9 +220,9 @@ export function CupPongGame() {
 
     // Change ball color when grabbed
     if (ball.isGrabbed || ball.isDragging) {
-      gradient.addColorStop(0, '#e0f2fe');
-      gradient.addColorStop(0.5, '#bae6fd');
-      gradient.addColorStop(1, '#7dd3fc');
+      gradient.addColorStop(0, '#FDF6E3');
+      gradient.addColorStop(0.5, '#E8A87C');
+      gradient.addColorStop(1, '#E27D60');
     } else {
       gradient.addColorStop(0, '#ffffff');
       gradient.addColorStop(0.5, '#f0f0f0');
@@ -270,7 +270,7 @@ export function CupPongGame() {
     const ball = ballRef.current;
 
     // Clear canvas
-    ctx.fillStyle = '#0f172a';
+    ctx.fillStyle = '#FDF6E3';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Draw cups
@@ -342,7 +342,7 @@ export function CupPongGame() {
 
     // Draw trajectory line when dragging
     if (ball.isDragging && dragStartRef.current && ballStartPosRef.current) {
-      ctx.strokeStyle = 'rgba(59, 130, 246, 0.5)';
+      ctx.strokeStyle = 'rgba(226, 125, 96, 0.5)';
       ctx.lineWidth = 3;
       ctx.setLineDash([5, 5]);
       ctx.beginPath();
@@ -357,7 +357,7 @@ export function CupPongGame() {
         dragStartRef.current.x - ballStartPosRef.current.x
       );
       const arrowSize = 10;
-      ctx.fillStyle = 'rgba(59, 130, 246, 0.5)';
+      ctx.fillStyle = 'rgba(226, 125, 96, 0.5)';
       ctx.beginPath();
       ctx.moveTo(dragStartRef.current.x, dragStartRef.current.y);
       ctx.lineTo(
@@ -385,8 +385,8 @@ export function CupPongGame() {
       const barY = canvas.height * 0.2;
 
       // Draw bar background
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.fillStyle = 'rgba(226, 125, 96, 0.1)';
+      ctx.strokeStyle = 'rgba(226, 125, 96, 0.3)';
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.roundRect(barX, barY, barWidth, barHeight, 10);
@@ -397,11 +397,11 @@ export function CupPongGame() {
       const fillHeight = barHeight * strength;
       const gradient = ctx.createLinearGradient(barX, barY + barHeight, barX, barY);
 
-      // Create color gradient from green to yellow to orange to red
-      gradient.addColorStop(0, '#22c55e');    // green
-      gradient.addColorStop(0.33, '#eab308'); // yellow
-      gradient.addColorStop(0.66, '#f97316'); // orange
-      gradient.addColorStop(1, '#ef4444');    // red
+      // Create color gradient using brand colors
+      gradient.addColorStop(0, '#41B3A3');    // deep teal
+      gradient.addColorStop(0.33, '#85DCBA'); // sage
+      gradient.addColorStop(0.66, '#E8A87C'); // sunset
+      gradient.addColorStop(1, '#E27D60');    // coral
 
       ctx.fillStyle = gradient;
       ctx.beginPath();
@@ -409,13 +409,13 @@ export function CupPongGame() {
       ctx.fill();
 
       // Draw "POWER" label
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      ctx.fillStyle = '#2D3436';
       ctx.font = 'bold 12px sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText('POWER', barX + barWidth / 2, barY - 10);
 
       // Draw percentage
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+      ctx.fillStyle = '#2D3436';
       ctx.font = 'bold 14px sans-serif';
       ctx.fillText(`${Math.round(strength * 100)}%`, barX + barWidth / 2, barY + barHeight + 25);
     }
@@ -529,38 +529,38 @@ export function CupPongGame() {
   };
 
   return (
-    <section className="py-24 px-6 border-t border-white/10">
+    <section className="py-24 px-6" style={{ borderTop: '1px solid rgba(226, 125, 96, 0.2)' }}>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-5xl md:text-6xl font-black text-white mb-6">
+          <h2 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: 'Pacifico, cursive', color: '#E27D60' }}>
             Try Your Shot
           </h2>
-          <p className="text-slate-400 text-lg mb-4">
+          <p className="text-lg mb-4" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>
             Think you've got what it takes? Test your aim with our mini cup pong game!
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
+          <div className="w-24 h-1 mx-auto rounded-full" style={{ background: 'linear-gradient(to right, #E27D60, #C38D9E)' }} />
         </div>
 
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-sm cursor-default">
+        <div className="rounded-2xl p-6 md:p-8 backdrop-blur-sm cursor-default" style={{ background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(226, 125, 96, 0.2)' }}>
           {/* Stats */}
           <div className="flex justify-center gap-8 mb-6">
             <div className="text-center">
-              <div className="text-3xl font-black text-blue-400">{score}</div>
-              <div className="text-sm text-slate-400">Cups Hit</div>
+              <div className="text-3xl font-black" style={{ color: '#E27D60' }}>{score}</div>
+              <div className="text-sm" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>Cups Hit</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-black text-purple-400">{attempts}</div>
-              <div className="text-sm text-slate-400">Attempts</div>
+              <div className="text-3xl font-black" style={{ color: '#C38D9E' }}>{attempts}</div>
+              <div className="text-sm" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>Attempts</div>
             </div>
           </div>
 
           {/* Game Canvas */}
           <div className="relative">
             {showInstructions && (
-              <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center z-10 p-6">
+              <div className="absolute inset-0 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center z-10 p-6" style={{ background: 'rgba(253, 246, 227, 0.95)' }}>
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-white mb-4">How to Play</h3>
-                  <div className="text-slate-300 space-y-2 text-left max-w-sm">
+                  <h3 className="text-2xl font-bold mb-4" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>How to Play</h3>
+                  <div className="space-y-2 text-left max-w-sm" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.8 }}>
                     <p>1. Click ON the white ball at the bottom</p>
                     <p>2. Drag in the opposite direction you want to throw</p>
                     <p>3. Release to launch the ball</p>
@@ -569,7 +569,8 @@ export function CupPongGame() {
                 </div>
                 <button
                   onClick={startGame}
-                  className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-3 rounded-full font-bold text-lg hover:scale-105 transition-transform"
+                  className="px-8 py-3 rounded-full font-bold text-lg hover:scale-105 transition-transform"
+                  style={{ background: 'linear-gradient(to right, #E27D60, #C38D9E)', color: '#FDF6E3' }}
                 >
                   Start Game
                 </button>
@@ -577,16 +578,16 @@ export function CupPongGame() {
             )}
 
             {showPerfectScore && (
-              <div className="absolute inset-0 bg-slate-950/95 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center z-20 p-6">
+              <div className="absolute inset-0 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center z-20 p-6" style={{ background: 'rgba(253, 246, 227, 0.95)' }}>
                 <div className="text-center animate-bounce">
                   <div className="text-6xl mb-4">🎉</div>
-                  <h3 className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 mb-4">
+                  <h3 className="text-3xl md:text-4xl font-black mb-4" style={{ fontFamily: 'Pacifico, cursive', color: '#E27D60' }}>
                     PERFECT SCORE!
                   </h3>
-                  <p className="text-xl text-white font-bold mb-2">
+                  <p className="text-xl font-bold mb-2" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>
                     6 Cups in 6 Attempts!
                   </p>
-                  <p className="text-slate-300">
+                  <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>
                     You're a natural! 🏆
                   </p>
                 </div>
@@ -595,7 +596,7 @@ export function CupPongGame() {
 
             {showHitMessage && (
               <div className="absolute inset-0 flex items-center justify-center z-15 pointer-events-none">
-                <div className="text-7xl md:text-8xl font-black text-green-400 animate-ping">
+                <div className="text-7xl md:text-8xl font-black animate-ping" style={{ color: '#41B3A3' }}>
                   HIT!
                 </div>
               </div>
@@ -603,30 +604,31 @@ export function CupPongGame() {
 
             {showMissMessage && (
               <div className="absolute inset-0 flex items-center justify-center z-15 pointer-events-none">
-                <div className="text-7xl md:text-8xl font-black text-red-400 animate-ping">
+                <div className="text-7xl md:text-8xl font-black animate-ping" style={{ color: '#E27D60' }}>
                   MISS!
                 </div>
               </div>
             )}
 
             {showGameOver && (
-              <div className="absolute inset-0 bg-slate-950/95 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center z-20 p-6">
+              <div className="absolute inset-0 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center z-20 p-6" style={{ background: 'rgba(253, 246, 227, 0.95)' }}>
                 <div className="text-center">
-                  <h3 className="text-4xl md:text-5xl font-black text-white mb-6">
+                  <h3 className="text-4xl md:text-5xl font-black mb-6" style={{ fontFamily: 'Pacifico, cursive', color: '#E27D60' }}>
                     {finalAttempts === 6 ? 'Perfect Game! 🏆' : 'Game Complete! 🎯'}
                   </h3>
-                  <div className="bg-white/10 rounded-xl p-6 mb-6">
-                    <div className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-2">
+                  <div className="rounded-xl p-6 mb-6" style={{ background: 'rgba(226, 125, 96, 0.1)', border: '1px solid rgba(226, 125, 96, 0.3)' }}>
+                    <div className="text-6xl font-black mb-2" style={{ color: '#E27D60' }}>
                       {finalAttempts > 0 ? Math.round((finalScore / finalAttempts) * 100) : 0}%
                     </div>
-                    <p className="text-slate-300 text-lg">Hit Percentage</p>
-                    <p className="text-slate-400 text-sm mt-2">
+                    <p className="text-lg" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>Hit Percentage</p>
+                    <p className="text-sm mt-2" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>
                       {finalScore} cups in {finalAttempts} attempts
                     </p>
                   </div>
                   <button
                     onClick={resetGame}
-                    className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-3 rounded-full font-bold text-lg hover:scale-105 transition-transform"
+                    className="px-8 py-3 rounded-full font-bold text-lg hover:scale-105 transition-transform"
+                    style={{ background: 'linear-gradient(to right, #E27D60, #C38D9E)', color: '#FDF6E3' }}
                   >
                     Play Again
                   </button>
@@ -636,8 +638,8 @@ export function CupPongGame() {
 
             <canvas
               ref={canvasRef}
-              className="w-full border border-white/20 rounded-xl cursor-default"
-              style={{ display: 'block' }}
+              className="w-full rounded-xl cursor-default"
+              style={{ display: 'block', border: '1px solid rgba(226, 125, 96, 0.3)' }}
               onMouseDown={(e) => handleStart(e.clientX, e.clientY)}
               onMouseMove={(e) => handleMove(e.clientX, e.clientY)}
               onMouseUp={handleEnd}
@@ -664,7 +666,8 @@ export function CupPongGame() {
             <div className="mt-6 flex justify-center gap-4">
               <button
                 onClick={resetGame}
-                className="bg-white/10 hover:bg-white/20 text-white px-6 py-2 rounded-full font-semibold transition-colors"
+                className="px-6 py-2 rounded-full font-semibold transition-all hover:scale-105"
+                style={{ background: 'rgba(226, 125, 96, 0.2)', color: '#2D3436', border: '1px solid rgba(226, 125, 96, 0.3)' }}
               >
                 Reset Game
               </button>
@@ -673,7 +676,8 @@ export function CupPongGame() {
                   setShowInstructions(true);
                   setShowGameOver(false);
                 }}
-                className="bg-white/10 hover:bg-white/20 text-white px-6 py-2 rounded-full font-semibold transition-colors"
+                className="px-6 py-2 rounded-full font-semibold transition-all hover:scale-105"
+                style={{ background: 'rgba(195, 141, 158, 0.2)', color: '#2D3436', border: '1px solid rgba(195, 141, 158, 0.3)' }}
               >
                 Show Instructions
               </button>
@@ -682,7 +686,7 @@ export function CupPongGame() {
         </div>
 
         <div className="mt-8 text-center">
-          <p className="text-slate-400 text-sm">
+          <p className="text-sm" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>
             Like what you see? Join the tournament and compete for real!
           </p>
         </div>

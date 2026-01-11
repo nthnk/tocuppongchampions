@@ -56,29 +56,31 @@ export function FAQ() {
     <section id="faq" className="py-24 px-6">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-black text-white mb-6">
+          <h2 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: 'Pacifico, cursive', color: '#E27D60' }}>
             Frequently Asked Questions
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
+          <div className="w-24 h-1 mx-auto rounded-full" style={{ background: 'linear-gradient(to right, #E27D60, #C38D9E)' }} />
         </div>
 
         <div className="space-y-4">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-sm hover:border-white/20 transition-all"
+              className="rounded-2xl overflow-hidden backdrop-blur-sm transition-all"
+              style={{ background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(226, 125, 96, 0.2)' }}
             >
               <button
                 onClick={() => toggleFAQ(index)}
                 className="w-full px-6 md:px-8 py-6 flex items-center justify-between text-left gap-4"
               >
-                <h3 className="text-lg md:text-xl font-bold text-white pr-4">
+                <h3 className="text-lg md:text-xl font-bold pr-4" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>
                   {faq.question}
                 </h3>
                 <svg
-                  className={`w-6 h-6 text-blue-400 flex-shrink-0 transition-transform duration-300 ${
+                  className={`w-6 h-6 flex-shrink-0 transition-transform duration-300 ${
                     openIndex === index ? 'rotate-180' : ''
                   }`}
+                  style={{ color: '#E27D60' }}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -93,7 +95,7 @@ export function FAQ() {
                 }`}
               >
                 <div className="px-6 md:px-8 pb-6">
-                  <p className="text-slate-400 leading-relaxed text-base md:text-lg">
+                  <p className="leading-relaxed text-base md:text-lg" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.8 }}>
                     {faq.answer}
                   </p>
                 </div>
@@ -104,10 +106,11 @@ export function FAQ() {
 
         {/* Additional Help */}
         <div className="mt-12 text-center">
-          <p className="text-slate-400 mb-4">Still have questions?</p>
+          <p className="mb-4" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>Still have questions?</p>
           <a
             href="mailto:info@tocuppongchampions.ca"
-            className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-semibold transition-colors"
+            className="inline-flex items-center gap-2 font-semibold transition-colors"
+            style={{ color: '#E27D60' }}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

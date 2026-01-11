@@ -34,8 +34,10 @@ export function TournamentFormatAnimated() {
         {/* Title animation */}
         <div className="text-center mb-16">
           <h2
-            className="text-5xl md:text-6xl font-black text-white mb-6"
+            className="text-5xl md:text-6xl font-black mb-6"
             style={{
+              fontFamily: 'Pacifico, cursive',
+              color: '#E27D60',
               opacity: scrollProgress,
               transform: `translateY(${(1 - scrollProgress) * 30}px) scale(${0.9 + scrollProgress * 0.1})`,
               transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -44,17 +46,20 @@ export function TournamentFormatAnimated() {
             Tournament Format
           </h2>
           <div
-            className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6"
+            className="w-24 h-1 mx-auto rounded-full mb-6"
             style={{
+              background: 'linear-gradient(to right, #E27D60, #C38D9E)',
               opacity: scrollProgress,
               transform: `scaleX(${scrollProgress})`,
               transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s',
             }}
           />
           <p
-            className="text-xl text-slate-400 max-w-2xl mx-auto"
+            className="text-xl max-w-2xl mx-auto"
             style={{
-              opacity: scrollProgress,
+              fontFamily: 'DM Sans, sans-serif',
+              color: '#2D3436',
+              opacity: scrollProgress * 0.7,
               transform: `translateY(${(1 - scrollProgress) * 20}px)`,
               transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s',
             }}
@@ -75,10 +80,9 @@ export function TournamentFormatAnimated() {
                   d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
                 />
               ),
-              bgGradient: 'from-blue-600/10 to-purple-600/10',
-              borderColor: 'border-blue-500/20',
-              hoverBorder: 'hover:border-blue-500/40',
-              iconGradient: 'from-blue-600 to-purple-600',
+              bgColor: 'rgba(232, 168, 124, 0.1)',
+              borderColor: 'rgba(232, 168, 124, 0.3)',
+              iconColor: '#41B3A3',
               title: 'Max 64 Teams',
               description:
                 'Smaller, more intimate tournament organized into 16-team brackets for fair competition',
@@ -93,10 +97,9 @@ export function TournamentFormatAnimated() {
                   d="M13 10V3L4 14h7v7l9-11h-7z"
                 />
               ),
-              bgGradient: 'from-purple-600/10 to-pink-600/10',
-              borderColor: 'border-purple-500/20',
-              hoverBorder: 'hover:border-purple-500/40',
-              iconGradient: 'from-purple-600 to-pink-600',
+              bgColor: 'rgba(195, 141, 158, 0.1)',
+              borderColor: 'rgba(195, 141, 158, 0.3)',
+              iconColor: '#C38D9E',
               title: 'Bracket Style',
               description: "Winner moves forward, but don't worry—lose once and you get another shot in the losers bracket!",
               delay: 0.3,
@@ -110,10 +113,9 @@ export function TournamentFormatAnimated() {
                   d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
                 />
               ),
-              bgGradient: 'from-pink-600/10 to-red-600/10',
-              borderColor: 'border-pink-500/20',
-              hoverBorder: 'hover:border-pink-500/40',
-              iconGradient: 'from-pink-600 to-red-600',
+              bgColor: 'rgba(226, 125, 96, 0.1)',
+              borderColor: 'rgba(226, 125, 96, 0.3)',
+              iconColor: '#E27D60',
               title: 'Second Chances',
               description:
                 'Everyone plays at least two matches—lose your first game and keep playing in the comeback bracket',
@@ -122,18 +124,22 @@ export function TournamentFormatAnimated() {
           ].map((card, index) => (
             <div
               key={index}
-              className={`bg-gradient-to-br ${card.bgGradient} border ${card.borderColor} rounded-2xl p-8 backdrop-blur-sm ${card.hoverBorder} transition-all`}
+              className="rounded-2xl p-8 backdrop-blur-sm transition-all"
               style={{
+                background: card.bgColor,
+                border: `1px solid ${card.borderColor}`,
                 opacity: scrollProgress,
                 transform: `translateY(${(1 - scrollProgress) * 30}px) scale(${0.95 + scrollProgress * 0.05})`,
                 transition: `all 0.4s cubic-bezier(0.4, 0, 0.2, 1) ${card.delay}s`,
               }}
             >
               <div
-                className={`w-16 h-16 bg-gradient-to-br ${card.iconGradient} rounded-2xl flex items-center justify-center mb-6`}
+                className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6"
+                style={{ background: card.iconColor }}
               >
                 <svg
-                  className="w-8 h-8 text-white"
+                  className="w-8 h-8"
+                  style={{ color: '#FDF6E3' }}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -141,45 +147,48 @@ export function TournamentFormatAnimated() {
                   {card.icon}
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">{card.title}</h3>
-              <p className="text-slate-400 leading-relaxed">{card.description}</p>
+              <h3 className="text-2xl font-bold mb-3" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>{card.title}</h3>
+              <p className="leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>{card.description}</p>
             </div>
           ))}
         </div>
 
         {/* How It Works section */}
         <div
-          className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-12 backdrop-blur-sm"
+          className="rounded-2xl p-8 md:p-12 backdrop-blur-sm"
           style={{
+            background: 'rgba(255, 255, 255, 0.5)',
+            border: '1px solid rgba(226, 125, 96, 0.2)',
             opacity: scrollProgress,
             transform: `translateY(${(1 - scrollProgress) * 30}px)`,
             transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.5s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.5s',
           }}
         >
-          <h3 className="text-3xl font-bold text-white mb-8 text-center">How It Works</h3>
+          <h3 className="text-3xl font-bold mb-8 text-center" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>How It Works</h3>
 
           <div className="grid md:grid-cols-4 gap-6 md:gap-4">
             {[
-              { step: '1', label: 'Check-In & Seeding', gradient: 'from-blue-600 to-purple-600', delay: 0.6 },
-              { step: '2', label: 'Bracket Play Begins', gradient: 'from-purple-600 to-pink-600', delay: 0.65 },
-              { step: '3', label: 'Losers Bracket', gradient: 'from-pink-600 to-red-600', delay: 0.7 },
-              { step: '4', label: 'Finals & Prizes', gradient: 'from-yellow-600 to-orange-600', delay: 0.75 },
+              { step: '1', label: 'Check-In & Seeding', color: '#41B3A3', delay: 0.6 },
+              { step: '2', label: 'Bracket Play Begins', color: '#85DCBA', delay: 0.65 },
+              { step: '3', label: 'Losers Bracket', color: '#C38D9E', delay: 0.7 },
+              { step: '4', label: 'Finals & Prizes', color: '#E27D60', delay: 0.75 },
             ].map((step, index) => (
               <div key={index} className="relative">
                 <div
-                  className={`bg-gradient-to-br ${step.gradient} rounded-xl p-6 text-center`}
+                  className="rounded-xl p-6 text-center"
                   style={{
+                    background: step.color,
                     opacity: scrollProgress,
                     transform: `translateY(${(1 - scrollProgress) * 20}px) rotate(${(1 - scrollProgress) * -3}deg)`,
                     transition: `all 0.3s cubic-bezier(0.4, 0, 0.2, 1) ${step.delay}s`,
                   }}
                 >
-                  <div className="text-3xl font-black text-white mb-2">{step.step}</div>
-                  <p className="text-sm font-semibold text-white">{step.label}</p>
+                  <div className="text-3xl font-black mb-2" style={{ color: '#FDF6E3' }}>{step.step}</div>
+                  <p className="text-sm font-semibold" style={{ fontFamily: 'DM Sans, sans-serif', color: '#FDF6E3' }}>{step.label}</p>
                 </div>
                 {index < 3 && (
                   <div className="hidden md:block absolute top-1/2 -right-2 w-4 h-4">
-                    <svg className="text-slate-600" fill="currentColor" viewBox="0 0 20 20">
+                    <svg style={{ color: '#2D3436', opacity: 0.3 }} fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fillRule="evenodd"
                         d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
@@ -193,15 +202,17 @@ export function TournamentFormatAnimated() {
           </div>
 
           <div
-            className="mt-8 p-6 bg-blue-600/10 border border-blue-500/20 rounded-xl"
+            className="mt-8 p-6 rounded-xl"
             style={{
+              background: 'rgba(65, 179, 163, 0.1)',
+              border: '1px solid rgba(65, 179, 163, 0.3)',
               opacity: scrollProgress,
               transform: `scale(${0.95 + scrollProgress * 0.05})`,
               transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.8s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.8s',
             }}
           >
-            <p className="text-center text-slate-300 text-lg">
-              <span className="font-bold text-white">Event duration:</span> A fun afternoon/evening at a downtown bar with brackets running—grab drinks, watch games, and compete!
+            <p className="text-center text-lg" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>
+              <span className="font-bold">Event duration:</span> A fun afternoon/evening at a downtown bar with brackets running—grab drinks, watch games, and compete!
             </p>
           </div>
         </div>
