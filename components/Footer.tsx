@@ -6,7 +6,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <h3 className="text-2xl font-black mb-4" style={{ fontFamily: 'Pacifico, cursive', color: '#E27D60' }}>
-              TO CUP PONG CHAMPIONS
+              TORONTO CUP PONG CHAMPIONSHIP
             </h3>
             <p className="leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>
               Toronto's premier cup pong tournament where you meet friends and compete for the title.

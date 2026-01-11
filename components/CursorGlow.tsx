@@ -8,6 +8,12 @@ export function CursorGlow() {
   const animationFrameRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
+    // Check if device is mobile/touch device
+    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    // Don't render cursor glow on mobile devices
+    if (isMobile) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 

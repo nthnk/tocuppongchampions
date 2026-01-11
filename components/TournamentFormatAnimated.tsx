@@ -173,7 +173,7 @@ export function TournamentFormatAnimated() {
               { step: '3', label: 'Losers Bracket', color: '#C38D9E', delay: 0.7 },
               { step: '4', label: 'Finals & Prizes', color: '#E27D60', delay: 0.75 },
             ].map((step, index) => (
-              <div key={index} className="relative">
+              <div key={index}>
                 <div
                   className="rounded-xl p-6 text-center"
                   style={{
@@ -186,17 +186,6 @@ export function TournamentFormatAnimated() {
                   <div className="text-3xl font-black mb-2" style={{ color: '#FDF6E3' }}>{step.step}</div>
                   <p className="text-sm font-semibold" style={{ fontFamily: 'DM Sans, sans-serif', color: '#FDF6E3' }}>{step.label}</p>
                 </div>
-                {index < 3 && (
-                  <div className="hidden md:block absolute top-1/2 -right-2 w-4 h-4">
-                    <svg style={{ color: '#2D3436', opacity: 0.3 }} fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                )}
               </div>
             ))}
           </div>
