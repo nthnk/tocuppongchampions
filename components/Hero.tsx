@@ -146,15 +146,15 @@ export function Hero() {
           }}
         >
           <div className="backdrop-blur-md border rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-6" style={{ background: 'rgba(255, 255, 255, 0.5)', borderColor: 'rgba(226, 125, 96, 0.3)', boxShadow: '0 10px 40px rgba(0,0,0,0.08)' }}>
-            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-1" style={{ color: '#2D3436' }}>MAX 64</div>
+            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-1" style={{ fontFamily: 'Pacifico, cursive', color: '#2D3436' }}>64</div>
             <div className="text-[10px] sm:text-xs md:text-sm uppercase tracking-wide" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.6 }}>Teams</div>
           </div>
           <div className="backdrop-blur-md border rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-6" style={{ background: 'rgba(255, 255, 255, 0.5)', borderColor: 'rgba(195, 141, 158, 0.3)', boxShadow: '0 10px 40px rgba(0,0,0,0.08)' }}>
-            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-1" style={{ color: '#2D3436' }}>$10</div>
+            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-1" style={{ fontFamily: 'Pacifico, cursive', color: '#2D3436' }}>$10</div>
             <div className="text-[10px] sm:text-xs md:text-sm uppercase tracking-wide" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.6 }}>Per Duo</div>
           </div>
           <div className="backdrop-blur-md border rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-6" style={{ background: 'rgba(255, 255, 255, 0.5)', borderColor: 'rgba(232, 168, 124, 0.3)', boxShadow: '0 10px 40px rgba(0,0,0,0.08)' }}>
-            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-1" style={{ color: '#2D3436' }}>16</div>
+            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-1" style={{ fontFamily: 'Pacifico, cursive', color: '#2D3436' }}>16</div>
             <div className="text-[10px] sm:text-xs md:text-sm uppercase tracking-wide" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.6 }}>Team Brackets</div>
           </div>
         </div>
