@@ -39,7 +39,7 @@ export function ParallaxCups() {
   };
 
   return (
-    <section className="relative h-[200vh] overflow-hidden -mt-24" style={{ background: 'linear-gradient(to bottom, #FFFBF7, #FDF6E3, #FFFBF7)' }}>
+    <section className="relative h-[200vh] overflow-hidden -mt-24" style={{ background: 'linear-gradient(180deg, #121318 0%, #0C0C0C 100%)' }}>
       {/* Cups */}
       {cups.map((cup) => (
         <div
