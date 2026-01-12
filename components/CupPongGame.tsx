@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { palette, fonts } from '@/lib/theme';
 
 interface Ball {
   x: number;
@@ -183,7 +184,7 @@ export function CupPongGame() {
       const pulseTime = Date.now() / 1000;
       const pulseAlpha = 0.3 + Math.sin(pulseTime * 3) * 0.2;
 
-      ctx.fillStyle = `rgba(226, 125, 96, ${pulseAlpha})`;
+      ctx.fillStyle = `${palette.orange}${Math.round(pulseAlpha * 255).toString(16).padStart(2, '0')}`;
       ctx.beginPath();
       ctx.arc(ball.x, ball.y, ball.radius + 8, 0, Math.PI * 2);
       ctx.fill();
@@ -191,12 +192,12 @@ export function CupPongGame() {
 
     // Strong glow when grabbed/dragging
     if (ball.isGrabbed || ball.isDragging) {
-      ctx.fillStyle = 'rgba(226, 125, 96, 0.6)';
+      ctx.fillStyle = `${palette.orange}99`;
       ctx.beginPath();
       ctx.arc(ball.x, ball.y, ball.radius + 12, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.fillStyle = 'rgba(226, 125, 96, 0.4)';
+      ctx.fillStyle = `${palette.orange}66`;
       ctx.beginPath();
       ctx.arc(ball.x, ball.y, ball.radius + 18, 0, Math.PI * 2);
       ctx.fill();
@@ -220,9 +221,9 @@ export function CupPongGame() {
 
     // Change ball color when grabbed
     if (ball.isGrabbed || ball.isDragging) {
-      gradient.addColorStop(0, '#FDF6E3');
-      gradient.addColorStop(0.5, '#E8A87C');
-      gradient.addColorStop(1, '#E27D60');
+      gradient.addColorStop(0, palette.cream);
+      gradient.addColorStop(0.5, palette.orangeLight);
+      gradient.addColorStop(1, palette.orange);
     } else {
       gradient.addColorStop(0, '#ffffff');
       gradient.addColorStop(0.5, '#f0f0f0');
@@ -270,7 +271,7 @@ export function CupPongGame() {
     const ball = ballRef.current;
 
     // Clear canvas
-    ctx.fillStyle = '#FDF6E3';
+    ctx.fillStyle = palette.cream;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Draw cups
@@ -342,7 +343,7 @@ export function CupPongGame() {
 
     // Draw trajectory line when dragging
     if (ball.isDragging && dragStartRef.current && ballStartPosRef.current) {
-      ctx.strokeStyle = 'rgba(226, 125, 96, 0.5)';
+      ctx.strokeStyle = `${palette.orange}80`;
       ctx.lineWidth = 3;
       ctx.setLineDash([5, 5]);
       ctx.beginPath();
@@ -357,7 +358,7 @@ export function CupPongGame() {
         dragStartRef.current.x - ballStartPosRef.current.x
       );
       const arrowSize = 10;
-      ctx.fillStyle = 'rgba(226, 125, 96, 0.5)';
+      ctx.fillStyle = `${palette.orange}80`;
       ctx.beginPath();
       ctx.moveTo(dragStartRef.current.x, dragStartRef.current.y);
       ctx.lineTo(
@@ -385,8 +386,8 @@ export function CupPongGame() {
       const barY = canvas.height * 0.2;
 
       // Draw bar background
-      ctx.fillStyle = 'rgba(226, 125, 96, 0.1)';
-      ctx.strokeStyle = 'rgba(226, 125, 96, 0.3)';
+      ctx.fillStyle = `${palette.orange}1A`;
+      ctx.strokeStyle = `${palette.orange}4D`;
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.roundRect(barX, barY, barWidth, barHeight, 10);
@@ -398,10 +399,10 @@ export function CupPongGame() {
       const gradient = ctx.createLinearGradient(barX, barY + barHeight, barX, barY);
 
       // Create color gradient using brand colors
-      gradient.addColorStop(0, '#41B3A3');    // deep teal
-      gradient.addColorStop(0.33, '#85DCBA'); // sage
-      gradient.addColorStop(0.66, '#E8A87C'); // sunset
-      gradient.addColorStop(1, '#E27D60');    // coral
+      gradient.addColorStop(0, palette.orange);
+      gradient.addColorStop(0.33, palette.orangeLight);
+      gradient.addColorStop(0.66, palette.gold);
+      gradient.addColorStop(1, palette.orange);
 
       ctx.fillStyle = gradient;
       ctx.beginPath();
@@ -409,13 +410,13 @@ export function CupPongGame() {
       ctx.fill();
 
       // Draw "POWER" label
-      ctx.fillStyle = '#2D3436';
+      ctx.fillStyle = palette.slate;
       ctx.font = 'bold 12px sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText('POWER', barX + barWidth / 2, barY - 10);
 
       // Draw percentage
-      ctx.fillStyle = '#2D3436';
+      ctx.fillStyle = palette.slate;
       ctx.font = 'bold 14px sans-serif';
       ctx.fillText(`${Math.round(strength * 100)}%`, barX + barWidth / 2, barY + barHeight + 25);
     }
@@ -529,38 +530,38 @@ export function CupPongGame() {
   };
 
   return (
-    <section className="py-24 px-6" style={{ borderTop: '1px solid rgba(226, 125, 96, 0.2)' }}>
+    <section className="py-24 px-6" style={{ borderTop: `1px solid ${palette.orange}33` }}>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: 'Pacifico, cursive', color: '#E27D60' }}>
+          <h2 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: fonts.heading, color: palette.blue }}>
             Try Your Shot
           </h2>
-          <p className="text-lg mb-4" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>
+          <p className="text-lg mb-4" style={{ fontFamily: fonts.body, color: palette.gray100 }}>
             Think you've got what it takes? Test your aim with our mini cup pong game!
           </p>
-          <div className="w-24 h-1 mx-auto rounded-full" style={{ background: 'linear-gradient(to right, #E27D60, #C38D9E)' }} />
+          <div className="w-24 h-1 mx-auto rounded-full" style={{ background: `linear-gradient(to right, ${palette.red}, ${palette.orange}, ${palette.blue})` }} />
         </div>
 
-        <div className="rounded-2xl p-6 md:p-8 backdrop-blur-sm cursor-default" style={{ background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(226, 125, 96, 0.2)' }}>
+        <div className="rounded-2xl p-6 md:p-8 backdrop-blur-sm cursor-default" style={{ background: `${palette.slate}E6`, border: `1px solid ${palette.blue}33` }}>
           {/* Stats */}
           <div className="flex justify-center gap-8 mb-6">
             <div className="text-center">
-              <div className="text-3xl font-black" style={{ color: '#E27D60' }}>{score}</div>
-              <div className="text-sm" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>Cups Hit</div>
+              <div className="text-3xl font-black" style={{ color: palette.orange }}>{score}</div>
+              <div className="text-sm" style={{ fontFamily: fonts.body, color: palette.gray100 }}>Cups Hit</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-black" style={{ color: '#C38D9E' }}>{attempts}</div>
-              <div className="text-sm" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>Attempts</div>
+              <div className="text-3xl font-black" style={{ color: palette.blue }}>{attempts}</div>
+              <div className="text-sm" style={{ fontFamily: fonts.body, color: palette.gray100 }}>Attempts</div>
             </div>
           </div>
 
           {/* Game Canvas */}
           <div className="relative">
             {showInstructions && (
-              <div className="absolute inset-0 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center z-10 p-6" style={{ background: 'rgba(253, 246, 227, 0.95)' }}>
+              <div className="absolute inset-0 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center z-10 p-6" style={{ background: `${palette.slate}F2` }}>
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold mb-4" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>How to Play</h3>
-                  <div className="space-y-2 text-left max-w-sm" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.8 }}>
+                  <h3 className="text-2xl font-bold mb-4" style={{ fontFamily: fonts.body, color: palette.white }}>How to Play</h3>
+                  <div className="space-y-2 text-left max-w-sm" style={{ fontFamily: fonts.body, color: palette.gray100 }}>
                     <p>1. Click ON the white ball at the bottom</p>
                     <p>2. Drag in the opposite direction you want to throw</p>
                     <p>3. Release to launch the ball</p>
@@ -570,7 +571,7 @@ export function CupPongGame() {
                 <button
                   onClick={startGame}
                   className="px-8 py-3 rounded-full font-bold text-lg hover:scale-105 transition-transform"
-                  style={{ background: 'linear-gradient(to right, #E27D60, #C38D9E)', color: '#FDF6E3' }}
+                  style={{ background: `linear-gradient(to right, ${palette.orange}, ${palette.orangeLight})`, color: palette.cream }}
                 >
                   Start Game
                 </button>
@@ -578,16 +579,16 @@ export function CupPongGame() {
             )}
 
             {showPerfectScore && (
-              <div className="absolute inset-0 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center z-20 p-6" style={{ background: 'rgba(253, 246, 227, 0.95)' }}>
+              <div className="absolute inset-0 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center z-20 p-6" style={{ background: `${palette.slate}F2` }}>
                 <div className="text-center animate-bounce">
                   <div className="text-6xl mb-4">🎉</div>
-                  <h3 className="text-3xl md:text-4xl font-black mb-4" style={{ fontFamily: 'Pacifico, cursive', color: '#E27D60' }}>
+                  <h3 className="text-3xl md:text-4xl font-black mb-4" style={{ fontFamily: fonts.heading, color: palette.orange }}>
                     PERFECT SCORE!
                   </h3>
-                  <p className="text-xl font-bold mb-2" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>
+                  <p className="text-xl font-bold mb-2" style={{ fontFamily: fonts.body, color: palette.white }}>
                     6 Cups in 6 Attempts!
                   </p>
-                  <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>
+                  <p style={{ fontFamily: fonts.body, color: palette.gray100 }}>
                     You're a natural! 🏆
                   </p>
                 </div>
@@ -596,7 +597,7 @@ export function CupPongGame() {
 
             {showHitMessage && (
               <div className="absolute inset-0 flex items-center justify-center z-15 pointer-events-none">
-                <div className="text-7xl md:text-8xl font-black animate-ping" style={{ color: '#41B3A3' }}>
+                <div className="text-7xl md:text-8xl font-black animate-ping" style={{ color: palette.orange }}>
                   HIT!
                 </div>
               </div>
@@ -604,31 +605,31 @@ export function CupPongGame() {
 
             {showMissMessage && (
               <div className="absolute inset-0 flex items-center justify-center z-15 pointer-events-none">
-                <div className="text-7xl md:text-8xl font-black animate-ping" style={{ color: '#E27D60' }}>
+                <div className="text-7xl md:text-8xl font-black animate-ping" style={{ color: palette.orangeLight }}>
                   MISS!
                 </div>
               </div>
             )}
 
             {showGameOver && (
-              <div className="absolute inset-0 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center z-20 p-6" style={{ background: 'rgba(253, 246, 227, 0.95)' }}>
+              <div className="absolute inset-0 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center z-20 p-6" style={{ background: `${palette.slate}F2` }}>
                 <div className="text-center">
-                  <h3 className="text-4xl md:text-5xl font-black mb-6" style={{ fontFamily: 'Pacifico, cursive', color: '#E27D60' }}>
+                  <h3 className="text-4xl md:text-5xl font-black mb-6" style={{ fontFamily: fonts.heading, color: palette.orange }}>
                     {finalAttempts === 6 ? 'Perfect Game! 🏆' : 'Game Complete! 🎯'}
                   </h3>
-                  <div className="rounded-xl p-6 mb-6" style={{ background: 'rgba(226, 125, 96, 0.1)', border: '1px solid rgba(226, 125, 96, 0.3)' }}>
-                    <div className="text-6xl font-black mb-2" style={{ color: '#E27D60' }}>
+                  <div className="rounded-xl p-6 mb-6" style={{ background: `${palette.orange}33`, border: `1px solid ${palette.orange}` }}>
+                    <div className="text-6xl font-black mb-2" style={{ color: palette.orange }}>
                       {finalAttempts > 0 ? Math.round((finalScore / finalAttempts) * 100) : 0}%
                     </div>
-                    <p className="text-lg" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>Hit Percentage</p>
-                    <p className="text-sm mt-2" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>
+                    <p className="text-lg" style={{ fontFamily: fonts.body, color: palette.white }}>Hit Percentage</p>
+                    <p className="text-sm mt-2" style={{ fontFamily: fonts.body, color: palette.gray100 }}>
                       {finalScore} cups in {finalAttempts} attempts
                     </p>
                   </div>
                   <button
                     onClick={resetGame}
                     className="px-8 py-3 rounded-full font-bold text-lg hover:scale-105 transition-transform"
-                    style={{ background: 'linear-gradient(to right, #E27D60, #C38D9E)', color: '#FDF6E3' }}
+                    style={{ background: `linear-gradient(to right, ${palette.orange}, ${palette.orangeLight})`, color: palette.cream }}
                   >
                     Play Again
                   </button>
@@ -639,7 +640,7 @@ export function CupPongGame() {
             <canvas
               ref={canvasRef}
               className="w-full rounded-xl cursor-default"
-              style={{ display: 'block', border: '1px solid rgba(226, 125, 96, 0.3)' }}
+              style={{ display: 'block', border: `1px solid ${palette.orange}4D` }}
               onMouseDown={(e) => handleStart(e.clientX, e.clientY)}
               onMouseMove={(e) => handleMove(e.clientX, e.clientY)}
               onMouseUp={handleEnd}
@@ -667,7 +668,7 @@ export function CupPongGame() {
               <button
                 onClick={resetGame}
                 className="px-6 py-2 rounded-full font-semibold transition-all hover:scale-105"
-                style={{ background: 'rgba(226, 125, 96, 0.2)', color: '#2D3436', border: '1px solid rgba(226, 125, 96, 0.3)' }}
+                style={{ background: `${palette.red}33`, color: palette.white, border: `1px solid ${palette.red}` }}
               >
                 Reset Game
               </button>
@@ -677,7 +678,7 @@ export function CupPongGame() {
                   setShowGameOver(false);
                 }}
                 className="px-6 py-2 rounded-full font-semibold transition-all hover:scale-105"
-                style={{ background: 'rgba(195, 141, 158, 0.2)', color: '#2D3436', border: '1px solid rgba(195, 141, 158, 0.3)' }}
+                style={{ background: `${palette.blue}33`, color: palette.white, border: `1px solid ${palette.blue}` }}
               >
                 Show Instructions
               </button>
@@ -686,7 +687,7 @@ export function CupPongGame() {
         </div>
 
         <div className="mt-8 text-center">
-          <p className="text-sm" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>
+          <p className="text-sm" style={{ fontFamily: fonts.body, color: palette.gray100 }}>
             Like what you see? Join the tournament and compete for real!
           </p>
         </div>

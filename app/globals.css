@@ -1,31 +1,39 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FDF6E3;
-  --foreground: #2D3436;
+  --background: #121318;
+  --foreground: #F3F4F6;
 
-  /* Cup Pong Dudes Brand Colors */
-  --sunset: #E8A87C;
-  --coral: #E27D60;
-  --dusty-rose: #C38D9E;
-  --sage: #85DCBA;
-  --cream: #FDF6E3;
-  --warm-white: #FFFBF7;
-  --deep-teal: #41B3A3;
-  --charcoal: #2D3436;
+  /* Cup Pong Dudes V6 Brand Colors */
+  --black: #0C0C0C;
+  --dark-slate: #121318;
+  --slate: #1A1B21;
+
+  --red: #E63946;
+  --blue: #3A86E6;
+  --orange: #E68A33;
+
+  --red-light: #EF5A67;
+  --blue-light: #5C9DEF;
+  --orange-light: #EFA050;
+
+  --white: #FFFFFF;
+  --gray-100: #F3F4F6;
+  --gray-400: #9CA3AF;
+  --gray-600: #4B5563;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-dm-sans);
-  --font-display: var(--font-pacifico);
+  --font-sans: var(--font-work-sans);
+  --font-display: var(--font-montserrat);
 }
 
 body {
-  background: linear-gradient(135deg, var(--warm-white) 0%, var(--cream) 100%);
+  background: linear-gradient(180deg, var(--dark-slate) 0%, var(--black) 100%);
   color: var(--foreground);
-  font-family: var(--font-dm-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-work-sans), system-ui, -apple-system, sans-serif;
 }
 
 html {

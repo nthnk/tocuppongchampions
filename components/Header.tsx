@@ -1,5 +1,7 @@
 'use client';
 
+import { palette, fonts } from '@/lib/theme';
+
 export function Header() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -8,11 +10,11 @@ export function Header() {
 
   const handleShare = async () => {
     const url = typeof window !== 'undefined' ? window.location.origin : '';
-    const shareText = `🏆 Toronto Cup Pong Championship - The Inaugural Fall Classic 🏆
+    const shareText = `🏆 Toronto Cup Pong Championship - The Spring Classic 🏆
 
 Join me for Toronto's premier competitive cup pong tournament!
 
-📅 September 2026
+📅 March 2026
 📍 Downtown Toronto
 💰 $20 per duo team
 🏅 Cash prizes for top 3 finishers
@@ -31,49 +33,49 @@ ${url}`;
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b" style={{ background: 'rgba(253, 246, 227, 0.9)', borderColor: 'rgba(226, 125, 96, 0.2)' }}>
+    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b" style={{ background: `${palette.darkNavy}cc`, borderColor: `${palette.slate}` }}>
       <nav className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-center gap-4 md:gap-8">
           <button
             onClick={() => scrollToSection('about')}
             className="text-sm md:text-base transition-all font-medium hover:scale-105"
-            style={{ color: '#2D3436', fontFamily: 'DM Sans, sans-serif' }}
-            onMouseEnter={(e) => e.currentTarget.style.color = '#E27D60'}
-            onMouseLeave={(e) => e.currentTarget.style.color = '#2D3436'}
+            style={{ color: palette.cream, fontFamily: fonts.body }}
+            onMouseEnter={(e) => e.currentTarget.style.color = palette.orange}
+            onMouseLeave={(e) => e.currentTarget.style.color = palette.cream}
           >
             What Is It?
           </button>
           <button
             onClick={() => scrollToSection('format')}
             className="text-sm md:text-base transition-all font-medium hover:scale-105"
-            style={{ color: '#2D3436', fontFamily: 'DM Sans, sans-serif' }}
-            onMouseEnter={(e) => e.currentTarget.style.color = '#E27D60'}
-            onMouseLeave={(e) => e.currentTarget.style.color = '#2D3436'}
+            style={{ color: palette.cream, fontFamily: fonts.body }}
+            onMouseEnter={(e) => e.currentTarget.style.color = palette.orange}
+            onMouseLeave={(e) => e.currentTarget.style.color = palette.cream}
           >
             How It Works
           </button>
           <button
             onClick={() => scrollToSection('share')}
             className="text-sm md:text-base transition-all font-medium hover:scale-105"
-            style={{ color: '#2D3436', fontFamily: 'DM Sans, sans-serif' }}
-            onMouseEnter={(e) => e.currentTarget.style.color = '#E27D60'}
-            onMouseLeave={(e) => e.currentTarget.style.color = '#2D3436'}
+            style={{ color: palette.cream, fontFamily: fonts.body }}
+            onMouseEnter={(e) => e.currentTarget.style.color = palette.orange}
+            onMouseLeave={(e) => e.currentTarget.style.color = palette.cream}
           >
             Share Event
           </button>
           <button
             onClick={() => scrollToSection('waitlist')}
             className="text-sm md:text-base px-4 md:px-6 py-2 font-bold rounded-full transition-all hover:scale-105"
-            style={{ background: 'linear-gradient(to right, #E27D60, #C38D9E)', color: '#FDF6E3', fontFamily: 'DM Sans, sans-serif' }}
+            style={{ background: palette.orange, color: palette.cream, fontFamily: fonts.heading }}
           >
-            Sign Up
+            SIGN UP
           </button>
           <button
             onClick={() => scrollToSection('faq')}
             className="text-sm md:text-base transition-all font-medium hover:scale-105"
-            style={{ color: '#2D3436', fontFamily: 'DM Sans, sans-serif' }}
-            onMouseEnter={(e) => e.currentTarget.style.color = '#E27D60'}
-            onMouseLeave={(e) => e.currentTarget.style.color = '#2D3436'}
+            style={{ color: palette.cream, fontFamily: fonts.body }}
+            onMouseEnter={(e) => e.currentTarget.style.color = palette.orange}
+            onMouseLeave={(e) => e.currentTarget.style.color = palette.cream}
           >
             FAQs
           </button>

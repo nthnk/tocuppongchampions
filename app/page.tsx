@@ -15,7 +15,7 @@ import { CursorGlow } from '@/components/CursorGlow';
 
 export default function Home() {
   return (
-    <main className="min-h-screen relative" style={{ background: 'linear-gradient(135deg, #FFFBF7 0%, #FDF6E3 100%)' }}>
+    <main className="min-h-screen relative" style={{ background: 'linear-gradient(180deg, #121318 0%, #0C0C0C 100%)' }}>
       <CursorGlow />
       <div className="relative z-10">
         <Header />

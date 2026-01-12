@@ -132,7 +132,7 @@ export async function POST(request: NextRequest) {
   <div class="container">
     <div class="header">
       <h1>🏆 TORONTO CUP PONG CHAMPIONSHIP</h1>
-      <p style="color: #e0e7ff; margin: 10px 0 0 0; font-size: 14px;">The Inaugural Fall Classic</p>
+      <p style="color: #e0e7ff; margin: 10px 0 0 0; font-size: 14px;">The Spring Classic</p>
     </div>
 
     <div class="content">
@@ -164,7 +164,7 @@ export async function POST(request: NextRequest) {
     </div>
 
     <div class="footer">
-      <p>Toronto Cup Pong Championship • Late February - March 2026 • Downtown Toronto</p>
+      <p>Toronto Cup Pong Championship • March 2026 • Downtown Toronto</p>
       <p style="margin-top: 10px;">Where precision meets competition</p>
     </div>
   </div>

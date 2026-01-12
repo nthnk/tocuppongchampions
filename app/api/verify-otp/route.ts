@@ -258,14 +258,14 @@ export async function POST(request: NextRequest) {
         <h3>What Happens Next?</h3>
         <ul>
           <li>We'll email you the exact <strong>venue location</strong> in the coming weeks</li>
-          <li>Event is planned for <strong>late February - March 2026</strong> at a downtown Toronto bar</li>
+          <li>Event is planned for <strong>March 2026</strong> at a downtown Toronto bar</li>
           <li>Bring your A-game and have fun!</li>
         </ul>
       </div>
 
       <div class="info-box">
         <p><strong>📍 Event Details</strong></p>
-        <p>• <strong>When:</strong> Late February - March 2026</p>
+        <p>• <strong>When:</strong> March 2026</p>
         <p>• <strong>Where:</strong> Somewhere in Downtown Toronto (venue TBD)</p>
         <p>• <strong>Format:</strong> Max 64 teams, 16-team brackets, double elimination</p>
         <p>• <strong>What's Included:</strong> Tournament entry & equipment</p>
@@ -287,7 +287,7 @@ export async function POST(request: NextRequest) {
     </div>
 
     <div class="footer">
-      <p>Toronto Cup Pong Championship • Late February - March 2026 • Downtown Toronto</p>
+      <p>Toronto Cup Pong Championship • March 2026 • Downtown Toronto</p>
       <p style="margin-top: 10px;">Where precision meets competition</p>
     </div>
   </div>

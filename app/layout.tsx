@@ -1,32 +1,28 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Pacifico, DM_Sans } from "next/font/google";
+import { Montserrat, Work_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const montserrat = Montserrat({
+  weight: ["600", "700", "800"],
   subsets: ["latin"],
+  variable: "--font-montserrat",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const workSans = Work_Sans({
+  weight: ["400", "500", "600"],
   subsets: ["latin"],
+  variable: "--font-work-sans",
 });
 
-const pacifico = Pacifico({
-  weight: "400",
+const jetbrainsMono = JetBrains_Mono({
+  weight: ["500"],
   subsets: ["latin"],
-  variable: "--font-pacifico",
-});
-
-const dmSans = DM_Sans({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
+  variable: "--font-jetbrains-mono",
 });
 
 export const metadata: Metadata = {
-  title: "Toronto Cup Pong Championship - The Fall Classic",
-  description: "Join the waitlist for Toronto's premier competitive cup pong tournament. September 2026 in Downtown Toronto. 50-100 teams competing for prizes.",
+  title: "Toronto Cup Pong Championship - The Spring Classic",
+  description: "Join the waitlist for Toronto's premier competitive cup pong tournament. March 2026 in Downtown Toronto. 50-100 teams competing for prizes.",
 };
 
 export default function RootLayout({
@@ -37,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${pacifico.variable} ${dmSans.variable} antialiased`}
+        className={`${montserrat.variable} ${workSans.variable} ${jetbrainsMono.variable} antialiased`}
       >
         {children}
       </body>
