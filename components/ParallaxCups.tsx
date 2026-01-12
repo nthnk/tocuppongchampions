@@ -84,7 +84,7 @@ export function ParallaxCups() {
           <h2 className="text-6xl md:text-8xl font-black mb-8 tracking-tight" style={{ fontFamily: fonts.heading, color: palette.orange, textShadow: `3px 3px 0 ${palette.orangeLight}` }}>
             Game On
           </h2>
-          <p className="text-2xl md:text-3xl font-bold" style={{ fontFamily: fonts.body, color: palette.slate, opacity: 0.8 }}>
+          <p className="text-2xl md:text-3xl font-bold" style={{ fontFamily: fonts.body, color: '#FFFFFF', opacity: 0.8 }}>
             Prepare for the ultimate showdown
           </p>
         </div>
