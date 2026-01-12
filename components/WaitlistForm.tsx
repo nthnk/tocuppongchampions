@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { palette, fonts } from '@/lib/theme';
 
 type FormStep = 'form' | 'otp';
 
@@ -141,39 +142,39 @@ export function WaitlistForm() {
   };
 
   return (
-    <section id="waitlist" className="py-24 px-6" style={{ borderTop: '1px solid rgba(226, 125, 96, 0.2)' }}>
+    <section id="waitlist" className="py-24 px-6" style={{ borderTop: `1px solid ${palette.orange}33` }}>
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: 'Pacifico, cursive', color: '#E27D60' }}>
+          <h2 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: fonts.heading, color: palette.orange }}>
             Join the Waitlist
           </h2>
-          <div className="w-24 h-1 mx-auto rounded-full mb-6" style={{ background: 'linear-gradient(to right, #E27D60, #C38D9E)' }} />
-          <p className="text-xl mb-6" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>
+          <div className="w-24 h-1 mx-auto rounded-full mb-6" style={{ background: `linear-gradient(to right, ${palette.orange}, ${palette.orangeLight})` }} />
+          <p className="text-xl mb-6" style={{ fontFamily: fonts.body, color: palette.gray100 }}>
             Reserve your spot and be part of something fun!
           </p>
-          <div className="rounded-xl p-6 text-left max-w-2xl mx-auto" style={{ background: 'rgba(65, 179, 163, 0.1)', border: '1px solid rgba(65, 179, 163, 0.3)' }}>
-            <h3 className="text-lg font-bold mb-3" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>Why Join the Waitlist?</h3>
-            <p className="leading-relaxed mb-4" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>
+          <div className="rounded-xl p-6 text-left max-w-2xl mx-auto" style={{ background: `${palette.slate}E6`, border: `1px solid ${palette.blue}4D` }}>
+            <h3 className="text-lg font-bold mb-3" style={{ fontFamily: fonts.body, color: palette.white }}>Why Join the Waitlist?</h3>
+            <p className="leading-relaxed mb-4" style={{ fontFamily: fonts.body, color: palette.gray100 }}>
               We're seeing how many people are interested! Once we hit our target number, we'll lock in an awesome venue in Downtown Toronto, send out payment details, and set a date. The more people who sign up, the better this event will be!
             </p>
-            <div className="flex items-start gap-3 rounded-lg p-4" style={{ color: '#E8A87C', background: 'rgba(232, 168, 124, 0.1)', border: '1px solid rgba(232, 168, 124, 0.3)' }}>
-              <svg className="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="flex items-start gap-3 rounded-lg p-4" style={{ background: `${palette.red}33`, border: `1px solid ${palette.red}66` }}>
+              <svg className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: palette.redLight }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
               <div>
-                <p className="font-semibold mb-1" style={{ fontFamily: 'DM Sans, sans-serif' }}>18+ Event Only</p>
-                <p className="text-sm" style={{ fontFamily: 'DM Sans, sans-serif', color: '#E27D60' }}>Valid government-issued ID will be checked at the entrance. No exceptions.</p>
+                <p className="font-semibold mb-1" style={{ fontFamily: fonts.body, color: palette.white }}>18+ Event Only</p>
+                <p className="text-sm" style={{ fontFamily: fonts.body, color: palette.gray100 }}>Valid government-issued ID will be checked at the entrance. No exceptions.</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="rounded-2xl p-8 md:p-12 backdrop-blur-sm" style={{ background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(226, 125, 96, 0.2)' }}>
+        <div className="rounded-2xl p-8 md:p-12 backdrop-blur-sm" style={{ background: `${palette.slate}E6`, border: `1px solid ${palette.blue}4D` }}>
           {step === 'form' ? (
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Team Name */}
               <div>
-                <label htmlFor="teamName" className="block text-sm font-semibold mb-2 uppercase tracking-wide" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>
+                <label htmlFor="teamName" className="block text-sm font-semibold mb-2 uppercase tracking-wide" style={{ fontFamily: fonts.body, color: palette.white }}>
                   Team Name *
                 </label>
                 <input
@@ -185,13 +186,13 @@ export function WaitlistForm() {
                   onChange={handleChange}
                   placeholder="e.g., The Swish Squad"
                   className="w-full px-4 py-4 rounded-xl focus:outline-none transition-all"
-                  style={{ background: 'rgba(255, 255, 255, 0.8)', border: '1px solid rgba(226, 125, 96, 0.3)', color: '#2D3436' }}
+                  style={{ background: 'rgba(255, 255, 255, 0.1)', border: `1px solid ${palette.gray600}`, color: palette.white }}
                 />
               </div>
 
               {/* Player 1 */}
               <div>
-                <label className="block text-sm font-semibold mb-2 uppercase tracking-wide" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>
+                <label className="block text-sm font-semibold mb-2 uppercase tracking-wide" style={{ fontFamily: fonts.body, color: palette.white }}>
                   Player 1 *
                 </label>
                 <div className="grid grid-cols-2 gap-4">
@@ -204,7 +205,7 @@ export function WaitlistForm() {
                     onChange={handleChange}
                     placeholder="First Name"
                     className="w-full px-4 py-4 rounded-xl focus:outline-none transition-all"
-                    style={{ background: 'rgba(255, 255, 255, 0.8)', border: '1px solid rgba(226, 125, 96, 0.3)', color: '#2D3436' }}
+                    style={{ background: 'rgba(255, 255, 255, 0.1)', border: `1px solid ${palette.gray600}`, color: palette.white }}
                   />
                   <input
                     type="text"
@@ -215,14 +216,14 @@ export function WaitlistForm() {
                     onChange={handleChange}
                     placeholder="Last Name"
                     className="w-full px-4 py-4 rounded-xl focus:outline-none transition-all"
-                    style={{ background: 'rgba(255, 255, 255, 0.8)', border: '1px solid rgba(226, 125, 96, 0.3)', color: '#2D3436' }}
+                    style={{ background: 'rgba(255, 255, 255, 0.1)', border: `1px solid ${palette.gray600}`, color: palette.white }}
                   />
                 </div>
               </div>
 
               {/* Player 2 */}
               <div>
-                <label className="block text-sm font-semibold mb-2 uppercase tracking-wide" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>
+                <label className="block text-sm font-semibold mb-2 uppercase tracking-wide" style={{ fontFamily: fonts.body, color: palette.white }}>
                   Player 2 *
                 </label>
                 <div className="grid grid-cols-2 gap-4">
@@ -235,7 +236,7 @@ export function WaitlistForm() {
                     onChange={handleChange}
                     placeholder="First Name"
                     className="w-full px-4 py-4 rounded-xl focus:outline-none transition-all"
-                    style={{ background: 'rgba(255, 255, 255, 0.8)', border: '1px solid rgba(226, 125, 96, 0.3)', color: '#2D3436' }}
+                    style={{ background: 'rgba(255, 255, 255, 0.1)', border: `1px solid ${palette.gray600}`, color: palette.white }}
                   />
                   <input
                     type="text"
@@ -246,14 +247,14 @@ export function WaitlistForm() {
                     onChange={handleChange}
                     placeholder="Last Name"
                     className="w-full px-4 py-4 rounded-xl focus:outline-none transition-all"
-                    style={{ background: 'rgba(255, 255, 255, 0.8)', border: '1px solid rgba(226, 125, 96, 0.3)', color: '#2D3436' }}
+                    style={{ background: 'rgba(255, 255, 255, 0.1)', border: `1px solid ${palette.gray600}`, color: palette.white }}
                   />
                 </div>
               </div>
 
               {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-sm font-semibold mb-2 uppercase tracking-wide" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>
+                <label htmlFor="email" className="block text-sm font-semibold mb-2 uppercase tracking-wide" style={{ fontFamily: fonts.body, color: palette.white }}>
                   Email Address *
                 </label>
                 <input
@@ -265,9 +266,9 @@ export function WaitlistForm() {
                   onChange={handleChange}
                   placeholder="your.email@example.com"
                   className="w-full px-4 py-4 rounded-xl focus:outline-none transition-all"
-                  style={{ background: 'rgba(255, 255, 255, 0.8)', border: '1px solid rgba(226, 125, 96, 0.3)', color: '#2D3436' }}
+                  style={{ background: 'rgba(255, 255, 255, 0.1)', border: `1px solid ${palette.gray600}`, color: palette.white }}
                 />
-                <p className="mt-2 text-sm" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.6 }}>
+                <p className="mt-2 text-sm" style={{ fontFamily: fonts.body, color: palette.gray100 }}>
                   We'll send a verification code to this email
                 </p>
               </div>
@@ -277,7 +278,7 @@ export function WaitlistForm() {
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full px-8 py-5 text-lg font-bold rounded-xl transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
-                style={{ background: 'linear-gradient(to right, #E27D60, #C38D9E)', color: '#FDF6E3', boxShadow: '0 8px 30px rgba(226, 125, 96, 0.4)' }}
+                style={{ background: `linear-gradient(to right, ${palette.orange}, ${palette.orangeLight})`, color: palette.cream, boxShadow: `0 8px 30px ${palette.orange}66` }}
               >
                 {isSubmitting ? (
                   <>

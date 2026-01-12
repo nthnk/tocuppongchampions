@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { palette, fonts } from '@/lib/theme';
 
 export function AboutAnimated() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -33,7 +34,7 @@ export function AboutAnimated() {
       ref={sectionRef}
       id="about"
       className="py-24 px-6 overflow-hidden"
-      style={{ borderTop: '1px solid rgba(226, 125, 96, 0.2)' }}
+      style={{ borderTop: `1px solid ${palette.slate}` }}
     >
       <div className="max-w-5xl mx-auto">
         {/* Title with fade and slide up */}
@@ -41,8 +42,8 @@ export function AboutAnimated() {
           <h2
             className="text-5xl md:text-6xl font-black mb-6"
             style={{
-              fontFamily: 'Pacifico, cursive',
-              color: '#E27D60',
+              fontFamily: fonts.heading,
+              color: palette.blue,
               opacity: scrollProgress,
               transform: `translateY(${(1 - scrollProgress) * 30}px)`,
               transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -53,7 +54,7 @@ export function AboutAnimated() {
           <div
             className="w-24 h-1 mx-auto rounded-full"
             style={{
-              background: 'linear-gradient(to right, #E27D60, #C38D9E)',
+              background: `linear-gradient(to right, ${palette.blue}, ${palette.orange})`,
               opacity: scrollProgress,
               transform: `scaleX(${scrollProgress})`,
               transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s',
@@ -67,20 +68,20 @@ export function AboutAnimated() {
             <p
               className="text-lg md:text-xl leading-relaxed"
               style={{
-                fontFamily: 'DM Sans, sans-serif',
-                color: '#2D3436',
+                fontFamily: fonts.body,
+                color: palette.cream,
                 opacity: scrollProgress,
                 transform: `translateX(${(1 - scrollProgress) * -20}px)`,
                 transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s',
               }}
             >
-              The <span className="font-bold" style={{ color: '#E27D60' }}>Toronto Cup Pong Championship</span> will be the largest cup pong tournament Toronto has ever seen. Come play cup pong and meet new friends! Our first event will be a mini-tournament hosted at a downtown Toronto bar in late February - March 2026.
+              The <span className="font-bold" style={{ color: palette.orange }}>Toronto Cup Pong Championship</span> will be the largest cup pong tournament Toronto has ever seen. Come play cup pong and meet new friends! Our first event will be a mini-tournament hosted at a downtown Toronto bar in March 2026.
             </p>
             <p
               className="text-lg md:text-xl leading-relaxed"
               style={{
-                fontFamily: 'DM Sans, sans-serif',
-                color: '#2D3436',
+                fontFamily: fonts.body,
+                color: palette.cream,
                 opacity: scrollProgress,
                 transform: `translateX(${(1 - scrollProgress) * -20}px)`,
                 transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.25s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.25s',
@@ -102,7 +103,7 @@ export function AboutAnimated() {
                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 ),
-                gradient: '#41B3A3',
+                gradient: palette.orange,
                 title: 'Easy to Play',
                 description: "No experience needed—we'll show you the ropes when you arrive",
                 delay: 0.2,
@@ -116,7 +117,7 @@ export function AboutAnimated() {
                     d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z M15 13a3 3 0 11-6 0 3 3 0 016 0z"
                   />
                 ),
-                gradient: '#C38D9E',
+                gradient: palette.gold,
                 title: 'Content Creation',
                 description: "Help us capture the energy and fun—your games could go viral!",
                 delay: 0.3,
@@ -130,7 +131,7 @@ export function AboutAnimated() {
                     d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                   />
                 ),
-                gradient: '#E27D60',
+                gradient: palette.orangeLight,
                 title: 'Bar Vibes',
                 description: 'Downtown Toronto bar with food and drinks available for purchase',
                 delay: 0.4,
@@ -151,7 +152,7 @@ export function AboutAnimated() {
                 >
                   <svg
                     className="w-6 h-6"
-                    style={{ color: '#FDF6E3' }}
+                    style={{ color: palette.cream }}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -160,8 +161,8 @@ export function AboutAnimated() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-2" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>{feature.title}</h3>
-                  <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>{feature.description}</p>
+                  <h3 className="text-xl font-bold mb-2" style={{ fontFamily: fonts.body, color: palette.cream }}>{feature.title}</h3>
+                  <p style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.7 }}>{feature.description}</p>
                 </div>
               </div>
             ))}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { palette, fonts } from '@/lib/theme';
 
 const faqs = [
   {
@@ -17,7 +18,7 @@ const faqs = [
   },
   {
     question: "When and where is this happening?",
-    answer: "The event is planned for late February - March 2026 at a downtown Toronto bar. We'll email all registered teams with the exact date and venue details as we finalize arrangements!"
+    answer: "The event is planned for March 2026 at a downtown Toronto bar. We'll email all registered teams with the exact date and venue details as we finalize arrangements!"
   },
   {
     question: "Can I register as a solo player?",
@@ -56,10 +57,10 @@ export function FAQ() {
     <section id="faq" className="py-24 px-6">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: 'Pacifico, cursive', color: '#E27D60' }}>
+          <h2 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: fonts.heading, color: palette.blue }}>
             Frequently Asked Questions
           </h2>
-          <div className="w-24 h-1 mx-auto rounded-full" style={{ background: 'linear-gradient(to right, #E27D60, #C38D9E)' }} />
+          <div className="w-24 h-1 mx-auto rounded-full" style={{ background: `linear-gradient(to right, ${palette.blue}, ${palette.orange}, ${palette.blue})` }} />
         </div>
 
         <div className="space-y-4">
@@ -67,20 +68,20 @@ export function FAQ() {
             <div
               key={index}
               className="rounded-2xl overflow-hidden backdrop-blur-sm transition-all"
-              style={{ background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(226, 125, 96, 0.2)' }}
+              style={{ background: `${palette.slate}E6`, border: `1px solid ${palette.red}33` }}
             >
               <button
                 onClick={() => toggleFAQ(index)}
                 className="w-full px-6 md:px-8 py-6 flex items-center justify-between text-left gap-4"
               >
-                <h3 className="text-lg md:text-xl font-bold pr-4" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436' }}>
+                <h3 className="text-lg md:text-xl font-bold pr-4" style={{ fontFamily: fonts.body, color: palette.white }}>
                   {faq.question}
                 </h3>
                 <svg
                   className={`w-6 h-6 flex-shrink-0 transition-transform duration-300 ${
                     openIndex === index ? 'rotate-180' : ''
                   }`}
-                  style={{ color: '#E27D60' }}
+                  style={{ color: palette.red }}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -95,7 +96,7 @@ export function FAQ() {
                 }`}
               >
                 <div className="px-6 md:px-8 pb-6">
-                  <p className="leading-relaxed text-base md:text-lg" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.8 }}>
+                  <p className="leading-relaxed text-base md:text-lg" style={{ fontFamily: fonts.body, color: palette.gray100 }}>
                     {faq.answer}
                   </p>
                 </div>
@@ -106,11 +107,11 @@ export function FAQ() {
 
         {/* Additional Help */}
         <div className="mt-12 text-center">
-          <p className="mb-4" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.7 }}>Still have questions?</p>
+          <p className="mb-4" style={{ fontFamily: fonts.body, color: palette.gray100 }}>Still have questions?</p>
           <a
             href="mailto:info@tocuppongchampions.ca"
             className="inline-flex items-center gap-2 font-semibold transition-colors"
-            style={{ color: '#E27D60' }}
+            style={{ color: palette.orange }}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

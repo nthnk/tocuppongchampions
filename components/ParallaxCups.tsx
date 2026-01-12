@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { palette, fonts } from '@/lib/theme';
 
 export function ParallaxCups() {
   const [scrollY, setScrollY] = useState(0);
@@ -38,7 +39,7 @@ export function ParallaxCups() {
   };
 
   return (
-    <section className="relative h-[200vh] overflow-hidden" style={{ background: 'linear-gradient(to bottom, #FFFBF7, #FDF6E3, #FFFBF7)' }}>
+    <section className="relative h-[200vh] overflow-hidden -mt-24" style={{ background: 'linear-gradient(to bottom, #FFFBF7, #FDF6E3, #FFFBF7)' }}>
       {/* Cups */}
       {cups.map((cup) => (
         <div
@@ -80,10 +81,10 @@ export function ParallaxCups() {
       {/* Content overlay - centered text */}
       <div className="sticky top-1/2 -translate-y-1/2 z-10 flex items-center justify-center h-screen pointer-events-none">
         <div className="text-center">
-          <h2 className="text-6xl md:text-8xl font-black mb-8 tracking-tight" style={{ fontFamily: 'Pacifico, cursive', color: '#E27D60', textShadow: '3px 3px 0 #E8A87C' }}>
+          <h2 className="text-6xl md:text-8xl font-black mb-8 tracking-tight" style={{ fontFamily: fonts.heading, color: palette.orange, textShadow: `3px 3px 0 ${palette.orangeLight}` }}>
             Game On
           </h2>
-          <p className="text-2xl md:text-3xl font-bold" style={{ fontFamily: 'DM Sans, sans-serif', color: '#2D3436', opacity: 0.8 }}>
+          <p className="text-2xl md:text-3xl font-bold" style={{ fontFamily: fonts.body, color: palette.slate, opacity: 0.8 }}>
             Prepare for the ultimate showdown
           </p>
         </div>
@@ -115,32 +116,25 @@ function RedSoloCup({ id = 0 }: { id?: number }) {
         </linearGradient>
       </defs>
 
-      {/* White rim */}
-      <ellipse cx="60" cy="15" rx="35" ry="10" fill={`url(#rimGradient-${id})`} />
-      <rect x="25" y="15" width="70" height="8" fill={`url(#rimGradient-${id})`} />
-      <ellipse cx="60" cy="23" rx="35" ry="10" fill="#F5F5F5" />
-
-      {/* Main cup body - trapezoid */}
+      {/* Main cup body - trapezoid (red) */}
       <path
-        d="M 25 23 L 15 145 L 105 145 L 95 23 Z"
+        d="M 25 20 L 15 145 L 105 145 L 95 20 Z"
         fill={`url(#cupGradient-${id})`}
       />
 
-      {/* Left highlight */}
+      {/* Bottom of cup - red */}
+      <ellipse cx="60" cy="145" rx="45" ry="12" fill={`url(#cupGradient-${id})`} />
+
+      {/* Left highlight on cup body */}
       <path
-        d="M 30 28 L 22 140 L 35 140 L 42 28 Z"
+        d="M 30 25 L 22 140 L 35 140 L 42 25 Z"
         fill={`url(#cupHighlight-${id})`}
         opacity="0.6"
       />
 
-      {/* Bottom shadow */}
-      <ellipse cx="60" cy="145" rx="45" ry="12" fill="#8B1A2B" />
-
-      {/* Bottom darker band */}
-      <path
-        d="M 15 145 L 18 155 L 102 155 L 105 145 Z"
-        fill="#6B1421"
-      />
+      {/* White rim at top - just a thin band */}
+      <ellipse cx="60" cy="20" rx="35" ry="8" fill={`url(#rimGradient-${id})`} />
+      <ellipse cx="60" cy="15" rx="35" ry="8" fill={`url(#rimGradient-${id})`} />
     </svg>
   );
 }
