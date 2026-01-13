@@ -96,7 +96,7 @@ export function Hero() {
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 max-w-5xl mx-auto px-4"
           style={{
             fontFamily: fonts.heading,
-            color: palette.orange,
+            color: '#ffffff',
             lineHeight: '1.2',
             opacity: scrollProgress,
             transform: `translateY(${(1 - scrollProgress) * 30}px)`,
