@@ -533,7 +533,7 @@ export function CupPongGame() {
     <section className="py-24 px-6" style={{ borderTop: `1px solid ${palette.orange}33` }}>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: fonts.heading, color: palette.blue }}>
+          <h2 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: fonts.heading, color: palette.orange }}>
             Try Your Shot
           </h2>
           <p className="text-lg mb-4" style={{ fontFamily: fonts.body, color: palette.gray100 }}>

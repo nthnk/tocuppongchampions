@@ -43,7 +43,7 @@ export function AboutAnimated() {
             className="text-5xl md:text-6xl font-black mb-6"
             style={{
               fontFamily: fonts.heading,
-              color: palette.blue,
+              color: palette.orange,
               opacity: scrollProgress,
               transform: `translateY(${(1 - scrollProgress) * 30}px)`,
               transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',

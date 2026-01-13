@@ -81,7 +81,7 @@ export function ParallaxCups() {
       {/* Content overlay - centered text */}
       <div className="sticky top-1/2 -translate-y-1/2 z-10 flex items-center justify-center h-screen pointer-events-none">
         <div className="text-center">
-          <h2 className="text-6xl md:text-8xl font-black mb-8 tracking-tight" style={{ fontFamily: fonts.heading, color: palette.orange, textShadow: `3px 3px 0 ${palette.orangeLight}` }}>
+          <h2 className="text-6xl md:text-8xl font-black mb-8 tracking-tight" style={{ fontFamily: fonts.heading, color: palette.orange }}>
             Game On
           </h2>
           <p className="text-2xl md:text-3xl font-bold" style={{ fontFamily: fonts.body, color: '#FFFFFF', opacity: 0.8 }}>

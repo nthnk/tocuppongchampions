@@ -57,7 +57,7 @@ export function FAQ() {
     <section id="faq" className="py-24 px-6">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: fonts.heading, color: palette.blue }}>
+          <h2 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: fonts.heading, color: palette.orange }}>
             Frequently Asked Questions
           </h2>
           <div className="w-24 h-1 mx-auto rounded-full" style={{ background: `linear-gradient(to right, ${palette.red}, ${palette.orange}, ${palette.blue})` }} />
