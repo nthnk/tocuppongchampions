@@ -60,7 +60,7 @@ export function FAQ() {
           <h2 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: fonts.heading, color: palette.blue }}>
             Frequently Asked Questions
           </h2>
-          <div className="w-24 h-1 mx-auto rounded-full" style={{ background: `linear-gradient(to right, ${palette.blue}, ${palette.orange}, ${palette.blue})` }} />
+          <div className="w-24 h-1 mx-auto rounded-full" style={{ background: `linear-gradient(to right, ${palette.red}, ${palette.orange}, ${palette.blue})` }} />
         </div>
 
         <div className="space-y-4">

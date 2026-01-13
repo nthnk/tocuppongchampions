@@ -54,7 +54,7 @@ export function AboutAnimated() {
           <div
             className="w-24 h-1 mx-auto rounded-full"
             style={{
-              background: `linear-gradient(to right, ${palette.blue}, ${palette.orange})`,
+              background: `linear-gradient(to right, ${palette.red}, ${palette.orange}, ${palette.blue})`,
               opacity: scrollProgress,
               transform: `scaleX(${scrollProgress})`,
               transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s',

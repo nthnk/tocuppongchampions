@@ -148,7 +148,7 @@ export function WaitlistForm() {
           <h2 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: fonts.heading, color: palette.orange }}>
             Join the Waitlist
           </h2>
-          <div className="w-24 h-1 mx-auto rounded-full mb-6" style={{ background: `linear-gradient(to right, ${palette.orange}, ${palette.orangeLight})` }} />
+          <div className="w-24 h-1 mx-auto rounded-full mb-6" style={{ background: `linear-gradient(to right, ${palette.red}, ${palette.orange}, ${palette.blue})` }} />
           <p className="text-xl mb-6" style={{ fontFamily: fonts.body, color: palette.gray100 }}>
             Reserve your spot and be part of something fun!
           </p>
