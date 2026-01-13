@@ -57,6 +57,7 @@ export async function POST(request: NextRequest) {
       try {
         const { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName } = verification.formData;
 
+        // Send confirmation email to participant
         await resend.emails.send({
           from: 'Toronto Cup Pong Championship <noreply@tocuppongchampions.ca>',
           to: email,
@@ -289,6 +290,130 @@ export async function POST(request: NextRequest) {
     <div class="footer">
       <p>Toronto Cup Pong Championship • March 2026 • Downtown Toronto</p>
       <p style="margin-top: 10px;">Where precision meets competition</p>
+    </div>
+  </div>
+</body>
+</html>
+          `,
+        });
+
+        // Send admin notification email
+        await resend.emails.send({
+          from: 'Toronto Cup Pong Championship <noreply@tocuppongchampions.ca>',
+          to: 'nknathankoo@gmail.com',
+          subject: 'New Waitlist Signup - Toronto Cup Pong Championship',
+          html: `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
+      padding: 30px 20px;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .content {
+      padding: 30px;
+    }
+    .team-info {
+      background-color: #f0f9ff;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      border-left: 4px solid #2563eb;
+    }
+    .team-info h3 {
+      margin-top: 0;
+      color: #1e40af;
+      font-size: 18px;
+    }
+    .info-row {
+      display: flex;
+      margin: 10px 0;
+      color: #1e40af;
+    }
+    .info-label {
+      font-weight: 600;
+      min-width: 120px;
+      color: #1e40af;
+    }
+    .info-value {
+      color: #1e40af;
+    }
+    .footer {
+      background-color: #f9fafb;
+      padding: 20px;
+      text-align: center;
+      color: #6b7280;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🎉 New Waitlist Signup</h1>
+    </div>
+
+    <div class="content">
+      <p style="color: #4b5563; font-size: 16px; margin-bottom: 20px;">
+        A new team has successfully registered for the Toronto Cup Pong Championship!
+      </p>
+
+      <div class="team-info">
+        <h3>Team Registration Details</h3>
+        <div class="info-row">
+          <span class="info-label">Team Name:</span>
+          <span class="info-value">${teamName}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Player 1:</span>
+          <span class="info-value">${player1FirstName} ${player1LastName}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Player 2:</span>
+          <span class="info-value">${player2FirstName} ${player2LastName}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Email:</span>
+          <span class="info-value">${email}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Timestamp:</span>
+          <span class="info-value">${new Date().toLocaleString('en-US', { timeZone: 'America/Toronto', dateStyle: 'full', timeStyle: 'long' })}</span>
+        </div>
+      </div>
+
+      <p style="color: #6b7280; font-size: 14px; margin-top: 20px;">
+        This team has been added to the Google Sheets database and received their confirmation email with payment instructions.
+      </p>
+    </div>
+
+    <div class="footer">
+      <p>Toronto Cup Pong Championship Admin Notification</p>
     </div>
   </div>
 </body>
