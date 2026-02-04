@@ -13,6 +13,7 @@ export const palette = {
   redLight: '#ff3b36',
   orange: '#f97316',
   orangeLight: '#fb923c',
+  gold: '#eab308',
   blue: '#3b82f6',
 
   // Neutrals - White/Cream
