@@ -7,7 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email } = body;
+    const { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email, referredBy } = body;
 
     // Validate required fields
     if (!teamName || !player1FirstName || !player1LastName || !player2FirstName || !player2LastName || !email) {
@@ -33,14 +33,14 @@ export async function POST(request: NextRequest) {
     console.log(`🔐 OTP CODE for ${email}: ${otpCode}`);
 
     // Store OTP with form data
-    storeOTP(email, otpCode, { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email });
+    storeOTP(email, otpCode, { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email, referredBy: referredBy || '' });
 
     // Send OTP email via Resend
     try {
       await resend.emails.send({
-        from: 'Toronto Cup Pong Championship <noreply@tocuppongchampions.ca>',
+        from: '6cups <noreply@tocuppongchampions.ca>',
         to: email,
-        subject: 'Your Toronto Cup Pong Championship Verification Code',
+        subject: 'Table Zero - Verification Code',
         html: `
 <!DOCTYPE html>
 <html>
@@ -49,38 +49,48 @@ export async function POST(request: NextRequest) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-family: Verdana, Geneva, sans-serif;
       line-height: 1.6;
-      color: #333;
-      background-color: #f4f4f4;
+      color: #fffafa;
+      background-color: #020000;
       margin: 0;
       padding: 0;
     }
     .container {
       max-width: 600px;
       margin: 0 auto;
-      background-color: #ffffff;
-      border-radius: 8px;
-      overflow: hidden;
+      background-color: #0a0a0a;
     }
     .header {
-      background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
+      background-color: #020000;
       padding: 40px 20px;
       text-align: center;
+      border-bottom: 1px solid #141414;
     }
     .header h1 {
       margin: 0;
-      color: #ffffff;
-      font-size: 24px;
+      color: #fffafa;
+      font-size: 32px;
       font-weight: bold;
+      letter-spacing: -1px;
+    }
+    .header span {
+      color: #f61813;
+    }
+    .header p {
+      color: #fffafa;
+      opacity: 0.5;
+      margin: 10px 0 0 0;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
     .content {
       padding: 40px 30px;
     }
     .otp-box {
-      background: linear-gradient(135deg, #eff6ff 0%, #f3e8ff 100%);
-      border: 2px solid #2563eb;
-      border-radius: 12px;
+      background-color: #141414;
+      border: 1px solid #141414;
       padding: 30px;
       text-align: center;
       margin: 30px 0;
@@ -89,83 +99,90 @@ export async function POST(request: NextRequest) {
       font-size: 42px;
       font-weight: bold;
       letter-spacing: 8px;
-      color: #2563eb;
+      color: #f61813;
       font-family: 'Courier New', monospace;
     }
     .otp-label {
-      font-size: 12px;
-      color: #6b7280;
+      font-size: 11px;
+      color: #fffafa;
+      opacity: 0.5;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-top: 10px;
+      letter-spacing: 2px;
+      margin-top: 15px;
+    }
+    .team-info {
+      background-color: #141414;
+      padding: 20px;
+      margin: 20px 0;
+      border-left: 2px solid #f61813;
+    }
+    .team-info p {
+      margin: 8px 0;
+      font-size: 14px;
+      color: #fffafa;
+      opacity: 0.8;
+    }
+    .team-info strong {
+      color: #fffafa;
     }
     .info-box {
-      background-color: #f9fafb;
-      border-left: 4px solid #2563eb;
+      background-color: #141414;
+      border-left: 2px solid #f61813;
       padding: 15px 20px;
       margin: 20px 0;
     }
     .info-box p {
       margin: 5px 0;
-      font-size: 14px;
-      color: #4b5563;
+      font-size: 13px;
+      color: #fffafa;
+      opacity: 0.7;
     }
     .footer {
-      background-color: #f9fafb;
+      background-color: #020000;
       padding: 30px;
       text-align: center;
-      color: #6b7280;
-      font-size: 12px;
-    }
-    .team-info {
-      background-color: #f0f9ff;
-      border-radius: 8px;
-      padding: 15px;
-      margin: 20px 0;
-    }
-    .team-info strong {
-      color: #1e40af;
+      color: #fffafa;
+      font-size: 11px;
+      opacity: 0.4;
+      border-top: 1px solid #141414;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1>🏆 TORONTO CUP PONG CHAMPIONSHIP</h1>
-      <p style="color: #e0e7ff; margin: 10px 0 0 0; font-size: 14px;">The Spring Classic</p>
+      <h1>TABLE <span>ZERO</span></h1>
+      <p>6cups presents</p>
     </div>
 
     <div class="content">
-      <h2 style="color: #1f2937; margin-top: 0;">Verify Your Waitlist Registration</h2>
-
-      <p style="color: #4b5563; font-size: 16px;">
-        Welcome to the waitlist! Enter this verification code to complete your registration for <strong>${teamName}</strong>.
+      <p style="color: #fffafa; font-size: 16px; margin-top: 0;">
+        Enter this code to complete your registration for <strong>${teamName}</strong>.
       </p>
 
       <div class="team-info">
-        <p style="margin: 5px 0;"><strong>Team Name:</strong> ${teamName}</p>
-        <p style="margin: 5px 0;"><strong>Player 1:</strong> ${player1FirstName} ${player1LastName}</p>
-        <p style="margin: 5px 0;"><strong>Player 2:</strong> ${player2FirstName} ${player2LastName}</p>
+        <p><strong>Team:</strong> ${teamName}</p>
+        <p><strong>Player 1:</strong> ${player1FirstName} ${player1LastName}</p>
+        <p><strong>Player 2:</strong> ${player2FirstName} ${player2LastName}</p>
       </div>
 
       <div class="otp-box">
         <div class="otp-code">${otpCode}</div>
-        <div class="otp-label">Your Verification Code</div>
+        <div class="otp-label">Verification Code</div>
       </div>
 
       <div class="info-box">
-        <p><strong>⏱️ This code expires in 10 minutes</strong></p>
-        <p>If you didn't request this code, you can safely ignore this email.</p>
+        <p><strong>This code expires in 10 minutes.</strong></p>
+        <p>If you didn't request this, ignore this email.</p>
       </div>
 
-      <p style="color: #4b5563; margin-top: 30px;">
-        Questions? Reply to this email or contact us at <a href="mailto:info@tocuppongchampions.ca" style="color: #2563eb;">info@tocuppongchampions.ca</a>
+      <p style="color: #fffafa; opacity: 0.6; margin-top: 30px; font-size: 13px;">
+        Questions? <a href="mailto:info@tocuppongchampions.ca" style="color: #f61813;">info@tocuppongchampions.ca</a>
       </p>
     </div>
 
     <div class="footer">
-      <p>Toronto Cup Pong Championship • March 2026 • Downtown Toronto</p>
-      <p style="margin-top: 10px;">Where precision meets competition</p>
+      <p>6cups • Table Zero • March 2026 • Toronto</p>
     </div>
   </div>
 </body>

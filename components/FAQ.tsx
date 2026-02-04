@@ -5,44 +5,48 @@ import { palette, fonts } from '@/lib/theme';
 
 const faqs = [
   {
-    question: "How much does it cost to enter?",
-    answer: "$10 per duo team. That's it! This gets you tournament entry and access to compete with other cup pong enthusiasts at a downtown Toronto bar."
+    question: "HOW DOES THE WAITLIST WORK?",
+    answer: "Table Zero has 32 spots. The waitlist is open to everyone, but signing up doesn't guarantee a spot. We'll reach out to confirm your spot as we finalize the event."
   },
   {
-    question: "Will there be alcohol?",
-    answer: "Yes! This is a bar event, so alcohol will be available for purchase. However, drinks and food are not included in the entry fee—you can purchase them directly from the bar."
+    question: "HOW CAN I IMPROVE MY CHANCES OF GETTING IN?",
+    answer: "There are a few ways to move up the waitlist. Tag us on social media and you'll jump up one spot for each post. Refer a friend who signs up and you'll move up 10 spots. Send us a trick shot video and you'll move up 5 spots. Get creative and have fun with it."
   },
   {
-    question: "What's the tournament format?",
-    answer: "This is a smaller, more intimate tournament with a max of 64 teams. We organize teams into 16-team mini-brackets. Win and you advance, lose and you drop to the redemption bracket for another chance. Everyone is guaranteed at least two games!"
+    question: "HOW MUCH DOES IT COST?",
+    answer: "$10 per duo team. Payment instructions will be sent once your spot is confirmed. Drinks and food are not included - you can purchase them at the bar."
   },
   {
-    question: "When and where is this happening?",
-    answer: "The event is planned for March 2026 at a downtown Toronto bar. We'll email all registered teams with the exact date and venue details as we finalize arrangements!"
+    question: "WILL THERE BE ALCOHOL?",
+    answer: "Yes. This is a bar event, so alcohol will be available for purchase. Drinks and food are not included in the entry fee."
   },
   {
-    question: "Can I register as a solo player?",
-    answer: "Not directly, but we've got you! Email info@tocuppongchampions.ca and we'll help match you with a partner. This is a great way to meet someone new before the event."
+    question: "WHAT'S THE TOURNAMENT FORMAT?",
+    answer: "32 teams in a double-elimination bracket. Win and advance. Lose your first game and you drop to the loser's bracket, where you can fight your way back later in the tournament. Lose twice and you're out. We'll share more details closer to the event."
   },
   {
-    question: "How do I pay the $10?",
-    answer: "Payment instructions will be sent to you in the confirmation email after you sign up. We'll provide all the details you need to complete your registration."
+    question: "WHAT HAPPENS WHEN I LOSE?",
+    answer: "If you're eliminated from the bracket, there's still plenty to do. We'll have other games and entertainment set up throughout the venue, so you can hang out, have fun, and watch the final matches to see who gets crowned the winner."
   },
   {
-    question: "What happens after I sign up?",
-    answer: "You'll get a confirmation email right away with payment instructions. We'll also send you updates about the venue, date, and everything else you need to know before the event."
+    question: "WHEN AND WHERE IS THIS HAPPENING?",
+    answer: "March 2026 at a downtown Toronto bar. Exact date and venue TBD. We'll email confirmed teams with all the details."
   },
   {
-    question: "What's included in the entry fee?",
-    answer: "Your $10 entry fee covers tournament participation and equipment. Food and drinks are available for purchase from the bar throughout the event."
+    question: "CAN I REGISTER AS A SOLO PLAYER?",
+    answer: "Not directly. You need a partner to sign up. If you need help finding one, email info@tocuppongchampions.ca and we'll try to match you with someone."
   },
   {
-    question: "What should we bring?",
-    answer: "Just yourself and a friend! We provide all the cup pong equipment. Bring your game face and some cash for food and drinks at the bar."
+    question: "WHAT SHOULD I BRING?",
+    answer: "Just yourself and your teammate. We provide all equipment. Bring cash or card for food and drinks at the bar."
   },
   {
-    question: "Why is this event happening?",
-    answer: "We're shooting content for our social media and wanted to host a fun mini tournament for friends and anyone who wants to play cup pong. It's a way to test our tournament concept while creating awesome content!"
+    question: "WHY IS THIS EVENT HAPPENING?",
+    answer: "Table Zero is the first official 6cups event. We're capturing content and testing our tournament format with a small group before scaling up. Think of it as the origin story."
+  },
+  {
+    question: "IS THIS AN INVITE-ONLY EVENT?",
+    answer: "Mostly. Some spots are reserved for friends and family. The rest are open to anyone on the waitlist who shows they want in. The list is open - your spot isn't guaranteed."
   }
 ];
 
@@ -54,39 +58,53 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-24 px-6">
-      <div className="max-w-4xl mx-auto">
+    <section id="faq" className="py-24 px-6" style={{ background: palette.black, borderTop: `1px solid ${palette.slate}` }}>
+      <div className="max-w-3xl mx-auto">
+        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: fonts.heading, color: palette.orange }}>
-            Frequently Asked Questions
+          <h2
+            className="text-4xl md:text-5xl font-bold mb-4"
+            style={{ fontFamily: fonts.heading, color: palette.cream }}
+          >
+            FAQ
           </h2>
-          <div className="w-24 h-1 mx-auto rounded-full" style={{ background: `linear-gradient(to right, ${palette.red}, ${palette.orange}, ${palette.blue})` }} />
+          <div
+            className="w-12 h-1 mx-auto"
+            style={{ background: palette.red }}
+          />
         </div>
 
-        <div className="space-y-4">
+        {/* FAQ Items */}
+        <div className="space-y-2">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="rounded-2xl overflow-hidden backdrop-blur-sm transition-all"
-              style={{ background: `${palette.slate}E6`, border: `1px solid ${palette.red}33` }}
+              className="overflow-hidden transition-all"
+              style={{
+                background: openIndex === index ? palette.darkSlate : 'transparent',
+                borderBottom: `1px solid ${palette.slate}`,
+              }}
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full px-6 md:px-8 py-6 flex items-center justify-between text-left gap-4"
+                className="w-full px-4 md:px-6 py-5 flex items-center justify-between text-left gap-4"
               >
-                <h3 className="text-lg md:text-xl font-bold pr-4" style={{ fontFamily: fonts.body, color: palette.white }}>
+                <h3
+                  className="text-base md:text-lg font-medium"
+                  style={{ fontFamily: fonts.heading, color: palette.cream }}
+                >
                   {faq.question}
                 </h3>
                 <svg
-                  className={`w-6 h-6 flex-shrink-0 transition-transform duration-300 ${
-                    openIndex === index ? 'rotate-180' : ''
+                  className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${
+                    openIndex === index ? 'rotate-45' : ''
                   }`}
                   style={{ color: palette.red }}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                 </svg>
               </button>
 
@@ -95,8 +113,11 @@ export function FAQ() {
                   openIndex === index ? 'max-h-96' : 'max-h-0'
                 }`}
               >
-                <div className="px-6 md:px-8 pb-6">
-                  <p className="leading-relaxed text-base md:text-lg" style={{ fontFamily: fonts.body, color: palette.gray100 }}>
+                <div className="px-4 md:px-6 pb-5">
+                  <p
+                    className="text-sm md:text-base leading-relaxed"
+                    style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.7 }}
+                  >
                     {faq.answer}
                   </p>
                 </div>
@@ -105,18 +126,23 @@ export function FAQ() {
           ))}
         </div>
 
-        {/* Additional Help */}
-        <div className="mt-12 text-center">
-          <p className="mb-4" style={{ fontFamily: fonts.body, color: palette.gray100 }}>Still have questions?</p>
+        {/* Contact */}
+        <div className="mt-16 text-center">
+          <p
+            className="mb-4 text-sm"
+            style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.6 }}
+          >
+            Still have questions?
+          </p>
           <a
             href="mailto:info@tocuppongchampions.ca"
-            className="inline-flex items-center gap-2 font-semibold transition-colors"
-            style={{ color: palette.orange }}
+            className="inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-80"
+            style={{ color: palette.red, fontFamily: fonts.heading }}
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
-            Contact us at info@tocuppongchampions.ca
+            info@tocuppongchampions.ca
           </a>
         </div>
       </div>

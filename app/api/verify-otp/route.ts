@@ -55,13 +55,13 @@ export async function POST(request: NextRequest) {
 
       // Send confirmation email with payment instructions
       try {
-        const { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName } = verification.formData;
+        const { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, referredBy } = verification.formData;
 
         // Send confirmation email to participant
         await resend.emails.send({
-          from: 'Toronto Cup Pong Championship <noreply@tocuppongchampions.ca>',
+          from: '6cups <noreply@tocuppongchampions.ca>',
           to: email,
-          subject: 'Welcome to Toronto Cup Pong Championship! 🏆',
+          subject: 'Table Zero - You\'re on the list',
           html: `
 <!DOCTYPE html>
 <html>
@@ -70,113 +70,106 @@ export async function POST(request: NextRequest) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-family: Verdana, Geneva, sans-serif;
       line-height: 1.6;
-      color: #333;
-      background-color: #f4f4f4;
+      color: #fffafa;
+      background-color: #020000;
       margin: 0;
       padding: 0;
     }
     .container {
       max-width: 600px;
       margin: 0 auto;
-      background-color: #ffffff;
-      border-radius: 8px;
-      overflow: hidden;
+      background-color: #0a0a0a;
     }
     .header {
-      background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
+      background-color: #020000;
       padding: 40px 20px;
       text-align: center;
+      border-bottom: 1px solid #141414;
     }
     .header h1 {
       margin: 0;
-      color: #ffffff;
-      font-size: 28px;
+      color: #fffafa;
+      font-size: 32px;
       font-weight: bold;
+      letter-spacing: -1px;
+    }
+    .header span {
+      color: #f61813;
     }
     .header p {
-      color: #e0e7ff;
+      color: #fffafa;
+      opacity: 0.5;
       margin: 10px 0 0 0;
-      font-size: 16px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
     .content {
       padding: 40px 30px;
     }
     .success-badge {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      color: white;
+      background-color: #f61813;
+      color: #fffafa;
       padding: 15px 20px;
-      border-radius: 8px;
       text-align: center;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
       margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     .team-info {
-      background-color: #f0f9ff;
-      border-radius: 8px;
+      background-color: #141414;
       padding: 20px;
       margin: 20px 0;
-      border-left: 4px solid #2563eb;
+      border-left: 2px solid #f61813;
     }
     .team-info h3 {
       margin-top: 0;
-      color: #1e40af;
-      font-size: 18px;
+      color: #fffafa;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.7;
     }
     .team-info p {
       margin: 8px 0;
-      color: #1e40af;
+      color: #fffafa;
+      opacity: 0.9;
     }
-    .payment-section {
-      background-color: #fef3c7;
-      border: 2px solid #f59e0b;
-      border-radius: 8px;
+    .info-section {
+      background-color: #141414;
       padding: 20px;
-      margin: 30px 0;
-    }
-    .payment-section h3 {
-      margin-top: 0;
-      color: #92400e;
-      font-size: 20px;
-    }
-    .payment-option {
-      background-color: white;
-      padding: 15px;
-      border-radius: 6px;
-      margin: 15px 0;
-      border-left: 4px solid #2563eb;
-    }
-    .payment-option h4 {
-      margin: 0 0 10px 0;
-      color: #1e40af;
-      font-size: 16px;
-    }
-    .payment-option p {
-      margin: 5px 0;
-      color: #4b5563;
-    }
-    .info-box {
-      background-color: #f9fafb;
-      border-left: 4px solid #2563eb;
-      padding: 15px 20px;
       margin: 20px 0;
+      border-left: 2px solid #f61813;
     }
-    .info-box p {
-      margin: 5px 0;
+    .info-section h3 {
+      margin-top: 0;
+      color: #fffafa;
       font-size: 14px;
-      color: #4b5563;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .info-section p {
+      margin: 8px 0;
+      color: #fffafa;
+      opacity: 0.8;
+      font-size: 14px;
     }
     .next-steps {
-      background-color: #eff6ff;
-      border-radius: 8px;
+      background-color: #141414;
       padding: 20px;
       margin: 20px 0;
+      border-left: 2px solid #f61813;
     }
     .next-steps h3 {
       margin-top: 0;
-      color: #1e40af;
+      color: #fffafa;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     .next-steps ul {
       margin: 10px 0;
@@ -184,112 +177,93 @@ export async function POST(request: NextRequest) {
     }
     .next-steps li {
       margin: 8px 0;
-      color: #4b5563;
+      color: #fffafa;
+      opacity: 0.8;
+      font-size: 14px;
     }
     .social-links {
       text-align: center;
       padding: 20px;
-      background-color: #f9fafb;
+      background-color: #141414;
+      margin: 20px 0;
     }
     .social-links p {
       margin: 10px 0;
-      color: #6b7280;
+      color: #fffafa;
+      opacity: 0.6;
+      font-size: 12px;
     }
     .social-links a {
-      color: #2563eb;
+      color: #f61813;
       text-decoration: none;
-      margin: 0 10px;
       font-weight: 600;
     }
     .footer {
-      background-color: #f9fafb;
+      background-color: #020000;
       padding: 30px;
       text-align: center;
-      color: #6b7280;
-      font-size: 12px;
+      color: #fffafa;
+      font-size: 11px;
+      opacity: 0.4;
+      border-top: 1px solid #141414;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1>🏆 YOU'RE IN!</h1>
-      <p>Welcome to the Toronto Cup Pong Championship</p>
+      <h1>TABLE <span>ZERO</span></h1>
+      <p>6cups presents</p>
     </div>
 
     <div class="content">
       <div class="success-badge">
-        ✓ Registration Confirmed
+        You're on the list
       </div>
 
-      <p style="color: #4b5563; font-size: 16px;">
-        Congratulations! You've successfully registered for Toronto's first cup pong mini-tournament. Get ready for an awesome time!
+      <p style="color: #fffafa; font-size: 16px; opacity: 0.9;">
+        You've signed up for Table Zero. Your spot isn't guaranteed yet - we'll be in touch to confirm.
       </p>
 
       <div class="team-info">
-        <h3>Your Team Details</h3>
-        <p><strong>Team Name:</strong> ${teamName}</p>
+        <h3>Your Team</h3>
+        <p><strong>Team:</strong> ${teamName}</p>
         <p><strong>Player 1:</strong> ${player1FirstName} ${player1LastName}</p>
         <p><strong>Player 2:</strong> ${player2FirstName} ${player2LastName}</p>
-      </div>
-
-      <div class="payment-section">
-        <h3>💰 Payment Instructions - $10 Entry Fee</h3>
-        <p style="color: #92400e; margin-bottom: 15px;">
-          To complete your registration, please pay the $10 entry fee using one of these options:
-        </p>
-
-        <div class="payment-option">
-          <h4>Option 1: Cash on Event Day</h4>
-          <p>Bring $10 cash with you to the event. We'll collect payment when you check in.</p>
-        </div>
-
-        <div class="payment-option">
-          <h4>Option 2: E-Transfer on Event Day</h4>
-          <p>Send $10 via e-transfer to: <strong>nknathankoo@gmail.com</strong></p>
-          <p style="font-size: 13px; color: #6b7280;">We'll send e-transfer details closer to the event date.</p>
-        </div>
-
-        <p style="margin-top: 15px; font-size: 14px; color: #92400e;">
-          <strong>Important:</strong> Payment can be made on the day of the event - no need to pay in advance!
-        </p>
+        ${referredBy ? `<p><strong>Referred by:</strong> ${referredBy}</p>` : ''}
       </div>
 
       <div class="next-steps">
-        <h3>What Happens Next?</h3>
+        <h3>Want to improve your chances?</h3>
         <ul>
-          <li>We'll email you the exact <strong>venue location</strong> in the coming weeks</li>
-          <li>Event is planned for <strong>March 2026</strong> at a downtown Toronto bar</li>
-          <li>Bring your A-game and have fun!</li>
+          <li>Invite friends - if they sign up and mention your name, you both move up</li>
+          <li>Tag us on socials (@cuppongdudes on Instagram)</li>
+          <li>Send us a trick shot video</li>
         </ul>
       </div>
 
-      <div class="info-box">
-        <p><strong>📍 Event Details</strong></p>
-        <p>• <strong>When:</strong> March 2026</p>
-        <p>• <strong>Where:</strong> Somewhere in Downtown Toronto (venue TBD)</p>
-        <p>• <strong>Format:</strong> Max 64 teams, 16-team brackets, double elimination</p>
-        <p>• <strong>What's Included:</strong> Tournament entry & equipment</p>
-        <p>• <strong>Food & Drinks:</strong> Available for purchase at the bar</p>
+      <div class="info-section">
+        <h3>Event Details</h3>
+        <p><strong>When:</strong> March 2026</p>
+        <p><strong>Where:</strong> Toronto (venue TBD)</p>
+        <p><strong>Cost:</strong> $10 per duo (payment details sent once your spot is confirmed)</p>
+        <p><strong>Format:</strong> 32 teams, bracket style</p>
       </div>
 
       <div class="social-links">
-        <p style="font-weight: 600; color: #1f2937;">Follow us for updates!</p>
+        <p>Follow for updates</p>
         <p>
-          <a href="https://www.instagram.com/cuppongdudes/">Instagram: @cuppongdudes</a>
-          <br>
-          <a href="https://www.tiktok.com/@cuppongguy?_r=1&_t=ZS-92vv1AfUO2B">TikTok: @cuppongguy</a>
+          <a href="https://www.instagram.com/cuppongdudes/">@cuppongdudes</a>
         </p>
       </div>
 
-      <p style="color: #4b5563; margin-top: 30px;">
-        Questions? Email us at <a href="mailto:info@tocuppongchampions.ca" style="color: #2563eb;">info@tocuppongchampions.ca</a>
+      <p style="color: #fffafa; opacity: 0.6; margin-top: 30px; font-size: 13px;">
+        Questions? <a href="mailto:info@tocuppongchampions.ca" style="color: #f61813;">info@tocuppongchampions.ca</a>
       </p>
     </div>
 
     <div class="footer">
-      <p>Toronto Cup Pong Championship • March 2026 • Downtown Toronto</p>
-      <p style="margin-top: 10px;">Where precision meets competition</p>
+      <p>6cups • Table Zero • March 2026 • Toronto</p>
     </div>
   </div>
 </body>
@@ -299,9 +273,9 @@ export async function POST(request: NextRequest) {
 
         // Send admin notification email
         await resend.emails.send({
-          from: 'Toronto Cup Pong Championship <noreply@tocuppongchampions.ca>',
+          from: '6cups <noreply@tocuppongchampions.ca>',
           to: 'nknathankoo@gmail.com',
-          subject: 'New Waitlist Signup - Toronto Cup Pong Championship',
+          subject: 'Table Zero - New Signup',
           html: `
 <!DOCTYPE html>
 <html>
@@ -310,83 +284,86 @@ export async function POST(request: NextRequest) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-family: Verdana, Geneva, sans-serif;
       line-height: 1.6;
-      color: #333;
-      background-color: #f4f4f4;
+      color: #fffafa;
+      background-color: #020000;
       margin: 0;
       padding: 0;
     }
     .container {
       max-width: 600px;
       margin: 0 auto;
-      background-color: #ffffff;
-      border-radius: 8px;
-      overflow: hidden;
+      background-color: #0a0a0a;
     }
     .header {
-      background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
+      background-color: #f61813;
       padding: 30px 20px;
       text-align: center;
     }
     .header h1 {
       margin: 0;
-      color: #ffffff;
-      font-size: 24px;
+      color: #fffafa;
+      font-size: 20px;
       font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     .content {
       padding: 30px;
     }
     .team-info {
-      background-color: #f0f9ff;
-      border-radius: 8px;
+      background-color: #141414;
       padding: 20px;
       margin: 20px 0;
-      border-left: 4px solid #2563eb;
+      border-left: 2px solid #f61813;
     }
     .team-info h3 {
       margin-top: 0;
-      color: #1e40af;
-      font-size: 18px;
+      color: #fffafa;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.7;
     }
     .info-row {
-      display: flex;
       margin: 10px 0;
-      color: #1e40af;
+      color: #fffafa;
     }
     .info-label {
       font-weight: 600;
-      min-width: 120px;
-      color: #1e40af;
+      color: #fffafa;
+      opacity: 0.6;
     }
     .info-value {
-      color: #1e40af;
+      color: #fffafa;
     }
     .footer {
-      background-color: #f9fafb;
+      background-color: #020000;
       padding: 20px;
       text-align: center;
-      color: #6b7280;
-      font-size: 12px;
+      color: #fffafa;
+      font-size: 11px;
+      opacity: 0.4;
+      border-top: 1px solid #141414;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1>🎉 New Waitlist Signup</h1>
+      <h1>New Table Zero Signup</h1>
     </div>
 
     <div class="content">
-      <p style="color: #4b5563; font-size: 16px; margin-bottom: 20px;">
-        A new team has successfully registered for the Toronto Cup Pong Championship!
+      <p style="color: #fffafa; font-size: 14px; margin-bottom: 20px; opacity: 0.8;">
+        A new team has joined the Table Zero waitlist.
       </p>
 
       <div class="team-info">
-        <h3>Team Registration Details</h3>
+        <h3>Team Details</h3>
         <div class="info-row">
-          <span class="info-label">Team Name:</span>
+          <span class="info-label">Team:</span>
           <span class="info-value">${teamName}</span>
         </div>
         <div class="info-row">
@@ -401,19 +378,25 @@ export async function POST(request: NextRequest) {
           <span class="info-label">Email:</span>
           <span class="info-value">${email}</span>
         </div>
+        ${referredBy ? `
         <div class="info-row">
-          <span class="info-label">Timestamp:</span>
+          <span class="info-label">Referred by:</span>
+          <span class="info-value">${referredBy}</span>
+        </div>
+        ` : ''}
+        <div class="info-row">
+          <span class="info-label">Time:</span>
           <span class="info-value">${new Date().toLocaleString('en-US', { timeZone: 'America/Toronto', dateStyle: 'full', timeStyle: 'long' })}</span>
         </div>
       </div>
 
-      <p style="color: #6b7280; font-size: 14px; margin-top: 20px;">
-        This team has been added to the Google Sheets database and received their confirmation email with payment instructions.
+      <p style="color: #fffafa; font-size: 12px; margin-top: 20px; opacity: 0.5;">
+        Added to Google Sheets. Confirmation email sent.
       </p>
     </div>
 
     <div class="footer">
-      <p>Toronto Cup Pong Championship Admin Notification</p>
+      <p>6cups Admin</p>
     </div>
   </div>
 </body>

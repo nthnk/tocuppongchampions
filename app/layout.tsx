@@ -1,28 +1,19 @@
 import type { Metadata } from "next";
-import { Montserrat, Work_Sans, JetBrains_Mono } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 
-const montserrat = Montserrat({
-  weight: ["600", "700", "800"],
+const outfit = Outfit({
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
-  variable: "--font-montserrat",
-});
-
-const workSans = Work_Sans({
-  weight: ["400", "500", "600"],
-  subsets: ["latin"],
-  variable: "--font-work-sans",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  weight: ["500"],
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
+  variable: "--font-outfit",
 });
 
 export const metadata: Metadata = {
-  title: "Toronto Cup Pong Championship - The Spring Classic",
-  description: "Join the waitlist for Toronto's premier competitive cup pong tournament. March 2026 in Downtown Toronto. 50-100 teams competing for prizes.",
+  title: "Table Zero | 6cups - Toronto Cup Pong",
+  description: "The inaugural 6cups cup pong tournament. 32 spots. The waitlist is open. March 2026, Toronto.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -33,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.variable} ${workSans.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${outfit.variable} antialiased`}
       >
         {children}
       </body>
