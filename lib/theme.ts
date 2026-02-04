@@ -11,6 +11,9 @@ export const palette = {
   // Primary colors - Red Solo Cup inspired
   red: '#f61813',        // Primary red
   redLight: '#ff3b36',
+  orange: '#f97316',
+  orangeLight: '#fb923c',
+  blue: '#3b82f6',
 
   // Neutrals - White/Cream
   white: '#FFFFFF',
