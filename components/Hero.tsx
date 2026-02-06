@@ -34,18 +34,10 @@ export function Hero() {
 
   return (
     <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background - deep black */}
+      {/* Background - warm black */}
       <div
         className="absolute inset-0"
         style={{ background: palette.black }}
-      />
-
-      {/* Subtle gradient overlay */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(ellipse at center, ${palette.red}08 0%, transparent 70%)`
-        }}
       />
 
       {/* Hero video background */}
@@ -54,147 +46,152 @@ export function Hero() {
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-50"
+        className="absolute inset-0 w-full h-full object-cover opacity-70"
       >
         <source src="/landing-video.mp4" type="video/mp4" />
       </video>
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0" style={{ background: `${palette.black}40` }} />
+      {/* Warm dark overlay with slight gradient */}
+      <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${palette.black}50, ${palette.black}90)` }} />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 py-32 text-center">
-        {/* Main headline - TABLE ZERO */}
+      {/* Bottom accent */}
+      <div className="absolute bottom-0 left-0 right-0 h-1" style={{ background: palette.red }} />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-32 text-center">
+        {/* Small tag above — social club feel */}
+        <div
+          className="mb-6"
+          style={{
+            opacity: scrollProgress * 0.6,
+            transform: `translateY(${(1 - scrollProgress) * 20}px)`,
+            transition: 'opacity 0.4s ease-out, transform 0.4s ease-out',
+          }}
+        >
+          <span
+            className="text-xs font-bold uppercase tracking-[0.4em]"
+            style={{ fontFamily: fonts.body, color: palette.cream }}
+          >
+            Toronto&apos;s Beer Pong Community
+          </span>
+        </div>
+
+        {/* Main headline — massive, editorial */}
         <h1
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight mb-6"
+          className="text-8xl sm:text-9xl md:text-[10rem] lg:text-[13rem] font-black tracking-tight mb-6"
           style={{
             fontFamily: fonts.heading,
             color: palette.cream,
             opacity: scrollProgress,
             transform: `translateY(${(1 - scrollProgress) * 30}px)`,
             transition: 'opacity 0.4s ease-out 0.1s, transform 0.4s ease-out 0.1s',
-            lineHeight: 0.9,
+            lineHeight: 0.85,
           }}
         >
-          TABLE<br />
-          <span style={{ color: palette.red }}>ZERO</span>
+          <span style={{ color: palette.red }}>6</span>CUPS
         </h1>
 
-        {/* Tagline - moodboard style */}
+        {/* Event tag — Table Zero bordered tag */}
         <div
-          className="text-xl sm:text-2xl md:text-3xl font-semibold mb-8"
+          className="mb-10"
           style={{
-            fontFamily: fonts.heading,
-            color: palette.cream,
             opacity: scrollProgress,
             transform: `translateY(${(1 - scrollProgress) * 30}px)`,
-            transition: 'opacity 0.4s ease-out 0.2s, transform 0.4s ease-out 0.2s',
+            transition: 'opacity 0.4s ease-out 0.15s, transform 0.4s ease-out 0.15s',
           }}
         >
-          <span style={{ color: palette.cream }}>32 Teams. </span>
-          <span style={{ color: palette.cream }}>One Night. </span>
-          <span style={{ color: palette.red }}>One Champion.</span>
+          <span
+            className="inline-block text-sm sm:text-base font-bold uppercase tracking-[0.3em] px-5 py-2.5"
+            style={{
+              fontFamily: fonts.heading,
+              color: palette.cream,
+              border: `2px solid ${palette.red}`,
+            }}
+          >
+            TABLE ZERO — APRIL 2026
+          </span>
         </div>
 
-        {/* Subtitle */}
+        {/* Tagline — warmer, more human tone */}
         <p
-          className="text-base sm:text-lg md:text-xl mb-12 max-w-2xl mx-auto"
+          className="text-base sm:text-lg md:text-xl max-w-lg mx-auto mb-14 leading-relaxed"
           style={{
             fontFamily: fonts.body,
             color: palette.cream,
             opacity: scrollProgress * 0.7,
             transform: `translateY(${(1 - scrollProgress) * 30}px)`,
+            transition: 'opacity 0.4s ease-out 0.2s, transform 0.4s ease-out 0.2s',
+          }}
+        >
+          32 teams. One bracket. A brewery in downtown Toronto.
+        </p>
+
+        {/* Stats row — cleaner, editorial */}
+        <div
+          className="flex flex-wrap justify-center items-center gap-8 sm:gap-12 mb-14"
+          style={{
+            opacity: scrollProgress,
+            transform: `translateY(${(1 - scrollProgress) * 30}px)`,
             transition: 'opacity 0.4s ease-out 0.3s, transform 0.4s ease-out 0.3s',
           }}
         >
-          Building Toronto's largest cup pong tournament. Waitlist open now.
-        </p>
+          {[
+            { big: '32', small: 'Teams' },
+            { big: '$10', small: 'Per Duo' },
+            { big: 'APR', small: '2026' },
+          ].map((stat, i) => (
+            <div key={i} className="text-center">
+              <div
+                className="text-3xl sm:text-4xl font-black"
+                style={{ fontFamily: fonts.heading, color: palette.red }}
+              >
+                {stat.big}
+              </div>
+              <div
+                className="text-xs font-bold uppercase tracking-widest mt-1"
+                style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.5 }}
+              >
+                {stat.small}
+              </div>
+            </div>
+          ))}
+        </div>
 
-        {/* Stats row */}
+        {/* CTA Button */}
         <div
-          className="flex flex-wrap justify-center gap-8 sm:gap-12 mb-12"
           style={{
             opacity: scrollProgress,
             transform: `translateY(${(1 - scrollProgress) * 30}px)`,
             transition: 'opacity 0.4s ease-out 0.4s, transform 0.4s ease-out 0.4s',
           }}
         >
-          <div className="text-center">
-            <div
-              className="text-3xl sm:text-4xl font-bold"
-              style={{ fontFamily: fonts.heading, color: palette.cream }}
-            >
-              32
-            </div>
-            <div
-              className="text-xs uppercase tracking-wider mt-1"
-              style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.5 }}
-            >
-              Teams
-            </div>
-          </div>
-          <div className="text-center">
-            <div
-              className="text-3xl sm:text-4xl font-bold"
-              style={{ fontFamily: fonts.heading, color: palette.cream }}
-            >
-              $10
-            </div>
-            <div
-              className="text-xs uppercase tracking-wider mt-1"
-              style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.5 }}
-            >
-              Per Duo
-            </div>
-          </div>
-          <div className="text-center">
-            <div
-              className="text-3xl sm:text-4xl font-bold"
-              style={{ fontFamily: fonts.heading, color: palette.cream }}
-            >
-              March
-            </div>
-            <div
-              className="text-xs uppercase tracking-wider mt-1"
-              style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.5 }}
-            >
-              2026
-            </div>
-          </div>
+          <button
+            onClick={scrollToWaitlist}
+            className="inline-flex items-center gap-3 px-14 py-5 text-lg font-black uppercase tracking-widest transition-all duration-300 hover:scale-105"
+            style={{
+              background: palette.red,
+              color: palette.cream,
+              fontFamily: fonts.heading,
+              animation: 'pulse-red 3s ease-in-out infinite',
+            }}
+          >
+            GET ON THE LIST
+          </button>
         </div>
 
-        {/* CTA Button */}
-        <button
-          onClick={scrollToWaitlist}
-          className="group relative inline-flex items-center gap-3 px-10 py-5 text-lg font-semibold uppercase tracking-wider transition-all duration-300 hover:scale-105"
-          style={{
-            background: palette.red,
-            color: palette.cream,
-            fontFamily: fonts.heading,
-            opacity: scrollProgress,
-            transform: `translateY(${(1 - scrollProgress) * 30}px)`,
-            transition: 'opacity 0.4s ease-out 0.5s, transform 0.4s ease-out 0.5s, scale 0.3s ease',
-          }}
-        >
-          <span>Get on the List</span>
-          <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
-        </button>
-
-        {/* Location badge */}
+        {/* Location — subtle */}
         <div
-          className="mt-8"
+          className="mt-10"
           style={{
-            opacity: scrollProgress * 0.5,
+            opacity: scrollProgress * 0.4,
             transform: `translateY(${(1 - scrollProgress) * 20}px)`,
-            transition: 'opacity 0.4s ease-out 0.6s, transform 0.4s ease-out 0.6s',
+            transition: 'opacity 0.4s ease-out 0.5s, transform 0.4s ease-out 0.5s',
           }}
         >
           <span
-            className="text-sm tracking-wider uppercase"
+            className="text-xs font-bold tracking-[0.3em] uppercase"
             style={{ fontFamily: fonts.body, color: palette.cream }}
           >
-            TORONTO · VENUE TBD
+            Downtown Toronto
           </span>
         </div>
 

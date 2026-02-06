@@ -244,7 +244,7 @@ export async function POST(request: NextRequest) {
 
       <div class="info-section">
         <h3>Event Details</h3>
-        <p><strong>When:</strong> March 2026</p>
+        <p><strong>When:</strong> April 2026</p>
         <p><strong>Where:</strong> Toronto (venue TBD)</p>
         <p><strong>Cost:</strong> $10 per duo (payment details sent once your spot is confirmed)</p>
         <p><strong>Format:</strong> 32 teams, bracket style</p>
@@ -263,7 +263,7 @@ export async function POST(request: NextRequest) {
     </div>
 
     <div class="footer">
-      <p>6cups • Table Zero • March 2026 • Toronto</p>
+      <p>6cups • Table Zero • April 2026 • Toronto</p>
     </div>
   </div>
 </body>

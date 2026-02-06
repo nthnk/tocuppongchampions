@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { palette, fonts } from '@/lib/theme';
-import Image from 'next/image';
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,45 +29,44 @@ export function Header() {
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
         background: isScrolled ? `${palette.black}f0` : 'transparent',
-        borderBottom: isScrolled ? `1px solid ${palette.slate}` : '1px solid transparent',
+        borderBottom: isScrolled ? `2px solid ${palette.red}` : '2px solid transparent',
         backdropFilter: isScrolled ? 'blur(12px)' : 'none',
       }}
     >
-      <nav className="max-w-5xl mx-auto px-6 py-4">
+      <nav className="max-w-6xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Brand Mark */}
           <button
             onClick={scrollToTop}
             className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           >
-            <Image
-              src="/6cups-logo.svg"
-              alt="6cups"
-              width={32}
-              height={32}
-              className="invert"
-            />
+            <span
+              className="text-2xl font-black uppercase tracking-wider"
+              style={{ fontFamily: fonts.heading, color: palette.cream }}
+            >
+              <span style={{ color: palette.red }}>6</span>CUPS
+            </span>
           </button>
 
           {/* Nav Links */}
           <div className="hidden md:flex items-center gap-8">
             <button
               onClick={() => scrollToSection('about')}
-              className="text-sm font-medium uppercase tracking-wider transition-opacity hover:opacity-100"
+              className="text-sm font-bold uppercase tracking-widest transition-opacity hover:opacity-100"
               style={{ color: palette.cream, fontFamily: fonts.body, opacity: 0.7 }}
             >
               ABOUT
             </button>
             <button
               onClick={() => scrollToSection('faq')}
-              className="text-sm font-medium uppercase tracking-wider transition-opacity hover:opacity-100"
+              className="text-sm font-bold uppercase tracking-widest transition-opacity hover:opacity-100"
               style={{ color: palette.cream, fontFamily: fonts.body, opacity: 0.7 }}
             >
               FAQ
             </button>
             <button
               onClick={() => scrollToSection('waitlist')}
-              className="text-sm font-semibold uppercase tracking-wider px-5 py-2 transition-opacity hover:opacity-90"
+              className="text-sm font-black uppercase tracking-widest px-6 py-3 transition-all hover:opacity-90"
               style={{
                 background: palette.red,
                 color: palette.cream,
@@ -82,7 +80,7 @@ export function Header() {
           {/* Mobile CTA */}
           <button
             onClick={() => scrollToSection('waitlist')}
-            className="md:hidden text-sm font-semibold uppercase tracking-wider px-4 py-2 transition-opacity hover:opacity-90"
+            className="md:hidden text-sm font-black uppercase tracking-widest px-5 py-2.5 transition-opacity hover:opacity-90"
             style={{
               background: palette.red,
               color: palette.cream,

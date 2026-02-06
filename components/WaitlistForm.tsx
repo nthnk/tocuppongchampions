@@ -144,36 +144,47 @@ export function WaitlistForm() {
   };
 
   const inputStyle = {
-    background: palette.slate,
+    background: palette.black,
     border: `1px solid ${palette.slate}`,
     color: palette.cream,
   };
 
-  const inputFocusClass = "w-full px-4 py-4 rounded-none focus:outline-none focus:border-red-500 transition-all placeholder-gray-500";
+  const inputFocusClass = "w-full px-4 py-4 focus:outline-none transition-all placeholder-gray-600";
 
   return (
-    <section id="waitlist" className="py-24 px-6" style={{ background: palette.black, borderTop: `1px solid ${palette.slate}` }}>
+    <section id="waitlist" className="py-28 px-6" style={{ background: palette.black }}>
       <div className="max-w-2xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-4">
+          <span
+            className="text-xs font-bold uppercase tracking-[0.4em]"
+            style={{ fontFamily: fonts.body, color: palette.red }}
+          >
+            Limited Entry
+          </span>
+        </div>
+        <div className="text-center mb-14">
           <h2
-            className="text-4xl md:text-5xl font-bold mb-4"
+            className="text-4xl md:text-5xl lg:text-6xl font-black mb-5 uppercase tracking-wider"
             style={{ fontFamily: fonts.heading, color: palette.cream }}
           >
-            Get on the <span style={{ color: palette.red }}>List</span>
+            GET ON <span style={{ color: palette.red }}>THE LIST</span>
           </h2>
           <p
-            className="text-lg"
-            style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.7 }}
+            className="text-base md:text-lg leading-relaxed max-w-md mx-auto"
+            style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.6 }}
           >
-            32 spots. Your spot isn't guaranteed.
+            32 spots. Sign up and we&apos;ll reach out when registration opens.
           </p>
         </div>
 
         {/* Form Card */}
         <div
           className="p-8 md:p-10"
-          style={{ background: palette.darkSlate, border: `1px solid ${palette.slate}` }}
+          style={{
+            background: palette.darkSlate,
+            borderTop: `3px solid ${palette.red}`,
+          }}
         >
           {step === 'form' ? (
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -181,10 +192,10 @@ export function WaitlistForm() {
               <div>
                 <label
                   htmlFor="teamName"
-                  className="block text-xs font-semibold mb-2 uppercase tracking-wider"
+                  className="block text-xs font-bold mb-2 uppercase tracking-widest"
                   style={{ fontFamily: fonts.heading, color: palette.cream }}
                 >
-                  Team Name *
+                  TEAM NAME *
                 </label>
                 <input
                   type="text"
@@ -202,10 +213,10 @@ export function WaitlistForm() {
               {/* Player 1 */}
               <div>
                 <label
-                  className="block text-xs font-semibold mb-2 uppercase tracking-wider"
+                  className="block text-xs font-bold mb-2 uppercase tracking-widest"
                   style={{ fontFamily: fonts.heading, color: palette.cream }}
                 >
-                  Player 1 *
+                  PLAYER 1 *
                 </label>
                 <div className="grid grid-cols-2 gap-4">
                   <input
@@ -236,10 +247,10 @@ export function WaitlistForm() {
               {/* Player 2 */}
               <div>
                 <label
-                  className="block text-xs font-semibold mb-2 uppercase tracking-wider"
+                  className="block text-xs font-bold mb-2 uppercase tracking-widest"
                   style={{ fontFamily: fonts.heading, color: palette.cream }}
                 >
-                  Player 2 *
+                  PLAYER 2 *
                 </label>
                 <div className="grid grid-cols-2 gap-4">
                   <input
@@ -271,10 +282,10 @@ export function WaitlistForm() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-xs font-semibold mb-2 uppercase tracking-wider"
+                  className="block text-xs font-bold mb-2 uppercase tracking-widest"
                   style={{ fontFamily: fonts.heading, color: palette.cream }}
                 >
-                  Email Address *
+                  EMAIL ADDRESS *
                 </label>
                 <input
                   type="email"
@@ -291,44 +302,14 @@ export function WaitlistForm() {
                   className="mt-2 text-sm"
                   style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.5 }}
                 >
-                  We'll send a verification code to this email
-                </p>
-              </div>
-
-              {/* Referral Field */}
-              <div
-                className="pt-6"
-                style={{ borderTop: `1px solid ${palette.slate}` }}
-              >
-                <label
-                  htmlFor="referredBy"
-                  className="block text-xs font-semibold mb-2 uppercase tracking-wider"
-                  style={{ fontFamily: fonts.heading, color: palette.cream }}
-                >
-                  Who invited you? <span style={{ color: palette.cream, opacity: 0.5 }}>(Optional)</span>
-                </label>
-                <input
-                  type="text"
-                  id="referredBy"
-                  name="referredBy"
-                  value={formData.referredBy}
-                  onChange={handleChange}
-                  placeholder="Enter their name"
-                  className={inputFocusClass}
-                  style={inputStyle}
-                />
-                <p
-                  className="mt-2 text-sm"
-                  style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.5 }}
-                >
-                  If someone invited you, entering their name helps you both move up the list
+                  We&apos;ll send a verification code to this email
                 </p>
               </div>
 
               {/* 18+ Notice */}
               <div
                 className="flex items-start gap-3 p-4"
-                style={{ background: `${palette.red}15`, border: `1px solid ${palette.red}30` }}
+                style={{ background: `${palette.red}15`, border: `2px solid ${palette.red}30` }}
               >
                 <svg
                   className="w-5 h-5 flex-shrink-0 mt-0.5"
@@ -341,7 +322,7 @@ export function WaitlistForm() {
                 </svg>
                 <div>
                   <p
-                    className="font-semibold text-sm"
+                    className="font-black text-sm uppercase tracking-wider"
                     style={{ fontFamily: fonts.heading, color: palette.cream }}
                   >
                     18+ Event
@@ -359,11 +340,12 @@ export function WaitlistForm() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-8 py-5 text-lg font-semibold uppercase tracking-wider transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                className="w-full px-8 py-6 text-lg font-black uppercase tracking-widest transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
                 style={{
                   background: palette.red,
                   color: palette.cream,
                   fontFamily: fonts.heading,
+                  animation: !isSubmitting ? 'pulse-red 3s ease-in-out infinite' : 'none',
                 }}
               >
                 {isSubmitting ? (
@@ -372,15 +354,10 @@ export function WaitlistForm() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Sending Code...
+                    SENDING CODE...
                   </>
                 ) : (
-                  <>
-                    Continue
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </>
+                  'SUBMIT APPLICATION'
                 )}
               </button>
             </form>
@@ -388,7 +365,7 @@ export function WaitlistForm() {
             <form onSubmit={handleVerifyOTP} className="space-y-6">
               <div className="text-center mb-6">
                 <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                  className="w-16 h-16 flex items-center justify-center mx-auto mb-4"
                   style={{ background: palette.red }}
                 >
                   <svg className="w-8 h-8" style={{ color: palette.cream }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -396,23 +373,23 @@ export function WaitlistForm() {
                   </svg>
                 </div>
                 <h3
-                  className="text-2xl font-bold mb-2"
+                  className="text-2xl font-black mb-2 uppercase tracking-wider"
                   style={{ fontFamily: fonts.heading, color: palette.cream }}
                 >
-                  Check Your Email
+                  VERIFY YOUR EMAIL
                 </h3>
                 <p style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.7 }}>
-                  We sent a 6-digit code to <span style={{ color: palette.cream, fontWeight: 600 }}>{formData.email}</span>
+                  We sent a 6-digit code to <span style={{ color: palette.cream, fontWeight: 700 }}>{formData.email}</span>
                 </p>
               </div>
 
               <div>
                 <label
                   htmlFor="otpCode"
-                  className="block text-xs font-semibold mb-2 uppercase tracking-wider text-center"
+                  className="block text-xs font-bold mb-2 uppercase tracking-widest text-center"
                   style={{ fontFamily: fonts.heading, color: palette.cream }}
                 >
-                  Verification Code
+                  VERIFICATION CODE
                 </label>
                 <input
                   type="text"
@@ -423,7 +400,7 @@ export function WaitlistForm() {
                   onChange={handleOTPChange}
                   placeholder="000000"
                   maxLength={6}
-                  className="w-full px-4 py-6 rounded-none focus:outline-none focus:border-red-500 transition-all text-center text-3xl font-bold tracking-widest placeholder-gray-600"
+                  className="w-full px-4 py-6 focus:outline-none transition-all text-center text-3xl font-black tracking-widest placeholder-gray-600"
                   style={inputStyle}
                   autoComplete="off"
                 />
@@ -438,7 +415,7 @@ export function WaitlistForm() {
               <button
                 type="submit"
                 disabled={isSubmitting || otpCode.length !== 6}
-                className="w-full px-8 py-5 text-lg font-semibold uppercase tracking-wider transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                className="w-full px-8 py-6 text-lg font-black uppercase tracking-widest transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
                 style={{
                   background: palette.red,
                   color: palette.cream,
@@ -451,15 +428,10 @@ export function WaitlistForm() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Verifying...
+                    VERIFYING...
                   </>
                 ) : (
-                  <>
-                    Verify & Join
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </>
+                  'CONFIRM & JOIN'
                 )}
               </button>
 
@@ -467,7 +439,7 @@ export function WaitlistForm() {
                 <button
                   type="button"
                   onClick={handleBackToForm}
-                  className="transition-colors hover:opacity-80"
+                  className="transition-colors hover:opacity-80 font-bold uppercase tracking-wider"
                   style={{ color: palette.cream, opacity: 0.6 }}
                 >
                   ← Change email
@@ -476,7 +448,7 @@ export function WaitlistForm() {
                   type="button"
                   onClick={handleResendOTP}
                   disabled={isSubmitting}
-                  className="transition-colors hover:opacity-80 disabled:opacity-50"
+                  className="transition-colors hover:opacity-80 disabled:opacity-50 font-bold uppercase tracking-wider"
                   style={{ color: palette.red }}
                 >
                   Resend code
@@ -489,14 +461,14 @@ export function WaitlistForm() {
           {submitStatus === 'success' && (
             <div
               className="mt-6 p-4 flex items-start gap-3"
-              style={{ background: `${palette.blue}20`, border: `1px solid ${palette.blue}50` }}
+              style={{ background: `${palette.red}20`, border: `2px solid ${palette.red}50` }}
             >
-              <svg className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: palette.blue }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: palette.red }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <div>
-                <h4 className="font-bold mb-1" style={{ fontFamily: fonts.heading, color: palette.cream }}>You're on the list.</h4>
-                <p className="text-sm" style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.8 }}>We'll be in touch. Invite friends to improve your chances.</p>
+                <h4 className="font-black mb-1 uppercase tracking-wider" style={{ fontFamily: fonts.heading, color: palette.cream }}>APPLICATION RECEIVED.</h4>
+                <p className="text-sm" style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.8 }}>We&apos;ll review your application and be in touch. Invite friends to improve your chances.</p>
               </div>
             </div>
           )}
@@ -505,13 +477,13 @@ export function WaitlistForm() {
           {submitStatus === 'error' && errorMessage && (
             <div
               className="mt-6 p-4 flex items-start gap-3"
-              style={{ background: `${palette.red}20`, border: `1px solid ${palette.red}50` }}
+              style={{ background: `${palette.red}20`, border: `2px solid ${palette.red}50` }}
             >
               <svg className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: palette.red }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <div>
-                <h4 className="font-bold mb-1" style={{ fontFamily: fonts.heading, color: palette.cream }}>Error</h4>
+                <h4 className="font-black mb-1 uppercase tracking-wider" style={{ fontFamily: fonts.heading, color: palette.cream }}>ERROR</h4>
                 <p className="text-sm" style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.8 }}>{errorMessage}</p>
               </div>
             </div>

@@ -182,7 +182,7 @@ export async function POST(request: NextRequest) {
     </div>
 
     <div class="footer">
-      <p>6cups • Table Zero • March 2026 • Toronto</p>
+      <p>6cups • Table Zero • April 2026 • Toronto</p>
     </div>
   </div>
 </body>

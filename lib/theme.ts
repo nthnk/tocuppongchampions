@@ -1,34 +1,31 @@
-// 6cups - Table Zero Brand Theme
-// Bold, minimal - Red & White only
+// 6CUPS Brand Theme
+// Bold, warm, gritty — Social club meets street culture
 
 export const palette = {
-  // Core darks
-  black: '#020000',
-  darkSlate: '#0a0a0a',
-  slate: '#141414',
-  darkNavy: '#0a0a0a', // kept for compatibility
+  // Core darks (warm, not cold)
+  black: '#0a0808',
+  darkSlate: '#111010',
+  slate: '#1c1917',
+  darkMaroon: '#1a0a08',
 
-  // Primary colors - Red Solo Cup inspired
-  red: '#f61813',        // Primary red
+  // Primary
+  red: '#f61813',
+  redDark: '#c41410',
   redLight: '#ff3b36',
-  orange: '#f97316',
-  orangeLight: '#fb923c',
+
+  // Accents
   gold: '#eab308',
   blue: '#3b82f6',
-  blueLight: '#60a5fa',
 
-  // Neutrals - White/Cream
+  // Neutrals (warm cream, not stark white)
   white: '#FFFFFF',
-  cream: '#fffafa',      // Off-white
-  warmWhite: '#fffafa',
-  gray100: '#f5f5f5',
-  gray400: '#9CA3AF',
-  gray600: '#4B5563',
-  gray: '#9CA3AF',
+  cream: '#f5efe6',
+  gray400: '#a8a29e',
+  gray600: '#57534e',
 };
 
 export const fonts = {
-  heading: 'var(--font-outfit), Verdana, Geneva, sans-serif',
+  // Posterama for headings, Outfit for body
+  heading: 'var(--font-posterama), var(--font-outfit), Verdana, Geneva, sans-serif',
   body: 'var(--font-outfit), Verdana, Geneva, sans-serif',
-  accent: 'var(--font-outfit), Verdana, Geneva, sans-serif',
 };
