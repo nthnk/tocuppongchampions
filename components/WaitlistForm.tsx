@@ -461,14 +461,14 @@ export function WaitlistForm() {
           {submitStatus === 'success' && (
             <div
               className="mt-6 p-4 flex items-start gap-3"
-              style={{ background: `${palette.red}20`, border: `2px solid ${palette.red}50` }}
+              style={{ background: '#22c55e20', border: '2px solid #22c55e50' }}
             >
-              <svg className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: palette.red }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: '#22c55e' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <div>
-                <h4 className="font-black mb-1 uppercase tracking-wider" style={{ fontFamily: fonts.heading, color: palette.cream }}>APPLICATION RECEIVED.</h4>
-                <p className="text-sm" style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.8 }}>We&apos;ll review your application and be in touch. Invite friends to improve your chances.</p>
+                <h4 className="font-black mb-1 uppercase tracking-wider" style={{ fontFamily: fonts.heading, color: palette.cream }}>YOU&apos;RE ON THE WAITLIST.</h4>
+                <p className="text-sm" style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.8 }}>We&apos;ll be in touch with event details and registration in the next few weeks.</p>
               </div>
             </div>
           )}

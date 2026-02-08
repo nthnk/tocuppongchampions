@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
         await resend.emails.send({
           from: '6cups <noreply@tocuppongchampions.ca>',
           to: email,
-          subject: 'Table Zero - You\'re on the list',
+          subject: '6CUPS Table Zero - You\'ve joined the waitlist',
           html: `
 <!DOCTYPE html>
 <html>
@@ -101,7 +101,7 @@ export async function POST(request: NextRequest) {
     .header p {
       color: #fffafa;
       opacity: 0.5;
-      margin: 10px 0 0 0;
+      margin: 0 0 10px 0;
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -212,17 +212,17 @@ export async function POST(request: NextRequest) {
 <body>
   <div class="container">
     <div class="header">
+      <p>6CUPS PRESENTS</p>
       <h1>TABLE <span>ZERO</span></h1>
-      <p>6cups presents</p>
     </div>
 
     <div class="content">
       <div class="success-badge">
-        You're on the list
+        You've joined the waitlist
       </div>
 
       <p style="color: #fffafa; font-size: 16px; opacity: 0.9;">
-        You've signed up for Table Zero. Your spot isn't guaranteed yet - we'll be in touch to confirm.
+        You've joined the waitlist for Table Zero. Your spot isn't guaranteed yet - we'll be in touch with event details and registration in the next few weeks.
       </p>
 
       <div class="team-info">
@@ -234,11 +234,11 @@ export async function POST(request: NextRequest) {
       </div>
 
       <div class="next-steps">
-        <h3>Want to improve your chances?</h3>
+        <h3>Want to help us make this happen?</h3>
         <ul>
-          <li>Invite friends - if they sign up and mention your name, you both move up</li>
-          <li>Tag us on socials (@cuppongdudes on Instagram)</li>
-          <li>Send us a trick shot video</li>
+          <li>Invite your friends to sign up</li>
+          <li>Tag us on socials (@play6cups on Instagram)</li>
+          <li>Send us a trick shot video to be featured on our page!</li>
         </ul>
       </div>
 
@@ -246,14 +246,14 @@ export async function POST(request: NextRequest) {
         <h3>Event Details</h3>
         <p><strong>When:</strong> April 2026</p>
         <p><strong>Where:</strong> Toronto (venue TBD)</p>
-        <p><strong>Cost:</strong> $10 per duo (payment details sent once your spot is confirmed)</p>
+        <p><strong>Cost:</strong> $10 per duo (payment details included in registration later)</p>
         <p><strong>Format:</strong> 32 teams, bracket style</p>
       </div>
 
       <div class="social-links">
         <p>Follow for updates</p>
         <p>
-          <a href="https://www.instagram.com/cuppongdudes/">@cuppongdudes</a>
+          <a href="https://www.instagram.com/play6cups?igsh=MXh5ZzJmYW9ubnFrNA%3D%3D&utm_source=qr">@play6cups</a>
         </p>
       </div>
 
@@ -263,6 +263,7 @@ export async function POST(request: NextRequest) {
     </div>
 
     <div class="footer">
+      <img src="https://tocuppongchampions.ca/horizontal_colour.svg" alt="6CUPS" width="120" style="margin-bottom: 15px; display: inline-block;" />
       <p>6cups • Table Zero • April 2026 • Toronto</p>
     </div>
   </div>

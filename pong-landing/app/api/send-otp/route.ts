@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
     .header p {
       color: #fffafa;
       opacity: 0.5;
-      margin: 10px 0 0 0;
+      margin: 0 0 10px 0;
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -151,8 +151,8 @@ export async function POST(request: NextRequest) {
 <body>
   <div class="container">
     <div class="header">
+      <p>6CUPS PRESENTS</p>
       <h1>TABLE <span>ZERO</span></h1>
-      <p>6cups presents</p>
     </div>
 
     <div class="content">
@@ -182,6 +182,7 @@ export async function POST(request: NextRequest) {
     </div>
 
     <div class="footer">
+      <img src="https://tocuppongchampions.ca/horizontal_colour.svg" alt="6CUPS" width="120" style="margin-bottom: 15px; display: inline-block;" />
       <p>6cups • Table Zero • April 2026 • Toronto</p>
     </div>
   </div>
