@@ -71,7 +71,7 @@ export function Hero() {
             className="text-xs font-bold uppercase tracking-[0.4em]"
             style={{ fontFamily: fonts.body, color: palette.cream }}
           >
-            Toronto&apos;s Beer Pong Community
+            TORONTO&apos;S BEER PONG TOURNAMENT
           </span>
         </div>
 
