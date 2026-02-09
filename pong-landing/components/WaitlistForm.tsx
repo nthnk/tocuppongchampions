@@ -306,7 +306,7 @@ export function WaitlistForm() {
                 </p>
               </div>
 
-              {/* 18+ Notice */}
+              {/* 19+ Notice */}
               <div
                 className="flex items-start gap-3 p-4"
                 style={{ background: `${palette.red}15`, border: `2px solid ${palette.red}30` }}
@@ -325,7 +325,7 @@ export function WaitlistForm() {
                     className="font-black text-sm uppercase tracking-wider"
                     style={{ fontFamily: fonts.heading, color: palette.cream }}
                   >
-                    18+ Event
+                    19+ Event
                   </p>
                   <p
                     className="text-sm"
