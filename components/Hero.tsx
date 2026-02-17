@@ -107,7 +107,7 @@ export function Hero() {
               border: `2px solid ${palette.red}`,
             }}
           >
-            TABLE ZERO — APRIL 2026
+            TABLE ZERO — MARCH 22, 2026
           </span>
         </div>
 
@@ -122,7 +122,7 @@ export function Hero() {
             transition: 'opacity 0.4s ease-out 0.2s, transform 0.4s ease-out 0.2s',
           }}
         >
-          32 teams. One bracket. A brewery in downtown Toronto.
+          32 teams. 4 brackets. 1 champion.
         </p>
 
         {/* Stats row — cleaner, editorial */}
@@ -137,7 +137,7 @@ export function Hero() {
           {[
             { big: '32', small: 'Teams' },
             { big: '$10', small: 'Per Duo' },
-            { big: 'APR', small: '2026' },
+            { big: 'MAR 22', small: '2026' },
           ].map((stat, i) => (
             <div key={i} className="text-center">
               <div
@@ -191,7 +191,7 @@ export function Hero() {
             className="text-xs font-bold tracking-[0.3em] uppercase"
             style={{ fontFamily: fonts.body, color: palette.cream }}
           >
-            Downtown Toronto
+            90 Cawthra Ave Unit 101, Toronto, ON M6N 3C2
           </span>
         </div>
 

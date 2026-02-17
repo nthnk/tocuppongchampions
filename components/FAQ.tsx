@@ -6,11 +6,11 @@ import { palette, fonts } from '@/lib/theme';
 const faqs = [
   {
     question: "HOW DOES THE WAITLIST WORK?",
-    answer: "Table Zero has 32 spots. The waitlist is open to everyone — sign up and we'll keep you updated. We're currently in talks with breweries in downtown Toronto to lock in a venue. Once we have a confirmed date and location, we'll open registration and reach out to everyone on the list."
+    answer: "Table Zero has 32 spots. The waitlist is open to everyone — sign up and we'll keep you updated. Once we open registration, we'll reach out to everyone on the list to confirm their spot."
   },
   {
     question: "WHEN WILL REGISTRATION OPEN?",
-    answer: "We're finalizing a venue partnership with a downtown Toronto brewery right now. Once the venue and date are confirmed, we'll open registration and notify everyone on the waitlist. We're targeting April 2026."
+    answer: "Registration will open soon. Everyone on the waitlist will be notified when spots are available. The event is confirmed for March 22, 2026 at Samara Brewing Co."
   },
   {
     question: "HOW MUCH DOES IT COST?",
@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     question: "WILL THERE BE ALCOHOL?",
-    answer: "Yes. We're partnering with a brewery in downtown Toronto, so drinks will be available for purchase. Food and drinks are not included in the entry fee."
+    answer: "Yes. We're partnering with Samara Brewing Co., so drinks will be available for purchase. Food and drinks are not included in the entry fee."
   },
   {
     question: "WHAT'S THE TOURNAMENT FORMAT?",
@@ -30,7 +30,15 @@ const faqs = [
   },
   {
     question: "WHEN AND WHERE IS THIS HAPPENING?",
-    answer: "April 2026 at a brewery in downtown Toronto. We're currently in talks with venues and will confirm the exact date and location soon. Everyone on the waitlist will be the first to know."
+    answer: "March 22, 2026 at Samara Brewing Co. (90 Cawthra Ave Unit 101, Toronto, ON M6N 3C2). There's lots of free parking available on Cawthra Avenue."
+  },
+  {
+    question: "CAN I COME IF I'M NOT PARTICIPATING?",
+    answer: "Yes! It's free to attend if you're not competing. Just DM us on Instagram (@play6cups) or email info@tocuppongchampions.ca to let us know you'll be there — we need to make sure we're not over capacity."
+  },
+  {
+    question: "WHAT IS THE MONEY GOING TOWARDS?",
+    answer: "Your $10 entry fee goes towards ping pong balls, cups, name tags, prize t-shirts for the winners, photo booth film, and the website domain. We're keeping it lean and putting everything back into the event."
   },
   {
     question: "CAN I REGISTER AS A SOLO PLAYER?",

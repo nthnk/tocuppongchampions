@@ -244,8 +244,8 @@ export async function POST(request: NextRequest) {
 
       <div class="info-section">
         <h3>Event Details</h3>
-        <p><strong>When:</strong> April 2026</p>
-        <p><strong>Where:</strong> Toronto (venue TBD)</p>
+        <p><strong>When:</strong> March 22, 2026</p>
+        <p><strong>Where:</strong> Samara Brewing Co., 90 Cawthra Ave Unit 101, Toronto</p>
         <p><strong>Cost:</strong> $10 per duo (payment details included in registration later)</p>
         <p><strong>Format:</strong> 32 teams, bracket style</p>
       </div>
@@ -264,7 +264,7 @@ export async function POST(request: NextRequest) {
 
     <div class="footer">
       <img src="https://tocuppongchampions.ca/horizontal_colour.svg" alt="6CUPS" width="120" style="margin-bottom: 15px; display: inline-block;" />
-      <p>6cups • Table Zero • April 2026 • Toronto</p>
+      <p>6cups • Table Zero • March 22, 2026 • Samara Brewing Co., Toronto</p>
     </div>
   </div>
 </body>

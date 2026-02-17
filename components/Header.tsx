@@ -62,6 +62,13 @@ export function Header() {
               ABOUT
             </button>
             <button
+              onClick={() => scrollToSection('location')}
+              className="text-sm font-bold uppercase tracking-widest transition-opacity hover:opacity-100"
+              style={{ color: palette.cream, fontFamily: fonts.body, opacity: 0.7 }}
+            >
+              LOCATION
+            </button>
+            <button
               onClick={() => scrollToSection('faq')}
               className="text-sm font-bold uppercase tracking-widest transition-opacity hover:opacity-100"
               style={{ color: palette.cream, fontFamily: fonts.body, opacity: 0.7 }}

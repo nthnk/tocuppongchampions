@@ -24,6 +24,10 @@
   border-radius: 0 !important;
 }
 
+.rounded-sponsor {
+  border-radius: 5px !important;
+}
+
 body {
   background: #0a0808;
   color: var(--foreground);

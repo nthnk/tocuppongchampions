@@ -183,7 +183,7 @@ export async function POST(request: NextRequest) {
 
     <div class="footer">
       <img src="https://tocuppongchampions.ca/horizontal_colour.svg" alt="6CUPS" width="120" style="margin-bottom: 15px; display: inline-block;" />
-      <p>6cups • Table Zero • April 2026 • Toronto</p>
+      <p>6cups • Table Zero • March 22, 2026 • Samara Brewing Co., Toronto</p>
     </div>
   </div>
 </body>
