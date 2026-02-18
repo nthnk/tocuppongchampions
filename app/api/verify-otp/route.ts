@@ -7,17 +7,17 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, code } = body;
+    const { email, code, otpToken } = body;
 
-    if (!email || !code) {
+    if (!email || !code || !otpToken) {
       return NextResponse.json(
-        { error: 'Email and code are required' },
+        { error: 'Email, code, and verification token are required' },
         { status: 400 }
       );
     }
 
-    // Verify the OTP
-    const verification = verifyOTP(email, code);
+    // Verify the OTP using the signed token (stateless)
+    const verification = verifyOTP(otpToken, email, code);
 
     if (!verification.valid) {
       return NextResponse.json(

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { generateOTP, storeOTP, checkRateLimit } from '@/lib/otp';
+import { generateOTP, createOTPToken, checkRateLimit } from '@/lib/otp';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -32,8 +32,8 @@ export async function POST(request: NextRequest) {
     // DEV: Log OTP code to console for testing
     console.log(`🔐 OTP CODE for ${email}: ${otpCode}`);
 
-    // Store OTP with form data
-    storeOTP(email, otpCode, { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email, referredBy: referredBy || '', spectators: Number(spectators) || 0 });
+    // Create signed OTP token (stateless - works across serverless instances)
+    const otpToken = createOTPToken(email, otpCode, { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email, referredBy: referredBy || '', spectators: Number(spectators) || 0 });
 
     // Send OTP email via Resend
     try {
@@ -199,7 +199,7 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { message: 'OTP sent successfully' },
+      { message: 'OTP sent successfully', otpToken },
       { status: 200 }
     );
   } catch (error) {

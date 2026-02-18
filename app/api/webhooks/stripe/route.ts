@@ -6,6 +6,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
+  console.log('Stripe webhook received');
   const body = await request.text();
   const signature = request.headers.get('stripe-signature');
 
@@ -26,6 +27,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
   }
 
+  console.log('Stripe webhook event type:', event.type);
+
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session;
     const metadata = session.metadata!;
@@ -44,23 +47,34 @@ export async function POST(request: NextRequest) {
     const sheetsUrl = process.env.GOOGLE_SHEETS_URL;
     if (sheetsUrl) {
       try {
-        await fetch(sheetsUrl, {
+        const sheetsPayload = {
+          timestamp: new Date().toISOString(),
+          teamName,
+          player1FirstName,
+          player1LastName,
+          player2FirstName,
+          player2LastName,
+          email,
+          spectators: spectators || '0',
+        };
+        console.log('Sending to Google Sheets:', JSON.stringify(sheetsPayload));
+        console.log('Google Sheets URL:', sheetsUrl);
+        const sheetsResponse = await fetch(sheetsUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            timestamp: new Date().toISOString(),
-            teamName,
-            player1FirstName,
-            player1LastName,
-            player2FirstName,
-            player2LastName,
-            email,
-            spectators: spectators || '0',
-          }),
+          body: JSON.stringify(sheetsPayload),
         });
+        const sheetsResponseText = await sheetsResponse.text();
+        console.log('Google Sheets response status:', sheetsResponse.status, 'redirected:', sheetsResponse.redirected);
+        console.log('Google Sheets response body:', sheetsResponseText);
+        if (!sheetsResponse.ok && !sheetsResponse.redirected) {
+          console.error('Google Sheets error:', sheetsResponse.status, sheetsResponseText);
+        }
       } catch (sheetsError) {
         console.error('Error submitting to Google Sheets:', sheetsError);
       }
+    } else {
+      console.error('GOOGLE_SHEETS_URL environment variable is not set!');
     }
 
     // 2. Send confirmation email to participant

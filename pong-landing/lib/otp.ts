@@ -1,80 +1,104 @@
-// In-memory OTP storage (for development/small scale)
-// In production, consider using Redis or a database
+// Stateless HMAC-based OTP verification
+// Works across serverless function instances (no shared memory needed)
 
-interface OTPData {
-  code: string;
-  email: string;
-  formData: {
-    teamName: string;
-    player1FirstName: string;
-    player1LastName: string;
-    player2FirstName: string;
-    player2LastName: string;
-    email: string;
-    spectators: number;
-  };
-  expiresAt: number;
-  attempts: number;
-}
-
-interface RateLimitData {
-  count: number;
-  resetAt: number;
-}
-
-// Store OTPs temporarily (clears on server restart)
-const otpStore = new Map<string, OTPData>();
-
-// Rate limiting store
-const rateLimitStore = new Map<string, RateLimitData>();
+import crypto from 'crypto';
 
 const OTP_EXPIRY_MS = 10 * 60 * 1000; // 10 minutes
-const MAX_OTP_REQUESTS = 3;
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const OTP_SECRET = process.env.OTP_SECRET || process.env.STRIPE_SECRET_KEY || 'fallback-otp-secret-key';
 
 export function generateOTP(): string {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
-export function storeOTP(email: string, code: string, formData: any): void {
-  const key = email.toLowerCase();
-  otpStore.set(key, {
+/**
+ * Creates a signed token containing the OTP code, email, form data, and expiry.
+ * The token is sent to the client and returned during verification.
+ * No server-side state is needed.
+ */
+export function createOTPToken(email: string, code: string, formData: any): string {
+  const expiresAt = Date.now() + OTP_EXPIRY_MS;
+  const payload = {
+    email: email.toLowerCase(),
     code,
-    email,
     formData,
-    expiresAt: Date.now() + OTP_EXPIRY_MS,
-    attempts: 0,
-  });
+    expiresAt,
+  };
+
+  const payloadStr = Buffer.from(JSON.stringify(payload)).toString('base64');
+  const signature = crypto
+    .createHmac('sha256', OTP_SECRET)
+    .update(payloadStr)
+    .digest('hex');
+
+  return `${payloadStr}.${signature}`;
 }
 
-export function verifyOTP(email: string, code: string): { valid: boolean; formData?: any; error?: string } {
-  const key = email.toLowerCase();
-  const otpData = otpStore.get(key);
-
-  if (!otpData) {
-    return { valid: false, error: 'No OTP found. Please request a new code.' };
+/**
+ * Verifies an OTP code against a signed token.
+ * Returns the form data if valid, or an error message if not.
+ */
+export function verifyOTP(
+  token: string,
+  email: string,
+  code: string
+): { valid: boolean; formData?: any; error?: string } {
+  if (!token) {
+    return { valid: false, error: 'No verification token found. Please request a new code.' };
   }
 
-  if (Date.now() > otpData.expiresAt) {
-    otpStore.delete(key);
-    return { valid: false, error: 'OTP has expired. Please request a new code.' };
+  const parts = token.split('.');
+  if (parts.length !== 2) {
+    return { valid: false, error: 'Invalid verification token. Please request a new code.' };
   }
 
-  if (otpData.attempts >= 5) {
-    otpStore.delete(key);
-    return { valid: false, error: 'Too many failed attempts. Please request a new code.' };
+  const [payloadStr, signature] = parts;
+
+  // Verify signature
+  const expectedSignature = crypto
+    .createHmac('sha256', OTP_SECRET)
+    .update(payloadStr)
+    .digest('hex');
+
+  if (!crypto.timingSafeEqual(Buffer.from(signature, 'hex'), Buffer.from(expectedSignature, 'hex'))) {
+    return { valid: false, error: 'Invalid verification token. Please request a new code.' };
   }
 
-  if (otpData.code !== code) {
-    otpData.attempts++;
+  // Decode payload
+  let payload: any;
+  try {
+    payload = JSON.parse(Buffer.from(payloadStr, 'base64').toString());
+  } catch {
+    return { valid: false, error: 'Invalid verification token. Please request a new code.' };
+  }
+
+  // Check expiry
+  if (Date.now() > payload.expiresAt) {
+    return { valid: false, error: 'Code has expired. Please request a new one.' };
+  }
+
+  // Check email matches
+  if (payload.email !== email.toLowerCase()) {
+    return { valid: false, error: 'Email mismatch. Please request a new code.' };
+  }
+
+  // Check code matches
+  if (payload.code !== code) {
     return { valid: false, error: 'Invalid code. Please try again.' };
   }
 
-  // Success - return form data and clean up
-  const formData = otpData.formData;
-  otpStore.delete(key);
-  return { valid: true, formData };
+  return { valid: true, formData: payload.formData };
 }
+
+// Rate limiting is best-effort on serverless (in-memory won't persist across instances)
+// but still helps within a single instance's lifetime
+interface RateLimitData {
+  count: number;
+  resetAt: number;
+}
+
+const rateLimitStore = new Map<string, RateLimitData>();
+const MAX_OTP_REQUESTS = 5;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
 
 export function checkRateLimit(email: string): { allowed: boolean; error?: string } {
   const key = email.toLowerCase();
@@ -82,7 +106,6 @@ export function checkRateLimit(email: string): { allowed: boolean; error?: strin
   const rateLimit = rateLimitStore.get(key);
 
   if (!rateLimit || now > rateLimit.resetAt) {
-    // New window or expired window
     rateLimitStore.set(key, {
       count: 1,
       resetAt: now + RATE_LIMIT_WINDOW_MS,
@@ -101,15 +124,3 @@ export function checkRateLimit(email: string): { allowed: boolean; error?: strin
   rateLimit.count++;
   return { allowed: true };
 }
-
-export function cleanupExpiredOTPs(): void {
-  const now = Date.now();
-  for (const [key, data] of otpStore.entries()) {
-    if (now > data.expiresAt) {
-      otpStore.delete(key);
-    }
-  }
-}
-
-// Run cleanup every 5 minutes
-setInterval(cleanupExpiredOTPs, 5 * 60 * 1000);

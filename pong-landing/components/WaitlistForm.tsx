@@ -17,6 +17,7 @@ export function WaitlistForm() {
     spectators: 0,
   });
   const [otpCode, setOtpCode] = useState('');
+  const [otpToken, setOtpToken] = useState('');
   const [step, setStep] = useState<FormStep>('form');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -43,6 +44,7 @@ export function WaitlistForm() {
         throw new Error(data.error || 'Failed to send verification code');
       }
 
+      setOtpToken(data.otpToken);
       setStep('otp');
     } catch (error: any) {
       setSubmitStatus('error');
@@ -67,6 +69,7 @@ export function WaitlistForm() {
         body: JSON.stringify({
           email: formData.email,
           code: otpCode,
+          otpToken,
         }),
       });
 
@@ -109,6 +112,7 @@ export function WaitlistForm() {
         throw new Error(data.error || 'Failed to resend code');
       }
 
+      setOtpToken(data.otpToken);
       setOtpCode('');
       alert('New verification code sent!');
     } catch (error: any) {
@@ -160,7 +164,7 @@ export function WaitlistForm() {
         </div>
         <div className="text-center mb-14">
           <h2
-            className="text-4xl md:text-5xl lg:text-6xl font-black mb-5 uppercase tracking-wider"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-5 uppercase tracking-wider whitespace-nowrap"
             style={{ fontFamily: fonts.heading, color: palette.cream }}
           >
             REGISTER <span style={{ color: palette.red }}>YOUR TEAM</span>
