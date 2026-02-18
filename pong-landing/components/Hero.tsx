@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { palette, fonts } from '@/lib/theme';
 
 export function Hero() {
-  const scrollToWaitlist = () => {
-    document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToRegister = () => {
+    document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -107,7 +107,7 @@ export function Hero() {
               border: `2px solid ${palette.red}`,
             }}
           >
-            TABLE ZERO — APRIL 2026
+            TABLE ZERO — MARCH 22, 2026
           </span>
         </div>
 
@@ -137,7 +137,7 @@ export function Hero() {
           {[
             { big: '32', small: 'Teams' },
             { big: '$10', small: 'Per Duo' },
-            { big: 'APR', small: '2026' },
+            { big: 'MAR 22', small: '2026' },
           ].map((stat, i) => (
             <div key={i} className="text-center">
               <div
@@ -165,7 +165,7 @@ export function Hero() {
           }}
         >
           <button
-            onClick={scrollToWaitlist}
+            onClick={scrollToRegister}
             className="inline-flex items-center gap-3 px-14 py-5 text-lg font-black uppercase tracking-widest transition-all duration-300 hover:scale-105"
             style={{
               background: palette.red,
@@ -174,7 +174,7 @@ export function Hero() {
               animation: 'pulse-red 3s ease-in-out infinite',
             }}
           >
-            GET ON THE LIST
+            REGISTER NOW
           </button>
         </div>
 

@@ -7,7 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email, referredBy } = body;
+    const { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email, referredBy, spectators } = body;
 
     // Validate required fields
     if (!teamName || !player1FirstName || !player1LastName || !player2FirstName || !player2LastName || !email) {
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     console.log(`🔐 OTP CODE for ${email}: ${otpCode}`);
 
     // Store OTP with form data
-    storeOTP(email, otpCode, { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email, referredBy: referredBy || '' });
+    storeOTP(email, otpCode, { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email, referredBy: referredBy || '', spectators: Number(spectators) || 0 });
 
     // Send OTP email via Resend
     try {

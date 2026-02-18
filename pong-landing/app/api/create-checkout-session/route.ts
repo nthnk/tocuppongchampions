@@ -1,33 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { verifyOTP } from '@/lib/otp';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, code } = body;
+    const { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email, spectators } = body;
 
-    if (!email || !code) {
+    if (!teamName || !email) {
       return NextResponse.json(
-        { error: 'Email and code are required' },
+        { error: 'Missing required fields' },
         { status: 400 }
       );
     }
 
-    // Verify the OTP
-    const verification = verifyOTP(email, code);
-
-    if (!verification.valid) {
-      return NextResponse.json(
-        { error: verification.error },
-        { status: 400 }
-      );
-    }
-
-    // OTP is valid — create a Stripe checkout session
-    const { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, spectators } = verification.formData;
     const origin = request.headers.get('origin') || 'http://localhost:3000';
 
     const session = await stripe.checkout.sessions.create({
@@ -40,7 +27,7 @@ export async function POST(request: NextRequest) {
               name: 'Table Zero Entry - Duo',
               description: `Team: ${teamName} | ${player1FirstName} ${player1LastName} & ${player2FirstName} ${player2LastName}`,
             },
-            unit_amount: 1000, // $10.00 CAD
+            unit_amount: 1000, // $10.00 CAD in cents
           },
           quantity: 1,
         },
@@ -60,14 +47,11 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    return NextResponse.json(
-      { message: 'Verified', checkoutUrl: session.url },
-      { status: 200 }
-    );
+    return NextResponse.json({ url: session.url });
   } catch (error) {
-    console.error('Error in verify-otp:', error);
+    console.error('Error creating checkout session:', error);
     return NextResponse.json(
-      { error: 'Failed to process verification' },
+      { error: 'Failed to create checkout session' },
       { status: 500 }
     );
   }

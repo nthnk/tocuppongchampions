@@ -69,7 +69,7 @@ export function Header() {
               FAQ
             </button>
             <button
-              onClick={() => scrollToSection('waitlist')}
+              onClick={() => scrollToSection('register')}
               className="text-sm font-black uppercase tracking-widest px-6 py-3 transition-all hover:opacity-90"
               style={{
                 background: palette.red,
@@ -77,13 +77,13 @@ export function Header() {
                 fontFamily: fonts.heading,
               }}
             >
-              GET ON THE LIST
+              REGISTER
             </button>
           </div>
 
           {/* Mobile CTA */}
           <button
-            onClick={() => scrollToSection('waitlist')}
+            onClick={() => scrollToSection('register')}
             className="md:hidden text-sm font-black uppercase tracking-widest px-5 py-2.5 transition-opacity hover:opacity-90"
             style={{
               background: palette.red,
@@ -91,7 +91,7 @@ export function Header() {
               fontFamily: fonts.heading,
             }}
           >
-            SIGN UP
+            REGISTER
           </button>
         </div>
       </nav>

@@ -72,7 +72,7 @@ export function Footer() {
         <div className="flex flex-wrap gap-8 mb-16">
           {[
             { label: 'About', href: '#about' },
-            { label: 'Waitlist', href: '#waitlist' },
+            { label: 'Register', href: '#register' },
             { label: 'FAQ', href: '#faq' },
             { label: 'Contact', href: 'mailto:info@tocuppongchampions.ca' },
           ].map((link) => (
