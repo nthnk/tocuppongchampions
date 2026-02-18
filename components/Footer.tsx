@@ -31,7 +31,7 @@ export function Footer() {
               className="text-xs font-bold uppercase tracking-wider"
               style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.3 }}
             >
-              Table Zero — April 2026
+              Table Zero — March 22, 2026
             </p>
           </div>
 

@@ -160,7 +160,7 @@ export function WaitlistForm() {
         </div>
         <div className="text-center mb-14">
           <h2
-            className="text-4xl md:text-5xl lg:text-6xl font-black mb-5 uppercase tracking-wider"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-5 uppercase tracking-wider whitespace-nowrap"
             style={{ fontFamily: fonts.heading, color: palette.cream }}
           >
             REGISTER <span style={{ color: palette.red }}>YOUR TEAM</span>
