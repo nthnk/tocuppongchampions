@@ -14,6 +14,7 @@ export function WaitlistForm() {
     player2LastName: '',
     email: '',
     referredBy: '',
+    spectators: 0,
   });
   const [otpCode, setOtpCode] = useState('');
   const [step, setStep] = useState<FormStep>('form');
@@ -75,22 +76,15 @@ export function WaitlistForm() {
         throw new Error(data.error || 'Invalid verification code');
       }
 
-      setSubmitStatus('success');
-      setFormData({
-        teamName: '',
-        player1FirstName: '',
-        player1LastName: '',
-        player2FirstName: '',
-        player2LastName: '',
-        email: '',
-        referredBy: '',
-      });
-      setOtpCode('');
-      setStep('form');
+      // Redirect to Stripe checkout
+      if (data.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+      } else {
+        throw new Error('Failed to create payment session');
+      }
     } catch (error: any) {
       setSubmitStatus('error');
       setErrorMessage(error.message || 'Verification failed');
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -125,9 +119,10 @@ export function WaitlistForm() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: type === 'number' ? Number(value) : value,
     });
   };
 
@@ -152,7 +147,7 @@ export function WaitlistForm() {
   const inputFocusClass = "w-full px-4 py-4 focus:outline-none transition-all placeholder-gray-600";
 
   return (
-    <section id="waitlist" className="py-28 px-6" style={{ background: palette.black }}>
+    <section id="register" className="py-28 px-6" style={{ background: palette.black }}>
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-4">
@@ -168,13 +163,13 @@ export function WaitlistForm() {
             className="text-4xl md:text-5xl lg:text-6xl font-black mb-5 uppercase tracking-wider"
             style={{ fontFamily: fonts.heading, color: palette.cream }}
           >
-            GET ON <span style={{ color: palette.red }}>THE LIST</span>
+            REGISTER <span style={{ color: palette.red }}>YOUR TEAM</span>
           </h2>
           <p
             className="text-base md:text-lg leading-relaxed max-w-md mx-auto"
             style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.6 }}
           >
-            32 spots. Sign up and we&apos;ll reach out when registration opens.
+            32 spots. $10 per duo. Secure your entry now.
           </p>
         </div>
 
@@ -306,6 +301,34 @@ export function WaitlistForm() {
                 </p>
               </div>
 
+              {/* Spectators */}
+              <div>
+                <label
+                  htmlFor="spectators"
+                  className="block text-xs font-bold mb-2 uppercase tracking-widest"
+                  style={{ fontFamily: fonts.heading, color: palette.cream }}
+                >
+                  HOW MANY SPECTATORS WOULD YOU LIKE TO BRING?
+                </label>
+                <input
+                  type="number"
+                  id="spectators"
+                  name="spectators"
+                  min={0}
+                  max={20}
+                  value={formData.spectators}
+                  onChange={handleChange}
+                  className={inputFocusClass}
+                  style={inputStyle}
+                />
+                <p
+                  className="mt-2 text-sm italic"
+                  style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.5 }}
+                >
+                  Spectators do not have to pay for admission but will be let in on a first come, first serve basis because the venue has capacity limits. We&apos;ll reach out to confirm your spectators can come.
+                </p>
+              </div>
+
               {/* 19+ Notice */}
               <div
                 className="flex items-start gap-3 p-4"
@@ -357,7 +380,7 @@ export function WaitlistForm() {
                     SENDING CODE...
                   </>
                 ) : (
-                  'SUBMIT APPLICATION'
+                  'REGISTER & PAY $10'
                 )}
               </button>
             </form>
@@ -431,7 +454,7 @@ export function WaitlistForm() {
                     VERIFYING...
                   </>
                 ) : (
-                  'CONFIRM & JOIN'
+                  'VERIFY & PROCEED TO PAYMENT'
                 )}
               </button>
 
@@ -455,22 +478,6 @@ export function WaitlistForm() {
                 </button>
               </div>
             </form>
-          )}
-
-          {/* Success Message */}
-          {submitStatus === 'success' && (
-            <div
-              className="mt-6 p-4 flex items-start gap-3"
-              style={{ background: '#22c55e20', border: '2px solid #22c55e50' }}
-            >
-              <svg className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: '#22c55e' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div>
-                <h4 className="font-black mb-1 uppercase tracking-wider" style={{ fontFamily: fonts.heading, color: palette.cream }}>YOU&apos;RE ON THE WAITLIST.</h4>
-                <p className="text-sm" style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.8 }}>We&apos;ll be in touch with event details and registration in the next few weeks.</p>
-              </div>
-            </div>
           )}
 
           {/* Error Message */}

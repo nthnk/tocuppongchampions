@@ -31,7 +31,7 @@ export function Footer() {
               className="text-xs font-bold uppercase tracking-wider"
               style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.3 }}
             >
-              Table Zero — March 22, 2026
+              Table Zero — April 2026
             </p>
           </div>
 
@@ -72,8 +72,7 @@ export function Footer() {
         <div className="flex flex-wrap gap-8 mb-16">
           {[
             { label: 'About', href: '#about' },
-            { label: 'Location', href: '#location' },
-            { label: 'Waitlist', href: '#waitlist' },
+            { label: 'Register', href: '#register' },
             { label: 'FAQ', href: '#faq' },
             { label: 'Contact', href: 'mailto:info@tocuppongchampions.ca' },
           ].map((link) => (

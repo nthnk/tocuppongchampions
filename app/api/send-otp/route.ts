@@ -7,7 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email, referredBy } = body;
+    const { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email, referredBy, spectators } = body;
 
     // Validate required fields
     if (!teamName || !player1FirstName || !player1LastName || !player2FirstName || !player2LastName || !email) {
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     console.log(`🔐 OTP CODE for ${email}: ${otpCode}`);
 
     // Store OTP with form data
-    storeOTP(email, otpCode, { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email, referredBy: referredBy || '' });
+    storeOTP(email, otpCode, { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, email, referredBy: referredBy || '', spectators: Number(spectators) || 0 });
 
     // Send OTP email via Resend
     try {
@@ -183,7 +183,7 @@ export async function POST(request: NextRequest) {
 
     <div class="footer">
       <img src="https://tocuppongchampions.ca/horizontal_colour.svg" alt="6CUPS" width="120" style="margin-bottom: 15px; display: inline-block;" />
-      <p>6cups • Table Zero • March 22, 2026 • Samara Brewing Co., Toronto</p>
+      <p>6cups • Table Zero • April 2026 • Toronto</p>
     </div>
   </div>
 </body>

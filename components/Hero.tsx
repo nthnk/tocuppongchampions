@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { palette, fonts } from '@/lib/theme';
 
 export function Hero() {
-  const scrollToWaitlist = () => {
-    document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToRegister = () => {
+    document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -122,7 +122,7 @@ export function Hero() {
             transition: 'opacity 0.4s ease-out 0.2s, transform 0.4s ease-out 0.2s',
           }}
         >
-          32 teams. 4 brackets. 1 champion.
+          32 teams. One bracket. A brewery in downtown Toronto.
         </p>
 
         {/* Stats row — cleaner, editorial */}
@@ -165,7 +165,7 @@ export function Hero() {
           }}
         >
           <button
-            onClick={scrollToWaitlist}
+            onClick={scrollToRegister}
             className="inline-flex items-center gap-3 px-14 py-5 text-lg font-black uppercase tracking-widest transition-all duration-300 hover:scale-105"
             style={{
               background: palette.red,
@@ -174,7 +174,7 @@ export function Hero() {
               animation: 'pulse-red 3s ease-in-out infinite',
             }}
           >
-            GET ON THE LIST
+            REGISTER NOW
           </button>
         </div>
 
@@ -191,7 +191,7 @@ export function Hero() {
             className="text-xs font-bold tracking-[0.3em] uppercase"
             style={{ fontFamily: fonts.body, color: palette.cream }}
           >
-            90 Cawthra Ave Unit 101, Toronto, ON M6N 3C2
+            Downtown Toronto
           </span>
         </div>
 

@@ -201,30 +201,8 @@ export function AboutAnimated() {
                 transition: 'opacity 0.4s ease-out 0.35s, transform 0.4s ease-out 0.35s',
               }}
             >
-              The first official 6CUPS tournament.<br />
-              Samara Brewing Co.<br />
-              March 22, 2026.
+              The first official 6CUPS tournament. Up to 32 teams. A brewery in downtown Toronto. April 2026.
             </p>
-
-            {/* Prize */}
-            <div
-              className="inline-flex items-center gap-3 mt-6 px-5 py-3"
-              style={{
-                background: `${palette.black}c0`,
-                border: `2px solid ${palette.red}`,
-                backdropFilter: 'blur(8px)',
-              }}
-            >
-              <svg className="w-5 h-5 flex-shrink-0" style={{ color: palette.gold }} fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-              </svg>
-              <span
-                className="text-sm font-bold uppercase tracking-wider"
-                style={{ fontFamily: fonts.body, color: palette.cream }}
-              >
-                Prize: Custom artistic t-shirts for the winning team
-              </span>
-            </div>
           </div>
 
           {/* How to get in */}
@@ -255,12 +233,12 @@ export function AboutAnimated() {
               {
                 number: '01',
                 title: 'JOIN THE WAITLIST',
-                description: 'Sign up below with your duo partner to get on the waitlist.',
+                description: 'Sign up below. Once we lock in a venue and date, we\'ll open registration.',
               },
               {
                 number: '02',
                 title: 'GET CONFIRMED',
-                description: 'We\'ll reach out to confirm your spot and share payment and event details.',
+                description: 'We\'ll reach out to confirm your spot and share all the event details.',
               },
             ].map((step, index) => (
               <div

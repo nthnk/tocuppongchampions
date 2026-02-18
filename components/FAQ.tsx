@@ -5,20 +5,20 @@ import { palette, fonts } from '@/lib/theme';
 
 const faqs = [
   {
-    question: "HOW DOES THE WAITLIST WORK?",
-    answer: "Table Zero has 32 spots. The waitlist is open to everyone — sign up and we'll keep you updated. Once we open registration, we'll reach out to everyone on the list to confirm their spot."
-  },
-  {
-    question: "WHEN WILL REGISTRATION OPEN?",
-    answer: "Registration will open soon. Everyone on the waitlist will be notified when spots are available. The event is confirmed for March 22, 2026 at Samara Brewing Co."
+    question: "HOW DO I REGISTER?",
+    answer: "Fill out the registration form on this page with your team name, both players' names, and your email. After verifying your email, you'll be taken to a secure payment page to pay the $10 entry fee. Once payment is confirmed, you're in!"
   },
   {
     question: "HOW MUCH DOES IT COST?",
-    answer: "$10 per duo team. Payment instructions will be sent once registration opens and your spot is confirmed. Drinks and food are not included — you can purchase them at the bar."
+    answer: "$10 per duo team. You pay online when you register. Drinks and food are not included — you can purchase them at the bar."
+  },
+  {
+    question: "WHEN AND WHERE IS THIS HAPPENING?",
+    answer: "March 22, 2026 from 12:00 PM to 6:00 PM at Samara Brewing Co., 90 Cawthra Ave, Unit 101, Toronto."
   },
   {
     question: "WILL THERE BE ALCOHOL?",
-    answer: "Yes. We're partnering with Samara Brewing Co., so drinks will be available for purchase. Food and drinks are not included in the entry fee."
+    answer: "Yes. The event is at Samara Brewing Co., so drinks will be available for purchase. Food and drinks are not included in the entry fee."
   },
   {
     question: "WHAT'S THE TOURNAMENT FORMAT?",
@@ -29,24 +29,16 @@ const faqs = [
     answer: "If you're eliminated from the bracket, there's still plenty to do. We'll have other games and entertainment set up throughout the venue, so you can hang out, have fun, and watch the final matches to see who gets crowned the winner."
   },
   {
-    question: "WHEN AND WHERE IS THIS HAPPENING?",
-    answer: "March 22, 2026 at Samara Brewing Co. (90 Cawthra Ave Unit 101, Toronto, ON M6N 3C2). There's lots of free parking available on Cawthra Avenue."
-  },
-  {
-    question: "CAN I COME IF I'M NOT PARTICIPATING?",
-    answer: "Yes! It's free to attend if you're not competing. Just DM us on Instagram (@play6cups) or email info@tocuppongchampions.ca to let us know you'll be there — we need to make sure we're not over capacity."
-  },
-  {
-    question: "WHAT IS THE MONEY GOING TOWARDS?",
-    answer: "Your $10 entry fee goes towards ping pong balls, cups, name tags, prize t-shirts for the winners, photo booth film, and the website domain. We're keeping it lean and putting everything back into the event."
-  },
-  {
     question: "CAN I REGISTER AS A SOLO PLAYER?",
     answer: "Not directly. You need a partner to sign up. If you need help finding one, email info@tocuppongchampions.ca and we'll try to match you with someone."
   },
   {
     question: "WHAT SHOULD I BRING?",
     answer: "Just yourself and your teammate. We provide all equipment. Bring cash or card for food and drinks at the bar."
+  },
+  {
+    question: "HOW DO I GET A REFUND?",
+    answer: "Email info@tocuppongchampions.ca with the email you used to register and let us know which email you'd like us to send the e-transfer refund to. We'll get it sorted."
   },
   {
     question: "WHY IS THIS EVENT HAPPENING?",

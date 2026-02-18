@@ -18,7 +18,7 @@ const posterama = localFont({
 
 export const metadata: Metadata = {
   title: "6CUPS | Table Zero - Toronto Beer Pong",
-  description: "32 teams. Toronto's premier beer pong tournament. The waitlist is open.",
+  description: "32 teams. Toronto's premier beer pong tournament. Register your team now.",
   icons: {
     icon: "/favicon.svg",
   },

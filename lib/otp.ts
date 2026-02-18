@@ -11,6 +11,7 @@ interface OTPData {
     player2FirstName: string;
     player2LastName: string;
     email: string;
+    spectators: number;
   };
   expiresAt: number;
   attempts: number;
