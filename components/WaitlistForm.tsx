@@ -203,7 +203,7 @@ export function WaitlistForm() {
                   required
                   value={formData.teamName}
                   onChange={handleChange}
-                  placeholder="e.g., The Splash Bros"
+                  placeholder="e.g., Super Splash Bros"
                   className={inputFocusClass}
                   style={inputStyle}
                 />

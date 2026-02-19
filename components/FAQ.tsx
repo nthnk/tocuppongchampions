@@ -5,16 +5,24 @@ import { palette, fonts } from '@/lib/theme';
 
 const faqs = [
   {
-    question: "HOW DO I REGISTER?",
-    answer: "Fill out the registration form on this page with your team name, both players' names, and your email. After verifying your email, you'll be taken to a secure payment page to pay the $10 entry fee. Once payment is confirmed, you're in!"
+    question: "WHY IS THIS EVENT HAPPENING?",
+    answer: "Practically everyone we've talked to says there's nothing interesting to do in Toronto in the winter. We wanted to put together something fun and social — an excuse to bring a bunch of people together. This is our first of many events, so we're testing out our format before scaling up."
+  },
+  {
+    question: "WHY IS THIS 19+?",
+    answer: "Since the event is at a brewery and alcohol will be available for purchase, it's a 19+ event. Beyond that, we want to keep the vibe right — this is an adults-only social experience."
+  },
+  {
+    question: "DO I HAVE TO DRINK TO PLAY?",
+    answer: "Nope. Drinking is completely optional. It's not part of the game at all — you're there to compete, hang out, and have fun. Grab a drink if you want, or don't. No pressure either way."
+  },
+  {
+    question: "WILL THERE BE BEER IN THE CUPS?",
+    answer: "No. It's actually illegal to have beer in the cups, so they'll be filled with water. You're welcome to drink whatever you'd like on the side, but the game cups are water only."
   },
   {
     question: "HOW MUCH DOES IT COST?",
     answer: "$10 per duo team. You pay online when you register. Drinks and food are not included — you can purchase them at the bar."
-  },
-  {
-    question: "WHEN AND WHERE IS THIS HAPPENING?",
-    answer: "March 22, 2026 from 12:00 PM to 6:00 PM at Samara Brewing Co., 90 Cawthra Ave, Unit 101, Toronto."
   },
   {
     question: "WILL THERE BE ALCOHOL?",
@@ -39,10 +47,6 @@ const faqs = [
   {
     question: "HOW DO I GET A REFUND?",
     answer: "Email info@tocuppongchampions.ca with the email you used to register and let us know which email you'd like us to send the e-transfer refund to. We'll get it sorted."
-  },
-  {
-    question: "WHY IS THIS EVENT HAPPENING?",
-    answer: "Table Zero is the first official 6CUPS event. We're capturing content and testing our tournament format with a small group before scaling up. Think of it as the origin story."
   }
 ];
 
