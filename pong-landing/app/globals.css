@@ -26,6 +26,12 @@
 
 .sponsor-box {
   border-radius: 7px !important;
+  background: #FFFFFF !important;
+  width: 240px !important;
+  height: 140px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 body {
