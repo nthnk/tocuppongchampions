@@ -37,22 +37,12 @@ export function Sponsors() {
             rel="noopener noreferrer"
             className="transition-opacity hover:opacity-80"
           >
-            <div
-              className="sponsor-box flex items-center justify-center"
-              style={{
-                background: '#FFFFFF',
-                width: '240px',
-                height: '140px',
-                padding: '12px',
-                borderRadius: '7px',
-              }}
-            >
+            <div className="w-[240px] h-[140px] bg-white rounded-[7px] flex items-center justify-center p-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/samara_logo.png"
                 alt="Samara Brewing Co."
-                className="object-contain"
-                style={{ maxHeight: '110px', maxWidth: '210px' }}
+                className="object-contain max-h-[110px] max-w-[210px]"
               />
             </div>
             <p
@@ -68,22 +58,12 @@ export function Sponsors() {
             rel="noopener noreferrer"
             className="transition-opacity hover:opacity-80"
           >
-            <div
-              className="sponsor-box flex items-center justify-center"
-              style={{
-                background: '#FFFFFF',
-                width: '240px',
-                height: '140px',
-                padding: '20px',
-                borderRadius: '7px',
-              }}
-            >
+            <div className="w-[240px] h-[140px] bg-white rounded-[7px] flex items-center justify-center p-5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/nickel9_logo.png"
                 alt="Nickel9 Distillery"
-                className="object-contain"
-                style={{ maxHeight: '90px', maxWidth: '180px' }}
+                className="object-contain max-h-[90px] max-w-[180px]"
               />
             </div>
             <p
@@ -99,22 +79,12 @@ export function Sponsors() {
             rel="noopener noreferrer"
             className="transition-opacity hover:opacity-80"
           >
-            <div
-              className="sponsor-box flex items-center justify-center"
-              style={{
-                background: '#FFFFFF',
-                width: '240px',
-                height: '140px',
-                padding: '12px',
-                borderRadius: '7px',
-              }}
-            >
+            <div className="w-[240px] h-[140px] bg-white rounded-[7px] flex items-center justify-center p-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/stavs-corner-logo.svg"
                 alt="Stav's Corner"
-                className="object-contain"
-                style={{ maxHeight: '130px', maxWidth: '220px' }}
+                className="object-contain max-h-[130px] max-w-[220px]"
               />
             </div>
             <p
