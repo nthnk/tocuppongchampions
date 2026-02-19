@@ -24,6 +24,10 @@
   border-radius: 0 !important;
 }
 
+[data-rounded] {
+  border-radius: 7px !important;
+}
+
 body {
   background: #0a0808;
   color: var(--foreground);

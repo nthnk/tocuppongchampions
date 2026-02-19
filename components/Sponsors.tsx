@@ -37,7 +37,7 @@ export function Sponsors() {
             rel="noopener noreferrer"
             className="transition-opacity hover:opacity-80"
           >
-            <div className="w-[240px] h-[140px] bg-white rounded-[7px] flex items-center justify-center p-3">
+            <div className="w-[240px] h-[140px] bg-white flex items-center justify-center p-3" data-rounded>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/samara_logo.png"
@@ -58,7 +58,7 @@ export function Sponsors() {
             rel="noopener noreferrer"
             className="transition-opacity hover:opacity-80"
           >
-            <div className="w-[240px] h-[140px] bg-white rounded-[7px] flex items-center justify-center p-5">
+            <div className="w-[240px] h-[140px] bg-white flex items-center justify-center p-5" data-rounded>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/nickel9_logo.png"
@@ -79,7 +79,7 @@ export function Sponsors() {
             rel="noopener noreferrer"
             className="transition-opacity hover:opacity-80"
           >
-            <div className="w-[240px] h-[140px] bg-white rounded-[7px] flex items-center justify-center p-3">
+            <div className="w-[240px] h-[140px] bg-white flex items-center justify-center p-3" data-rounded>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/stavs-corner-logo.svg"
