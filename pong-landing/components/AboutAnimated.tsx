@@ -201,7 +201,9 @@ export function AboutAnimated() {
                 transition: 'opacity 0.4s ease-out 0.35s, transform 0.4s ease-out 0.35s',
               }}
             >
-              The first official 6CUPS tournament. Up to 32 teams. A brewery in downtown Toronto. April 2026.
+              The first official 6CUPS tournament. Up to 32 teams.<br />
+              Samara Brewing Co. / Nickel 9 Distillery<br />
+              March 22, 2026.
             </p>
           </div>
 
@@ -232,13 +234,13 @@ export function AboutAnimated() {
             {[
               {
                 number: '01',
-                title: 'JOIN THE WAITLIST',
-                description: 'Sign up below. Once we lock in a venue and date, we\'ll open registration.',
+                title: 'REGISTER YOUR DUO',
+                description: 'Sign up below with your teammate. $10 per duo gets you in.',
               },
               {
                 number: '02',
-                title: 'GET CONFIRMED',
-                description: 'We\'ll reach out to confirm your spot and share all the event details.',
+                title: 'SHOW UP & PLAY',
+                description: 'March 22 at Samara Brewing Co. Check in, grab a drink, and compete.',
               },
             ].map((step, index) => (
               <div
