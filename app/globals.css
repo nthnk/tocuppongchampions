@@ -20,8 +20,12 @@
   --font-sans: var(--font-outfit);
 }
 
-* {
+*:not(.sponsor-box) {
   border-radius: 0 !important;
+}
+
+.sponsor-box {
+  border-radius: 7px !important;
 }
 
 body {

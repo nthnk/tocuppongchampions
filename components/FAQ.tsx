@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     question: "WHAT'S THE TOURNAMENT FORMAT?",
-    answer: "32 teams in a double-elimination bracket. Win and advance. Lose your first game and you drop to the loser's bracket, where you can fight your way back later in the tournament. Lose twice and you're out. We'll share more details closer to the event."
+    answer: "32 teams across 4 brackets. Single elimination — you lose, you're out. But don't worry, there's still plenty to do. We'll have cornhole, board games, and other organized social games running throughout the event so the fun doesn't stop."
   },
   {
     question: "WHAT HAPPENS IF I LOSE?",

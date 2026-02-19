@@ -122,7 +122,7 @@ export function Hero() {
             transition: 'opacity 0.4s ease-out 0.2s, transform 0.4s ease-out 0.2s',
           }}
         >
-          32 teams. One bracket. A brewery in downtown Toronto.
+          32 teams. 4 brackets. 1 champion.
         </p>
 
         {/* Stats row — cleaner, editorial */}
@@ -191,7 +191,7 @@ export function Hero() {
             className="text-xs font-bold tracking-[0.3em] uppercase"
             style={{ fontFamily: fonts.body, color: palette.cream }}
           >
-            Downtown Toronto
+            90 Cawthra Ave Unit 101, Toronto, ON M6N 3C2
           </span>
         </div>
 
