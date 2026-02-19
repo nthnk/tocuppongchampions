@@ -48,8 +48,8 @@ export function Location() {
 
         <div className="max-w-2xl mx-auto text-center">
           <h3
-            className="text-xl md:text-2xl lg:text-3xl font-black uppercase mb-4 whitespace-nowrap"
-            style={{ fontFamily: fonts.heading, color: palette.cream }}
+            className="font-black uppercase mb-4 whitespace-nowrap"
+            style={{ fontFamily: fonts.heading, color: palette.cream, fontSize: 'clamp(0.85rem, 4vw, 1.875rem)' }}
           >
             SAMARA BREWING CO. / NICKEL 9 DISTILLERY
           </h3>
