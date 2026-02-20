@@ -177,6 +177,36 @@ export function WaitlistForm() {
           </p>
         </div>
 
+        {/* No Walk-Ins Notice */}
+        <div
+          className="flex items-start gap-4 p-5 mb-10 max-w-2xl mx-auto"
+          style={{ background: `${palette.red}15`, border: `2px solid ${palette.red}` }}
+        >
+          <svg
+            className="w-6 h-6 flex-shrink-0 mt-0.5"
+            style={{ color: palette.red }}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+          </svg>
+          <div>
+            <p
+              className="font-black text-sm uppercase tracking-wider mb-1"
+              style={{ fontFamily: fonts.heading, color: palette.red }}
+            >
+              No Walk-Ins
+            </p>
+            <p
+              className="text-sm leading-relaxed"
+              style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.8 }}
+            >
+              Walk-ins will not be accepted. All teams must register online and pay the $10 entry fee in advance. Unregistered teams will not be allowed entry due to bracket structure and venue capacity limits.
+            </p>
+          </div>
+        </div>
+
         {/* Form Card */}
         <div
           className="p-8 md:p-10"
@@ -329,7 +359,7 @@ export function WaitlistForm() {
                   className="mt-2 text-sm italic"
                   style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.5 }}
                 >
-                  Spectators do not have to pay for admission but will be let in on a first come, first serve basis because the venue has capacity limits. We&apos;ll reach out to confirm your spectators can come.
+                  Spectators do not pay for admission but spots are not guaranteed. The venue has a strict capacity limit of 150 people, and spectators are approved on a first come, first serve basis. You must be associated with a registered team to attend as a spectator. We&apos;ll reach out to confirm whether your spectators can come.
                 </p>
               </div>
 

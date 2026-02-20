@@ -21,6 +21,14 @@ const faqs = [
     answer: "No. It's actually illegal to have beer in the cups, so they'll be filled with water. You're welcome to drink whatever you'd like on the side, but the game cups are water only."
   },
   {
+    question: "CAN I SHOW UP WITHOUT REGISTERING?",
+    answer: "No. Walk-ins will not be accepted under any circumstances. All teams must register online and pay the $10 entry fee before the event. This is because walk-ins would disrupt our bracket structure, and the venue has strict capacity limits that we cannot exceed. If you haven't registered and paid, you will not be allowed in."
+  },
+  {
+    question: "CAN I BRING SPECTATORS?",
+    answer: "Only if you're a registered team. When you register, you'll indicate how many spectators you'd like to bring. However, spectator spots are not guaranteed — they are approved on a first come, first serve basis. The venue has a legal capacity limit of 150 people and we expect to be very close to it. We'll reach out to let teams know if their spectators have been confirmed. Spectators who are not associated with a registered team will not be allowed entry."
+  },
+  {
     question: "HOW MUCH DOES IT COST?",
     answer: "$10 per duo team. You pay online when you register. Drinks and food are not included — you can purchase them at the bar."
   },
