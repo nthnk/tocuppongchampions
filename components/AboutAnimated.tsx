@@ -98,7 +98,7 @@ export function AboutAnimated() {
                   color: palette.cream,
                 }}
               >
-                Beer pong gets a bad rap. People think frat houses and sticky floors. But at its core, it&apos;s one of the most social games out there.
+                Beer pong gets a bad rap. People think house parties and sticky floors. But at its core, it&apos;s one of the most social games out there.
               </p>
               <p
                 className="text-base md:text-lg leading-relaxed"
