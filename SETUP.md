@@ -47,6 +47,9 @@ function doPost(e) {
     var data = JSON.parse(e.postData.contents);
 
     // Append a new row with the data
+    // Columns: A=Timestamp, B=Team Name, C=Player 1 First, D=Player 1 Last,
+    //          E=Player 2 First, F=Player 2 Last, G=Email, H=Spectators,
+    //          I=Division, J=Code
     sheet.appendRow([
       data.timestamp,
       data.teamName,
@@ -54,7 +57,10 @@ function doPost(e) {
       data.player1LastName,
       data.player2FirstName,
       data.player2LastName,
-      data.email
+      data.email,
+      data.spectators || '0',
+      data.division || '',
+      data.code || ''
     ]);
 
     // Return success response

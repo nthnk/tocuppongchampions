@@ -13,6 +13,8 @@ export function WaitlistForm() {
     player2FirstName: '',
     player2LastName: '',
     email: '',
+    division: '',
+    referralCode: '',
     referredBy: '',
     spectators: 0,
   });
@@ -25,6 +27,13 @@ export function WaitlistForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (formData.referralCode !== '' && formData.referralCode.toUpperCase() !== 'DELTAKAPPA') {
+      setSubmitStatus('error');
+      setErrorMessage('Invalid referral code');
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
     setErrorMessage('');
@@ -46,6 +55,9 @@ export function WaitlistForm() {
 
       setOtpToken(data.otpToken);
       setStep('otp');
+      setTimeout(() => {
+        document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     } catch (error: any) {
       setSubmitStatus('error');
       setErrorMessage(error.message || 'Failed to send verification code');
@@ -122,8 +134,9 @@ export function WaitlistForm() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type } = e.target;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    const type = 'type' in e.target ? e.target.type : 'text';
     setFormData({
       ...formData,
       [name]: type === 'number' ? Number(value) : value,
@@ -335,6 +348,38 @@ export function WaitlistForm() {
                 </p>
               </div>
 
+              {/* Division */}
+              <div>
+                <label
+                  htmlFor="division"
+                  className="block text-xs font-bold mb-2 uppercase tracking-widest"
+                  style={{ fontFamily: fonts.heading, color: palette.cream }}
+                >
+                  AREA OF TORONTO *
+                </label>
+                <select
+                  id="division"
+                  name="division"
+                  required
+                  value={formData.division}
+                  onChange={handleChange}
+                  className={inputFocusClass}
+                  style={inputStyle}
+                >
+                  <option value="" disabled>Select your area</option>
+                  <option value="North West">North West</option>
+                  <option value="North East">North East</option>
+                  <option value="South West">South West</option>
+                  <option value="South East">South East</option>
+                </select>
+                <p
+                  className="mt-2 text-sm"
+                  style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.5 }}
+                >
+                  Used for bracket seeding — we want representation from all over Toronto!
+                </p>
+              </div>
+
               {/* Spectators */}
               <div>
                 <label
@@ -361,6 +406,35 @@ export function WaitlistForm() {
                 >
                   Spectators do not pay for admission but spots are not guaranteed. The venue has a strict capacity limit of 150 people, and spectators are approved on a first come, first serve basis. You must be associated with a registered team to attend as a spectator. We&apos;ll reach out to confirm whether your spectators can come.
                 </p>
+              </div>
+
+              {/* Referral Code */}
+              <div>
+                <label
+                  htmlFor="referralCode"
+                  className="block text-xs font-bold mb-2 uppercase tracking-widest"
+                  style={{ fontFamily: fonts.heading, color: palette.cream }}
+                >
+                  REFERRAL CODE
+                </label>
+                <input
+                  type="text"
+                  id="referralCode"
+                  name="referralCode"
+                  value={formData.referralCode}
+                  onChange={handleChange}
+                  placeholder="Enter code if you have one"
+                  className={inputFocusClass}
+                  style={inputStyle}
+                />
+                {formData.referralCode !== '' && formData.referralCode.toUpperCase() === 'DELTAKAPPA' && (
+                  <p
+                    className="mt-2 text-sm font-bold"
+                    style={{ fontFamily: fonts.body, color: '#22c55e' }}
+                  >
+                    ✓ Referral code accepted — 10% discount will be applied at checkout!
+                  </p>
+                )}
               </div>
 
               {/* 19+ Notice */}
