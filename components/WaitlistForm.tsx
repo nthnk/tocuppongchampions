@@ -5,6 +5,35 @@ import { palette, fonts } from '@/lib/theme';
 
 type FormStep = 'form' | 'otp';
 
+const neighbourhoodsByDivision: Record<string, string[]> = {
+  'North West': [
+    'Forest Hill', 'Cedarvale/Humewood', 'Yorkdale', 'North York/Yonge-Sheppard',
+    'Bathurst Manor', 'Lawrence Manor', 'Weston', 'Maple Leaf', 'Humber Summit',
+    'Keelesdale', 'Humbermede', 'Downsview', 'Jane & Finch', 'Willowdale West',
+    'Wilson Heights', 'Mount Dennis', 'Emery Village', 'Black Creek', 'Brookhaven', 'Lansing',
+  ],
+  'North East': [
+    'Lawrence Park', 'Bridle Path', 'Bayview Village', 'Willowdale East',
+    'St. Andrew-Windfields', 'Don Mills', 'Lytton Park', 'Sunnybrook',
+    'Flemingdon Park', 'Agincourt', 'Milliken', 'Scarborough Town Centre',
+    "Tam O'Shanter", 'Wexford', "L'Amoureaux", 'Victoria Village', 'Parkwoods',
+    'Henry Farm', 'Pleasant View', 'Malvern',
+  ],
+  'South West': [
+    'Trinity Bellwoods', 'The Annex', 'Kensington Market', 'Yorkville', 'High Park',
+    'Roncesvalles Village', 'The Junction', 'Liberty Village', 'Little Italy/College Street',
+    'Ossington', 'Etobicoke', 'Parkdale', 'Davenport', 'Mimico', 'Bloor West Village',
+    'The Kingsway', 'Long Branch', 'Alderwood', 'Little Portugal', 'Swansea',
+  ],
+  'South East': [
+    'The Beaches', 'Leslieville', 'Rosedale', 'Cabbagetown', 'Greektown/The Danforth',
+    'Distillery District', 'St. Lawrence Market', 'Riverdale', 'Summerhill',
+    'Little India/Gerrard Street East', 'East Danforth', 'Leaside', 'Birchcliffe-Cliffside',
+    'Scarborough Village', 'Guildwood', 'East York', 'Woodbine Corridor',
+    'Moss Park/Regent Park', 'Church & Wellesley', 'Thorncliffe Park',
+  ],
+};
+
 export function WaitlistForm() {
   const [formData, setFormData] = useState({
     teamName: '',
@@ -14,6 +43,7 @@ export function WaitlistForm() {
     player2LastName: '',
     email: '',
     division: '',
+    neighbourhood: '',
     referralCode: '',
     referredBy: '',
     spectators: 0,
@@ -137,10 +167,18 @@ export function WaitlistForm() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     const type = 'type' in e.target ? e.target.type : 'text';
-    setFormData({
-      ...formData,
-      [name]: type === 'number' ? Number(value) : value,
-    });
+    if (name === 'division') {
+      setFormData({
+        ...formData,
+        division: value,
+        neighbourhood: '',
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: type === 'number' ? Number(value) : value,
+      });
+    }
   };
 
   const handleOTPChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -379,6 +417,33 @@ export function WaitlistForm() {
                   Used for bracket seeding — we want representation from all over Toronto!
                 </p>
               </div>
+
+              {/* Neighbourhood */}
+              {formData.division && (
+                <div>
+                  <label
+                    htmlFor="neighbourhood"
+                    className="block text-xs font-bold mb-2 uppercase tracking-widest"
+                    style={{ fontFamily: fonts.heading, color: palette.cream }}
+                  >
+                    NEIGHBOURHOOD *
+                  </label>
+                  <select
+                    id="neighbourhood"
+                    name="neighbourhood"
+                    required
+                    value={formData.neighbourhood}
+                    onChange={handleChange}
+                    className={inputFocusClass}
+                    style={inputStyle}
+                  >
+                    <option value="" disabled>Select your neighbourhood</option>
+                    {neighbourhoodsByDivision[formData.division].map((hood) => (
+                      <option key={hood} value={hood}>{hood}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
 
               {/* Spectators */}
               <div>

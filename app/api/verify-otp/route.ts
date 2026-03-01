@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     }
 
     // OTP is valid — create a Stripe checkout session
-    const { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, division, referralCode, spectators } = verification.formData;
+    const { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, division, neighbourhood, referralCode, spectators } = verification.formData;
     const origin = request.headers.get('origin') || 'http://localhost:3000';
 
     // If valid referral code, find and apply the coupon
@@ -72,6 +72,7 @@ export async function POST(request: NextRequest) {
         player2LastName,
         email,
         division,
+        neighbourhood,
         referralCode: referralCode || '',
         spectators: String(spectators || 0),
       },

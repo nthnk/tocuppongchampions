@@ -41,6 +41,7 @@ export async function POST(request: NextRequest) {
       player2LastName,
       email,
       division,
+      neighbourhood,
       referralCode,
       spectators,
     } = metadata;
@@ -59,6 +60,7 @@ export async function POST(request: NextRequest) {
           email,
           spectators: spectators || '0',
           division: division || '',
+          neighbourhood: neighbourhood || '',
           code: referralCode || '',
         };
         console.log('Sending to Google Sheets:', JSON.stringify(sheetsPayload));
