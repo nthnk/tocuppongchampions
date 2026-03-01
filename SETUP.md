@@ -38,15 +38,52 @@ npm run dev
 3. Paste the following code:
 
 ```javascript
+// Returns the current team count (number of data rows in Sign-Up Form sheet)
+function doGet(e) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName('Sign-Up Form') || ss.getActiveSheet();
+    // Count data rows (subtract 1 for header row)
+    var teamCount = Math.max(0, sheet.getLastRow() - 1);
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'teamCount': teamCount }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'teamCount': 0, 'error': error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
 function doPost(e) {
   try {
-    // Get the active spreadsheet
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-
-    // Parse the incoming JSON data
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
     var data = JSON.parse(e.postData.contents);
 
-    // Append a new row with the data
+    // If this is a waitlist submission, write to the Waitlist tab
+    if (data.waitlist) {
+      var waitlistSheet = ss.getSheetByName('Waitlist');
+      if (!waitlistSheet) {
+        waitlistSheet = ss.insertSheet('Waitlist');
+        waitlistSheet.appendRow(['Timestamp', 'Team Name', 'Player 1 First', 'Player 1 Last', 'Player 2 First', 'Player 2 Last', 'Email']);
+      }
+      waitlistSheet.appendRow([
+        data.timestamp,
+        data.teamName,
+        data.player1FirstName,
+        data.player1LastName,
+        data.player2FirstName,
+        data.player2LastName,
+        data.email
+      ]);
+      return ContentService
+        .createTextOutput(JSON.stringify({ 'result': 'success', 'type': 'waitlist' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // Regular sign-up — write to the Sign-Up Form sheet
+    var sheet = ss.getSheetByName('Sign-Up Form') || ss.getActiveSheet();
+
     // Columns: A=Timestamp, B=Team Name, C=Player 1 First, D=Player 1 Last,
     //          E=Player 2 First, F=Player 2 Last, G=Email, H=Spectators,
     //          I=Division, J=Neighbourhood, K=Code
@@ -64,13 +101,11 @@ function doPost(e) {
       data.code || ''
     ]);
 
-    // Return success response
     return ContentService
       .createTextOutput(JSON.stringify({ 'result': 'success' }))
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (error) {
-    // Return error response
     return ContentService
       .createTextOutput(JSON.stringify({ 'result': 'error', 'error': error.toString() }))
       .setMimeType(ContentService.MimeType.JSON);
