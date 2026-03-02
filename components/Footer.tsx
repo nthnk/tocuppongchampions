@@ -74,6 +74,7 @@ export function Footer() {
             { label: 'About', href: '#about' },
             { label: 'Register', href: '#register' },
             { label: 'FAQ', href: '#faq' },
+            { label: 'Waiver', href: '/waiver' },
             { label: 'Contact', href: 'mailto:info@tocuppongchampions.ca' },
           ].map((link) => (
             <a

@@ -68,6 +68,13 @@ export function Header() {
             >
               FAQ
             </button>
+            <a
+              href="/waiver"
+              className="text-sm font-bold uppercase tracking-widest transition-opacity hover:opacity-100"
+              style={{ color: palette.cream, fontFamily: fonts.body, opacity: 0.7 }}
+            >
+              WAIVER
+            </a>
             <button
               onClick={() => scrollToSection('register')}
               className="text-sm font-black uppercase tracking-widest px-6 py-3 transition-all hover:opacity-90"
@@ -81,18 +88,27 @@ export function Header() {
             </button>
           </div>
 
-          {/* Mobile CTA */}
-          <button
-            onClick={() => scrollToSection('register')}
-            className="md:hidden text-sm font-black uppercase tracking-widest px-5 py-2.5 transition-opacity hover:opacity-90"
-            style={{
-              background: palette.red,
-              color: palette.cream,
-              fontFamily: fonts.heading,
-            }}
-          >
-            REGISTER
-          </button>
+          {/* Mobile CTAs */}
+          <div className="md:hidden flex items-center gap-4">
+            <a
+              href="/waiver"
+              className="text-xs font-bold uppercase tracking-widest transition-opacity hover:opacity-100"
+              style={{ color: palette.cream, fontFamily: fonts.body, opacity: 0.7 }}
+            >
+              WAIVER
+            </a>
+            <button
+              onClick={() => scrollToSection('register')}
+              className="text-sm font-black uppercase tracking-widest px-5 py-2.5 transition-opacity hover:opacity-90"
+              style={{
+                background: palette.red,
+                color: palette.cream,
+                fontFamily: fonts.heading,
+              }}
+            >
+              REGISTER
+            </button>
+          </div>
         </div>
       </nav>
     </header>
