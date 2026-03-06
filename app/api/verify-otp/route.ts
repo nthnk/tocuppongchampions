@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     const origin = request.headers.get('origin') || 'http://localhost:3000';
 
     // Critical: check team count from Google Sheets before creating Stripe session
-    const MAX_TEAMS = 64;
+    const MAX_TEAMS = 32;
     const sheetsUrl = process.env.GOOGLE_SHEETS_URL;
     if (sheetsUrl) {
       try {

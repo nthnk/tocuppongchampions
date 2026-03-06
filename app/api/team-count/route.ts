@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 // Ensure this route is never cached — team count must be live
 export const dynamic = 'force-dynamic';
 
-const MAX_TEAMS = 64;
+const MAX_TEAMS = 32;
 
 export async function GET() {
   const sheetsUrl = process.env.GOOGLE_SHEETS_URL;

@@ -313,7 +313,7 @@ export function WaitlistForm() {
               className="text-base md:text-lg leading-relaxed max-w-lg mx-auto"
               style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.6 }}
             >
-              All 64 team spots for Table Zero have been filled. Join the waitlist below to be first in line if a spot opens up, and to get early access to our next event.
+              All 32 team spots for Table Zero have been filled. Join the waitlist below to be first in line if a spot opens up, and to get early access to our next event.
             </p>
           </div>
 
@@ -554,7 +554,7 @@ export function WaitlistForm() {
             className="text-base md:text-lg leading-relaxed max-w-md mx-auto"
             style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.6 }}
           >
-            64 spots. $10 per duo. Secure your entry now.
+            32 spots. $10 per duo. Secure your entry now.
           </p>
         </div>
 

@@ -10,6 +10,7 @@ export function Hero() {
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [timeLeft, setTimeLeft] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +31,32 @@ export function Hero() {
     handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    // March 22, 2026 at 12:00 PM EST (UTC-5)
+    const eventDate = new Date('2026-03-22T12:00:00-05:00');
+
+    const updateCountdown = () => {
+      const now = new Date();
+      const diff = eventDate.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return clearInterval(interval);
+      }
+
+      setTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((diff / (1000 * 60)) % 60),
+        seconds: Math.floor((diff / 1000) % 60),
+      });
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -124,6 +151,55 @@ export function Hero() {
         >
           32 teams. 4 brackets. 1 champion.
         </p>
+
+        {/* Countdown Timer */}
+        {timeLeft && (
+          <div
+            className="flex justify-center items-center gap-3 sm:gap-5 mb-14"
+            style={{
+              opacity: scrollProgress,
+              transform: `translateY(${(1 - scrollProgress) * 30}px)`,
+              transition: 'opacity 0.4s ease-out 0.25s, transform 0.4s ease-out 0.25s',
+            }}
+          >
+            {[
+              { value: timeLeft.days, label: 'Days' },
+              { value: timeLeft.hours, label: 'Hours' },
+              { value: timeLeft.minutes, label: 'Min' },
+              { value: timeLeft.seconds, label: 'Sec' },
+            ].map((unit, i) => (
+              <div key={i} className="flex items-center gap-3 sm:gap-5">
+                <div className="text-center">
+                  <div
+                    className="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center text-3xl sm:text-4xl font-black"
+                    style={{
+                      fontFamily: fonts.heading,
+                      color: palette.cream,
+                      border: `2px solid ${palette.red}`,
+                      background: `${palette.black}80`,
+                    }}
+                  >
+                    {String(unit.value).padStart(2, '0')}
+                  </div>
+                  <div
+                    className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] mt-2"
+                    style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.5 }}
+                  >
+                    {unit.label}
+                  </div>
+                </div>
+                {i < 3 && (
+                  <span
+                    className="text-2xl sm:text-3xl font-black -mt-5"
+                    style={{ color: palette.red, fontFamily: fonts.heading }}
+                  >
+                    :
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Stats row — cleaner, editorial */}
         <div
