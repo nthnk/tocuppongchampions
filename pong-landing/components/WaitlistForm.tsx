@@ -1,9 +1,38 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { palette, fonts } from '@/lib/theme';
 
 type FormStep = 'form' | 'otp';
+
+const neighbourhoodsByDivision: Record<string, string[]> = {
+  'North West': [
+    'Forest Hill', 'Cedarvale/Humewood', 'Yorkdale', 'North York/Yonge-Sheppard',
+    'Bathurst Manor', 'Lawrence Manor', 'Weston', 'Maple Leaf', 'Humber Summit',
+    'Keelesdale', 'Humbermede', 'Downsview', 'Jane & Finch', 'Willowdale West',
+    'Wilson Heights', 'Mount Dennis', 'Emery Village', 'Black Creek', 'Brookhaven', 'Lansing',
+  ],
+  'North East': [
+    'Lawrence Park', 'Bridle Path', 'Bayview Village', 'Willowdale East',
+    'St. Andrew-Windfields', 'Don Mills', 'Lytton Park', 'Sunnybrook',
+    'Flemingdon Park', 'Agincourt', 'Milliken', 'Scarborough Town Centre',
+    "Tam O'Shanter", 'Wexford', "L'Amoureaux", 'Victoria Village', 'Parkwoods',
+    'Henry Farm', 'Pleasant View', 'Malvern',
+  ],
+  'South West': [
+    'Trinity Bellwoods', 'The Annex', 'Kensington Market', 'Yorkville', 'High Park',
+    'Roncesvalles Village', 'The Junction', 'Liberty Village', 'Little Italy/College Street',
+    'Ossington', 'Etobicoke', 'Parkdale', 'Davenport', 'Mimico', 'Bloor West Village',
+    'The Kingsway', 'Long Branch', 'Alderwood', 'Little Portugal', 'Swansea',
+  ],
+  'South East': [
+    'The Beaches', 'Leslieville', 'Rosedale', 'Cabbagetown', 'Greektown/The Danforth',
+    'Distillery District', 'St. Lawrence Market', 'Riverdale', 'Summerhill',
+    'Little India/Gerrard Street East', 'East Danforth', 'Leaside', 'Birchcliffe-Cliffside',
+    'Scarborough Village', 'Guildwood', 'East York', 'Woodbine Corridor',
+    'Moss Park/Regent Park', 'Church & Wellesley', 'Thorncliffe Park',
+  ],
+};
 
 export function WaitlistForm() {
   const [formData, setFormData] = useState({
@@ -13,6 +42,9 @@ export function WaitlistForm() {
     player2FirstName: '',
     player2LastName: '',
     email: '',
+    division: '',
+    neighbourhood: '',
+    referralCode: '',
     referredBy: '',
     spectators: 0,
   });
@@ -23,8 +55,44 @@ export function WaitlistForm() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
+  // Capacity state
+  const [isFull, setIsFull] = useState(false);
+  const [isLoadingCapacity, setIsLoadingCapacity] = useState(true);
+  const [waitlistData, setWaitlistData] = useState({
+    teamName: '',
+    player1FirstName: '',
+    player1LastName: '',
+    player2FirstName: '',
+    player2LastName: '',
+    email: '',
+  });
+  const [waitlistSubmitted, setWaitlistSubmitted] = useState(false);
+
+  // Check capacity on load
+  useEffect(() => {
+    const checkCapacity = async () => {
+      try {
+        const response = await fetch('/api/team-count');
+        const data = await response.json();
+        setIsFull(data.isFull);
+      } catch (error) {
+        console.error('Error checking capacity:', error);
+      } finally {
+        setIsLoadingCapacity(false);
+      }
+    };
+    checkCapacity();
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (formData.referralCode !== '' && formData.referralCode.toUpperCase() !== 'DELTAKAPPA') {
+      setSubmitStatus('error');
+      setErrorMessage('Invalid referral code');
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
     setErrorMessage('');
@@ -46,6 +114,9 @@ export function WaitlistForm() {
 
       setOtpToken(data.otpToken);
       setStep('otp');
+      setTimeout(() => {
+        document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     } catch (error: any) {
       setSubmitStatus('error');
       setErrorMessage(error.message || 'Failed to send verification code');
@@ -76,6 +147,12 @@ export function WaitlistForm() {
       const data = await response.json();
 
       if (!response.ok) {
+        // If capacity is full, switch to waitlist mode
+        if (data.error === 'CAPACITY_FULL') {
+          setIsFull(true);
+          setStep('form');
+          return;
+        }
         throw new Error(data.error || 'Invalid verification code');
       }
 
@@ -122,12 +199,59 @@ export function WaitlistForm() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'number' ? Number(value) : value,
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    const type = 'type' in e.target ? e.target.type : 'text';
+    if (name === 'division') {
+      setFormData({
+        ...formData,
+        division: value,
+        neighbourhood: '',
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: type === 'number' ? Number(value) : value,
+      });
+    }
+  };
+
+  const handleWaitlistChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setWaitlistData({
+      ...waitlistData,
+      [name]: value,
     });
+  };
+
+  const handleWaitlistSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/waitlist-signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(waitlistData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to join waitlist');
+      }
+
+      setWaitlistSubmitted(true);
+    } catch (error: any) {
+      setSubmitStatus('error');
+      setErrorMessage(error.message || 'Failed to join waitlist');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleOTPChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -150,6 +274,263 @@ export function WaitlistForm() {
 
   const inputFocusClass = "w-full px-4 py-4 focus:outline-none transition-all placeholder-gray-600";
 
+  // Loading state
+  if (isLoadingCapacity) {
+    return (
+      <section id="register" className="py-28 px-6" style={{ background: palette.black }}>
+        <div className="max-w-2xl mx-auto text-center">
+          <div
+            className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin mx-auto"
+            style={{ borderColor: palette.red, borderTopColor: 'transparent' }}
+          />
+        </div>
+      </section>
+    );
+  }
+
+  // ===== WAITLIST FORM (capacity full) =====
+  if (isFull) {
+    return (
+      <section id="register" className="py-28 px-6" style={{ background: palette.black }}>
+        <div className="max-w-2xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-4">
+            <span
+              className="text-xs font-bold uppercase tracking-[0.4em]"
+              style={{ fontFamily: fonts.body, color: palette.red }}
+            >
+              Sold Out
+            </span>
+          </div>
+          <div className="text-center mb-14">
+            <h2
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-5 uppercase tracking-wider"
+              style={{ fontFamily: fonts.heading, color: palette.cream }}
+            >
+              MAX <span style={{ color: palette.red }}>CAPACITY</span>
+            </h2>
+            <p
+              className="text-base md:text-lg leading-relaxed max-w-lg mx-auto"
+              style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.6 }}
+            >
+              All 32 team spots for Table Zero have been filled. Join the waitlist below to be first in line if a spot opens up, and to get early access to our next event.
+            </p>
+          </div>
+
+          {/* Waitlist Card */}
+          <div
+            className="p-8 md:p-10"
+            style={{
+              background: palette.darkSlate,
+              borderTop: `3px solid ${palette.red}`,
+            }}
+          >
+            {waitlistSubmitted ? (
+              <div className="text-center py-8">
+                <div
+                  className="w-16 h-16 flex items-center justify-center mx-auto mb-6"
+                  style={{ background: '#22c55e' }}
+                >
+                  <svg className="w-8 h-8" style={{ color: palette.cream }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3
+                  className="text-2xl font-black mb-3 uppercase tracking-wider"
+                  style={{ fontFamily: fonts.heading, color: palette.cream }}
+                >
+                  YOU&apos;RE ON THE LIST
+                </h3>
+                <p
+                  className="text-base leading-relaxed max-w-md mx-auto"
+                  style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.7 }}
+                >
+                  We&apos;ll notify you immediately if a spot opens up. You&apos;ll also be the first to hear about our next event.
+                </p>
+                <p
+                  className="mt-4 text-sm"
+                  style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.5 }}
+                >
+                  Follow <a href="https://www.instagram.com/play6cups" style={{ color: palette.red, textDecoration: 'none', fontWeight: 700 }}>@play6cups</a> on Instagram for updates
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleWaitlistSubmit} className="space-y-6">
+                <div className="text-center mb-4">
+                  <h3
+                    className="text-xl font-black mb-2 uppercase tracking-wider"
+                    style={{ fontFamily: fonts.heading, color: palette.cream }}
+                  >
+                    JOIN THE WAITLIST
+                  </h3>
+                  <p
+                    className="text-sm leading-relaxed"
+                    style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.6 }}
+                  >
+                    If a team drops out, you&apos;re next in line. You&apos;ll also be first to hear about future events.
+                  </p>
+                </div>
+
+                {/* Team Name */}
+                <div>
+                  <label
+                    htmlFor="wl-teamName"
+                    className="block text-xs font-bold mb-2 uppercase tracking-widest"
+                    style={{ fontFamily: fonts.heading, color: palette.cream }}
+                  >
+                    TEAM NAME *
+                  </label>
+                  <input
+                    type="text"
+                    id="wl-teamName"
+                    name="teamName"
+                    required
+                    value={waitlistData.teamName}
+                    onChange={handleWaitlistChange}
+                    placeholder="e.g., Super Splash Bros"
+                    className={inputFocusClass}
+                    style={inputStyle}
+                  />
+                </div>
+
+                {/* Player 1 */}
+                <div>
+                  <label
+                    className="block text-xs font-bold mb-2 uppercase tracking-widest"
+                    style={{ fontFamily: fonts.heading, color: palette.cream }}
+                  >
+                    PLAYER 1 *
+                  </label>
+                  <div className="grid grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      id="wl-player1FirstName"
+                      name="player1FirstName"
+                      required
+                      value={waitlistData.player1FirstName}
+                      onChange={handleWaitlistChange}
+                      placeholder="First Name"
+                      className={inputFocusClass}
+                      style={inputStyle}
+                    />
+                    <input
+                      type="text"
+                      id="wl-player1LastName"
+                      name="player1LastName"
+                      required
+                      value={waitlistData.player1LastName}
+                      onChange={handleWaitlistChange}
+                      placeholder="Last Name"
+                      className={inputFocusClass}
+                      style={inputStyle}
+                    />
+                  </div>
+                </div>
+
+                {/* Player 2 */}
+                <div>
+                  <label
+                    className="block text-xs font-bold mb-2 uppercase tracking-widest"
+                    style={{ fontFamily: fonts.heading, color: palette.cream }}
+                  >
+                    PLAYER 2 *
+                  </label>
+                  <div className="grid grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      id="wl-player2FirstName"
+                      name="player2FirstName"
+                      required
+                      value={waitlistData.player2FirstName}
+                      onChange={handleWaitlistChange}
+                      placeholder="First Name"
+                      className={inputFocusClass}
+                      style={inputStyle}
+                    />
+                    <input
+                      type="text"
+                      id="wl-player2LastName"
+                      name="player2LastName"
+                      required
+                      value={waitlistData.player2LastName}
+                      onChange={handleWaitlistChange}
+                      placeholder="Last Name"
+                      className={inputFocusClass}
+                      style={inputStyle}
+                    />
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label
+                    htmlFor="wl-email"
+                    className="block text-xs font-bold mb-2 uppercase tracking-widest"
+                    style={{ fontFamily: fonts.heading, color: palette.cream }}
+                  >
+                    EMAIL ADDRESS *
+                  </label>
+                  <input
+                    type="email"
+                    id="wl-email"
+                    name="email"
+                    required
+                    value={waitlistData.email}
+                    onChange={handleWaitlistChange}
+                    placeholder="your@email.com"
+                    className={inputFocusClass}
+                    style={inputStyle}
+                  />
+                </div>
+
+                {/* Submit */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full px-8 py-6 text-lg font-black uppercase tracking-widest transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                  style={{
+                    background: palette.red,
+                    color: palette.cream,
+                    fontFamily: fonts.heading,
+                  }}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      JOINING...
+                    </>
+                  ) : (
+                    'JOIN THE WAITLIST'
+                  )}
+                </button>
+              </form>
+            )}
+
+            {/* Error Message */}
+            {submitStatus === 'error' && errorMessage && (
+              <div
+                className="mt-6 p-4 flex items-start gap-3"
+                style={{ background: `${palette.red}20`, border: `2px solid ${palette.red}50` }}
+              >
+                <svg className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: palette.red }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div>
+                  <h4 className="font-black mb-1 uppercase tracking-wider" style={{ fontFamily: fonts.heading, color: palette.cream }}>ERROR</h4>
+                  <p className="text-sm" style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.8 }}>{errorMessage}</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // ===== REGISTRATION FORM (spots available) =====
   return (
     <section id="register" className="py-28 px-6" style={{ background: palette.black }}>
       <div className="max-w-2xl mx-auto">
@@ -175,6 +556,36 @@ export function WaitlistForm() {
           >
             32 spots. $10 per duo. Secure your entry now.
           </p>
+        </div>
+
+        {/* No Walk-Ins Notice */}
+        <div
+          className="flex items-start gap-4 p-5 mb-10 max-w-2xl mx-auto"
+          style={{ background: `${palette.red}15`, border: `2px solid ${palette.red}` }}
+        >
+          <svg
+            className="w-6 h-6 flex-shrink-0 mt-0.5"
+            style={{ color: palette.red }}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+          </svg>
+          <div>
+            <p
+              className="font-black text-sm uppercase tracking-wider mb-1"
+              style={{ fontFamily: fonts.heading, color: palette.red }}
+            >
+              No Walk-Ins
+            </p>
+            <p
+              className="text-sm leading-relaxed"
+              style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.8 }}
+            >
+              Walk-ins will not be accepted. All teams must register online and pay the $10 entry fee in advance. Unregistered teams will not be allowed entry due to bracket structure and venue capacity limits.
+            </p>
+          </div>
         </div>
 
         {/* Form Card */}
@@ -305,6 +716,65 @@ export function WaitlistForm() {
                 </p>
               </div>
 
+              {/* Division */}
+              <div>
+                <label
+                  htmlFor="division"
+                  className="block text-xs font-bold mb-2 uppercase tracking-widest"
+                  style={{ fontFamily: fonts.heading, color: palette.cream }}
+                >
+                  AREA OF TORONTO *
+                </label>
+                <select
+                  id="division"
+                  name="division"
+                  required
+                  value={formData.division}
+                  onChange={handleChange}
+                  className={inputFocusClass}
+                  style={inputStyle}
+                >
+                  <option value="" disabled>Select your area</option>
+                  <option value="North West">North West</option>
+                  <option value="North East">North East</option>
+                  <option value="South West">South West</option>
+                  <option value="South East">South East</option>
+                </select>
+                <p
+                  className="mt-2 text-sm"
+                  style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.5 }}
+                >
+                  Used for bracket seeding — we want representation from all over Toronto!
+                </p>
+              </div>
+
+              {/* Neighbourhood */}
+              {formData.division && (
+                <div>
+                  <label
+                    htmlFor="neighbourhood"
+                    className="block text-xs font-bold mb-2 uppercase tracking-widest"
+                    style={{ fontFamily: fonts.heading, color: palette.cream }}
+                  >
+                    NEIGHBOURHOOD *
+                  </label>
+                  <select
+                    id="neighbourhood"
+                    name="neighbourhood"
+                    required
+                    value={formData.neighbourhood}
+                    onChange={handleChange}
+                    className={inputFocusClass}
+                    style={inputStyle}
+                  >
+                    <option value="" disabled>Select your neighbourhood</option>
+                    {neighbourhoodsByDivision[formData.division].map((hood) => (
+                      <option key={hood} value={hood}>{hood}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
               {/* Spectators */}
               <div>
                 <label
@@ -329,8 +799,37 @@ export function WaitlistForm() {
                   className="mt-2 text-sm italic"
                   style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.5 }}
                 >
-                  Spectators do not have to pay for admission but will be let in on a first come, first serve basis because the venue has capacity limits. We&apos;ll reach out to confirm your spectators can come.
+                  Spectators do not pay for admission but spots are not guaranteed. The venue has a strict capacity limit of 150 people, and spectators are approved on a first come, first serve basis. You must be associated with a registered team to attend as a spectator. We&apos;ll reach out to confirm whether your spectators can come.
                 </p>
+              </div>
+
+              {/* Referral Code */}
+              <div>
+                <label
+                  htmlFor="referralCode"
+                  className="block text-xs font-bold mb-2 uppercase tracking-widest"
+                  style={{ fontFamily: fonts.heading, color: palette.cream }}
+                >
+                  REFERRAL CODE
+                </label>
+                <input
+                  type="text"
+                  id="referralCode"
+                  name="referralCode"
+                  value={formData.referralCode}
+                  onChange={handleChange}
+                  placeholder="Enter code if you have one"
+                  className={inputFocusClass}
+                  style={inputStyle}
+                />
+                {formData.referralCode !== '' && formData.referralCode.toUpperCase() === 'DELTAKAPPA' && (
+                  <p
+                    className="mt-2 text-sm font-bold"
+                    style={{ fontFamily: fonts.body, color: '#22c55e' }}
+                  >
+                    ✓ Referral code accepted — 10% discount will be applied at checkout!
+                  </p>
+                )}
               </div>
 
               {/* 19+ Notice */}

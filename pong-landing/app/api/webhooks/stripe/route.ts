@@ -40,6 +40,9 @@ export async function POST(request: NextRequest) {
       player2FirstName,
       player2LastName,
       email,
+      division,
+      neighbourhood,
+      referralCode,
       spectators,
     } = metadata;
 
@@ -56,6 +59,9 @@ export async function POST(request: NextRequest) {
           player2LastName,
           email,
           spectators: spectators || '0',
+          division: division || '',
+          neighbourhood: neighbourhood || '',
+          code: referralCode || '',
         };
         console.log('Sending to Google Sheets:', JSON.stringify(sheetsPayload));
         console.log('Google Sheets URL:', sheetsUrl);
@@ -252,7 +258,8 @@ export async function POST(request: NextRequest) {
         <p><strong>Player 1:</strong> ${player1FirstName} ${player1LastName}</p>
         <p><strong>Player 2:</strong> ${player2FirstName} ${player2LastName}</p>
         ${Number(spectators) > 0 ? `<p><strong>Spectators:</strong> ${spectators}</p>` : ''}
-        <p><strong>Entry paid:</strong> $10.00 CAD</p>
+        <p><strong>Entry paid:</strong> $${((session.amount_total || 1000) / 100).toFixed(2)} CAD</p>
+        ${referralCode && referralCode.toUpperCase() === 'DELTAKAPPA' ? '<p style="color: #22c55e; font-weight: bold;">10% referral discount applied</p>' : ''}
       </div>
 
       <div class="info-section">

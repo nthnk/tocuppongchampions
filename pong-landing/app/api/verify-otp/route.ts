@@ -26,9 +26,47 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // OTP is valid — create a Stripe checkout session
-    const { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, spectators } = verification.formData;
+    // OTP is valid — check capacity before allowing payment
+    const { teamName, player1FirstName, player1LastName, player2FirstName, player2LastName, division, neighbourhood, referralCode, spectators } = verification.formData;
     const origin = request.headers.get('origin') || 'http://localhost:3000';
+
+    // Critical: check team count from Google Sheets before creating Stripe session
+    const MAX_TEAMS = 32;
+    const sheetsUrl = process.env.GOOGLE_SHEETS_URL;
+    if (sheetsUrl) {
+      try {
+        const countResponse = await fetch(sheetsUrl, {
+          method: 'GET',
+          headers: { 'Accept': 'application/json' },
+          cache: 'no-store',
+        });
+        const countText = await countResponse.text();
+        const countData = JSON.parse(countText);
+        if (countData.teamCount >= MAX_TEAMS) {
+          return NextResponse.json(
+            { error: 'CAPACITY_FULL', message: 'Registration is full. All 64 team spots have been taken.' },
+            { status: 409 }
+          );
+        }
+      } catch (countError) {
+        console.error('Error checking team count:', countError);
+        // If we can't verify, allow the registration to proceed rather than blocking
+      }
+    }
+
+    // If valid referral code, find and apply the coupon
+    const discounts: Stripe.Checkout.SessionCreateParams.Discount[] = [];
+    if (referralCode && referralCode.toUpperCase() === 'DELTAKAPPA') {
+      try {
+        const coupons = await stripe.coupons.list({ limit: 100 });
+        const coupon = coupons.data.find(c => c.name === 'DELTAKAPPA Referral');
+        if (coupon) {
+          discounts.push({ coupon: coupon.id });
+        }
+      } catch (couponError) {
+        console.error('Error looking up coupon:', couponError);
+      }
+    }
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -45,6 +83,7 @@ export async function POST(request: NextRequest) {
           quantity: 1,
         },
       ],
+      ...(discounts.length > 0 ? { discounts } : {}),
       mode: 'payment',
       customer_email: email,
       success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
@@ -56,6 +95,9 @@ export async function POST(request: NextRequest) {
         player2FirstName,
         player2LastName,
         email,
+        division,
+        neighbourhood,
+        referralCode: referralCode || '',
         spectators: String(spectators || 0),
       },
     });
