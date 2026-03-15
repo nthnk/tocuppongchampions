@@ -34,8 +34,8 @@ export function Hero() {
   }, []);
 
   useEffect(() => {
-    // March 22, 2026 at 12:00 PM EST (UTC-5)
-    const eventDate = new Date('2026-03-22T12:00:00-05:00');
+    // March 22, 2026 at 12:00 PM EDT (UTC-4)
+    const eventDate = new Date('2026-03-22T12:00:00-04:00');
 
     const updateCountdown = () => {
       const now = new Date();
