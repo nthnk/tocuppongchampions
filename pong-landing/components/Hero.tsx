@@ -134,7 +134,7 @@ export function Hero() {
               border: `2px solid ${palette.red}`,
             }}
           >
-            TABLE ZERO — MARCH 22, 2026
+            TABLE ZERO — MARCH 22, 2026 — 12–6PM
           </span>
         </div>
 
