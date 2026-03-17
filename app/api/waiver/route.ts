@@ -1,18 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
-import {
-  insertWaiver,
-  generateConfirmationCode,
-  checkDuplicateEmail,
-  buildPdfFilename,
-} from '@/lib/waiver-db';
 import { generateWaiverPdf } from '@/lib/waiver-pdf';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { buildConfirmationEmail, buildAdminNotificationEmail } from '@/lib/waiver-emails';
 
-const PDF_DIR = path.join(process.cwd(), 'data', 'waivers-pdf');
+// Inline utilities (no SQLite dependency)
+function generateConfirmationCode(): string {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let code = '';
+  for (let i = 0; i < 6; i++) {
+    code += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return `6CUPS-${code}`;
+}
+
+function buildPdfFilename(fullName: string, confirmationCode: string): string {
+  const nameParts = fullName.toUpperCase().split(' ');
+  const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : nameParts[0];
+  const firstName = nameParts[0];
+  return `WAIVER_${lastName}_${firstName}_${confirmationCode}.pdf`;
+}
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -77,11 +84,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid signature data.' }, { status: 400 });
     }
 
-    // Check for duplicate email
-    if (checkDuplicateEmail(email.toLowerCase().trim())) {
-      return NextResponse.json({ error: 'A waiver has already been submitted with this email address.' }, { status: 409 });
-    }
-
     // Sanitize inputs
     const cleanName = sanitize(fullName);
     const cleanEmail = email.toLowerCase().trim();
@@ -94,21 +96,6 @@ export async function POST(request: NextRequest) {
       timeZone: 'America/Toronto',
       dateStyle: 'full',
       timeStyle: 'long',
-    });
-
-    // Save to database
-    insertWaiver({
-      confirmation_code: confirmationCode,
-      full_name: cleanName,
-      date_of_birth: dateOfBirth,
-      age_on_event: calculatedAge,
-      email: cleanEmail,
-      phone: '',
-      photo_opt_out: !!photoOptOut,
-      signature_data: signatureData,
-      ip_address: ip,
-      drive_upload_status: 'pending',
-      submitted_at: submittedAt,
     });
 
     // Generate PDF
@@ -125,15 +112,6 @@ export async function POST(request: NextRequest) {
     });
 
     const pdfFilename = buildPdfFilename(cleanName, confirmationCode);
-
-    // Always save PDF locally
-    try {
-      await mkdir(PDF_DIR, { recursive: true });
-      await writeFile(path.join(PDF_DIR, pdfFilename), Buffer.from(pdfBytes));
-      console.log(`[Waiver] PDF saved locally: data/waivers-pdf/${pdfFilename}`);
-    } catch (fsError: any) {
-      console.error(`[Waiver] Local PDF save failed:`, fsError.message);
-    }
 
     // Fire-and-forget: emails run in background after response is sent
     if (!TEST_MODE) {
