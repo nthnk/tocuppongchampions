@@ -113,66 +113,80 @@ export async function POST(request: NextRequest) {
 
     const pdfFilename = buildPdfFilename(cleanName, confirmationCode);
 
-    // Fire-and-forget: emails run in background after response is sent
+    // Send emails (awaited so we can catch Resend errors)
+    const emailErrors: string[] = [];
+
     if (!TEST_MODE) {
       const pdfBuf = Buffer.from(pdfBytes);
 
-      // Emails (background — don't block response)
-      resend.emails.send({
-        from: '6cups <noreply@tocuppongchampions.ca>',
-        to: cleanEmail,
-        subject: "You're In — 6CUPS Waiver Confirmed | Table Zero, March 22",
-        html: buildConfirmationEmail({ fullName: cleanName, confirmationCode }),
-      })
-        .then(() => console.log(`[Waiver] Confirmation email sent to ${cleanEmail}`))
-        .catch((err: any) => console.error(`[Waiver] Confirmation email failed for ${cleanEmail}:`, err.message));
+      // 1. Confirmation email to participant
+      try {
+        const confirmResult = await resend.emails.send({
+          from: '6cups <noreply@tocuppongchampions.ca>',
+          to: cleanEmail,
+          subject: "You're In — 6CUPS Waiver Confirmed | Table Zero, March 22",
+          html: buildConfirmationEmail({ fullName: cleanName, confirmationCode }),
+        });
+        console.log(`[Waiver] Confirmation email sent to ${cleanEmail}`, confirmResult);
+      } catch (err: any) {
+        console.error(`[Waiver] Confirmation email failed:`, err);
+        emailErrors.push(`Confirmation: ${err.message}`);
+      }
 
-      resend.emails.send({
-        from: '6cups <noreply@tocuppongchampions.ca>',
-        to: ADMIN_EMAIL,
-        subject: `6CUPS Waiver Signed: ${cleanName} | ${confirmationCode}`,
-        html: buildAdminNotificationEmail({
-          fullName: cleanName,
-          email: cleanEmail,
-          confirmationCode,
-          submittedAt,
-          photoOptOut: !!photoOptOut,
-        }),
-      })
-        .then(() => console.log(`[Waiver] Admin notification sent to ${ADMIN_EMAIL}`))
-        .catch((err: any) => console.error(`[Waiver] Admin email failed:`, err.message));
+      // 2. Admin notification
+      try {
+        const adminResult = await resend.emails.send({
+          from: '6cups <noreply@tocuppongchampions.ca>',
+          to: ADMIN_EMAIL,
+          subject: `6CUPS Waiver Signed: ${cleanName} | ${confirmationCode}`,
+          html: buildAdminNotificationEmail({
+            fullName: cleanName,
+            email: cleanEmail,
+            confirmationCode,
+            submittedAt,
+            photoOptOut: !!photoOptOut,
+          }),
+        });
+        console.log(`[Waiver] Admin notification sent to ${ADMIN_EMAIL}`, adminResult);
+      } catch (err: any) {
+        console.error(`[Waiver] Admin email failed:`, err);
+        emailErrors.push(`Admin: ${err.message}`);
+      }
 
-      // Email signed waiver PDF to admin (background — don't block response)
-      resend.emails.send({
-        from: '6cups <noreply@tocuppongchampions.ca>',
-        to: 'nathan@tocuppongchampions.ca',
-        subject: `Signed Waiver PDF: ${cleanName} | ${confirmationCode}`,
-        html: buildAdminNotificationEmail({
-          fullName: cleanName,
-          email: cleanEmail,
-          confirmationCode,
-          submittedAt,
-          photoOptOut: !!photoOptOut,
-        }),
-        attachments: [
-          {
-            filename: pdfFilename,
-            content: pdfBuf,
-          },
-        ],
-      })
-        .then(() => console.log(`[Waiver] Waiver PDF emailed to nathan@tocuppongchampions.ca for ${confirmationCode}`))
-        .catch((err: any) => console.error(`[Waiver] Waiver PDF email failed for ${confirmationCode}:`, err.message));
+      // 3. Signed waiver PDF to admin
+      try {
+        const pdfResult = await resend.emails.send({
+          from: '6cups <noreply@tocuppongchampions.ca>',
+          to: 'nathan@tocuppongchampions.ca',
+          subject: `Signed Waiver PDF: ${cleanName} | ${confirmationCode}`,
+          html: buildAdminNotificationEmail({
+            fullName: cleanName,
+            email: cleanEmail,
+            confirmationCode,
+            submittedAt,
+            photoOptOut: !!photoOptOut,
+          }),
+          attachments: [
+            {
+              filename: pdfFilename,
+              content: pdfBuf,
+            },
+          ],
+        });
+        console.log(`[Waiver] Waiver PDF emailed to nathan@tocuppongchampions.ca`, pdfResult);
+      } catch (err: any) {
+        console.error(`[Waiver] Waiver PDF email failed:`, err);
+        emailErrors.push(`PDF: ${err.message}`);
+      }
     } else {
-      console.log(`[Waiver TEST MODE] Would send confirmation email to ${cleanEmail}`);
-      console.log(`[Waiver TEST MODE] Would send admin notification to ${ADMIN_EMAIL}`);
-      console.log(`[Waiver TEST MODE] Would email waiver PDF to nathan@tocuppongchampions.ca`);
-      console.log(`[Waiver TEST MODE] Confirmation code: ${confirmationCode}`);
-      console.log(`[Waiver TEST MODE] Participant: ${cleanName}, DOB: ${dateOfBirth}, Age: ${calculatedAge}`);
-      console.log(`[Waiver TEST MODE] Photo opt-out: ${photoOptOut ? 'Yes' : 'No'}`);
+      console.log(`[Waiver TEST MODE] Skipping emails. Confirmation code: ${confirmationCode}`);
     }
 
-    return NextResponse.json({ success: true, confirmationCode });
+    return NextResponse.json({
+      success: true,
+      confirmationCode,
+      ...(emailErrors.length > 0 && { emailErrors }),
+    });
   } catch (error: any) {
     console.error('[Waiver] Submission error:', error);
     return NextResponse.json(
