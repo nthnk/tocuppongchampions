@@ -4,14 +4,11 @@ import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import {
   insertWaiver,
-  updateDriveStatus,
-  insertFailedUpload,
   generateConfirmationCode,
   checkDuplicateEmail,
   buildPdfFilename,
 } from '@/lib/waiver-db';
 import { generateWaiverPdf } from '@/lib/waiver-pdf';
-import { uploadToDrive } from '@/lib/google-drive';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { buildConfirmationEmail, buildAdminNotificationEmail } from '@/lib/waiver-emails';
 
@@ -48,10 +45,10 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { fullName, dateOfBirth, ageOnEvent, email, phone, photoOptOut, signatureData } = body;
+    const { fullName, dateOfBirth, ageOnEvent, email, photoOptOut, signatureData } = body;
 
     // Server-side validation
-    if (!fullName || !dateOfBirth || !email || !phone || !signatureData) {
+    if (!fullName || !dateOfBirth || !email || !signatureData) {
       return NextResponse.json({ error: 'All required fields must be filled in.' }, { status: 400 });
     }
 
@@ -87,7 +84,6 @@ export async function POST(request: NextRequest) {
 
     // Sanitize inputs
     const cleanName = sanitize(fullName);
-    const cleanPhone = sanitize(phone);
     const cleanEmail = email.toLowerCase().trim();
 
     // Generate confirmation code
@@ -107,7 +103,7 @@ export async function POST(request: NextRequest) {
       date_of_birth: dateOfBirth,
       age_on_event: calculatedAge,
       email: cleanEmail,
-      phone: cleanPhone,
+      phone: '',
       photo_opt_out: !!photoOptOut,
       signature_data: signatureData,
       ip_address: ip,
@@ -121,7 +117,6 @@ export async function POST(request: NextRequest) {
       dateOfBirth: dateOfBirth,
       ageOnEvent: calculatedAge,
       email: cleanEmail,
-      phone: cleanPhone,
       photoOptOut: !!photoOptOut,
       signatureImageBase64: signatureData,
       confirmationCode,
@@ -140,20 +135,9 @@ export async function POST(request: NextRequest) {
       console.error(`[Waiver] Local PDF save failed:`, fsError.message);
     }
 
-    // Fire-and-forget: Drive upload + emails run in background after response is sent
+    // Fire-and-forget: emails run in background after response is sent
     if (!TEST_MODE) {
       const pdfBuf = Buffer.from(pdfBytes);
-      // Drive upload (background — don't block response)
-      uploadToDrive(pdfBuf, pdfFilename)
-        .then((fileId) => {
-          updateDriveStatus(confirmationCode, 'uploaded', fileId);
-          console.log(`[Waiver] Drive upload success: ${pdfFilename} (${fileId})`);
-        })
-        .catch((driveError: any) => {
-          console.error(`[Waiver] Drive upload failed for ${confirmationCode}:`, driveError.message);
-          updateDriveStatus(confirmationCode, 'failed');
-          insertFailedUpload(confirmationCode, pdfBuf, pdfFilename, driveError.message);
-        });
 
       // Emails (background — don't block response)
       resend.emails.send({
@@ -179,13 +163,35 @@ export async function POST(request: NextRequest) {
       })
         .then(() => console.log(`[Waiver] Admin notification sent to ${ADMIN_EMAIL}`))
         .catch((err: any) => console.error(`[Waiver] Admin email failed:`, err.message));
+
+      // Email signed waiver PDF to admin (background — don't block response)
+      resend.emails.send({
+        from: '6cups <noreply@tocuppongchampions.ca>',
+        to: 'nathan@tocuppongchampions.ca',
+        subject: `Signed Waiver PDF: ${cleanName} | ${confirmationCode}`,
+        html: buildAdminNotificationEmail({
+          fullName: cleanName,
+          email: cleanEmail,
+          confirmationCode,
+          submittedAt,
+          photoOptOut: !!photoOptOut,
+        }),
+        attachments: [
+          {
+            filename: pdfFilename,
+            content: pdfBuf,
+          },
+        ],
+      })
+        .then(() => console.log(`[Waiver] Waiver PDF emailed to nathan@tocuppongchampions.ca for ${confirmationCode}`))
+        .catch((err: any) => console.error(`[Waiver] Waiver PDF email failed for ${confirmationCode}:`, err.message));
     } else {
       console.log(`[Waiver TEST MODE] Would send confirmation email to ${cleanEmail}`);
       console.log(`[Waiver TEST MODE] Would send admin notification to ${ADMIN_EMAIL}`);
+      console.log(`[Waiver TEST MODE] Would email waiver PDF to nathan@tocuppongchampions.ca`);
       console.log(`[Waiver TEST MODE] Confirmation code: ${confirmationCode}`);
       console.log(`[Waiver TEST MODE] Participant: ${cleanName}, DOB: ${dateOfBirth}, Age: ${calculatedAge}`);
       console.log(`[Waiver TEST MODE] Photo opt-out: ${photoOptOut ? 'Yes' : 'No'}`);
-      updateDriveStatus(confirmationCode, 'test_mode');
     }
 
     return NextResponse.json({ success: true, confirmationCode });

@@ -18,7 +18,6 @@ export default function WaiverPage() {
   const [fullName, setFullName] = useState('');
   const [dob, setDob] = useState('');
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
   const [agreed, setAgreed] = useState(false);
   const [ageOnEvent, setAgeOnEvent] = useState<number | null>(null);
 
@@ -96,9 +95,6 @@ export default function WaiverPage() {
     else if (!isValidDate(dob)) errs.push('Please enter a valid date of birth.');
     if (ageOnEvent !== null && ageOnEvent < 19) errs.push('You must be 19 or older on March 22, 2026 to attend this event.');
     if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errs.push('A valid email address is required.');
-    const digits = phone.replace(/\D/g, '');
-    if (!phone.trim()) errs.push('Mobile phone number is required.');
-    else if (digits.length !== 10) errs.push('Phone number must be exactly 10 digits.');
     if (signaturePadRef.current?.isEmpty()) errs.push('Please draw your signature before submitting.');
     if (!agreed) errs.push('You must agree to the waiver terms to submit.');
     return errs;
@@ -126,7 +122,6 @@ export default function WaiverPage() {
           dateOfBirth: dob,
           ageOnEvent,
           email: email.trim().toLowerCase(),
-          phone: phone.trim(),
           photoOptOut: false,
           signatureData,
         }),
@@ -346,29 +341,6 @@ export default function WaiverPage() {
                 style={{ background: '#111010', border: '1px solid #333', color: '#f5efe6' }}
                 required
               />
-            </div>
-
-            {/* Phone */}
-            <div>
-              <label className="block text-xs font-bold uppercase tracking-wider mb-2" style={{ color: '#a8a29e' }}>
-                Mobile Phone Number <span style={{ color: '#f61813' }}>*</span>
-              </label>
-              <input
-                type="tel"
-                value={phone}
-                onChange={(e) => {
-                  const digits = e.target.value.replace(/\D/g, '').slice(0, 10);
-                  setPhone(digits);
-                }}
-                placeholder="4165551234"
-                maxLength={10}
-                className="w-full px-4 py-3 text-sm outline-none"
-                style={{ background: '#111010', border: '1px solid #333', color: '#f5efe6' }}
-                required
-              />
-              <p className="text-[11px] mt-1" style={{ color: '#57534e' }}>
-                10 digits, no dashes or spaces ({phone.replace(/\D/g, '').length}/10)
-              </p>
             </div>
 
             {/* Photography notice */}

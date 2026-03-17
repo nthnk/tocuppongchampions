@@ -6,7 +6,6 @@ interface WaiverPdfData {
   dateOfBirth: string;
   ageOnEvent: number;
   email: string;
-  phone: string;
   photoOptOut: boolean;
   signatureImageBase64: string;
   confirmationCode: string;
@@ -201,7 +200,6 @@ This Waiver, Release of Liability, Assumption of Risk and Indemnification Agreem
     ['Date of Birth:', data.dateOfBirth],
     ['Age on March 22, 2026:', String(data.ageOnEvent)],
     ['Email Address:', data.email],
-    ['Mobile Phone:', data.phone],
     ['Photography Opt-Out:', data.photoOptOut ? 'YES — Does NOT consent to photography/filming' : 'NO — Consents to photography/filming'],
     ['Confirmation Code:', data.confirmationCode],
     ['Date & Time Signed:', data.submittedAt],

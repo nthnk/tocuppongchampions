@@ -38,7 +38,6 @@ export async function POST(request: NextRequest) {
           dateOfBirth: waiver.date_of_birth,
           ageOnEvent: waiver.age_on_event,
           email: waiver.email,
-          phone: waiver.phone,
           photoOptOut: waiver.photo_opt_out,
           signatureImageBase64: waiver.signature_data,
           confirmationCode: waiver.confirmation_code,
