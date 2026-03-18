@@ -164,7 +164,7 @@ export function buildConfirmationEmail(data: {
 
       <div class="info-section">
         <h3>Event Details</h3>
-        <p><strong>Event:</strong> 6CUPS Beer Pong Tournament — The Fall Classic</p>
+        <p><strong>Event:</strong> 6CUPS Beer Pong Tournament — TABLE ZERO</p>
         <p><strong>Date:</strong> Sunday, March 22, 2026</p>
         <p><strong>Location:</strong> 90 Cawthra Avenue, Toronto, Ontario — Nickel 9 Distillery</p>
         <p style="margin-top: 12px;">
@@ -196,7 +196,7 @@ export function buildConfirmationEmail(data: {
 
     <div class="footer">
       <img src="https://tocuppongchampions.ca/horizontal_colour.svg" alt="6CUPS" width="120" style="margin-bottom: 15px; display: inline-block;" />
-      <p>6CUPS &bull; The Fall Classic &bull; March 22, 2026 &bull; Toronto</p>
+      <p>6CUPS &bull; TABLE ZERO &bull; March 22, 2026 &bull; Toronto</p>
     </div>
   </div>
 </body>

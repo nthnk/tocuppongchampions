@@ -335,7 +335,7 @@ const CupPongBrandingV6 = () => {
                 margin: 0,
                 lineHeight: 1.1,
               }}>
-                The Fall Classic 2025
+                TABLE ZERO 2026
               </p>
               <p style={{
                 fontFamily: 'Inter, sans-serif',

@@ -102,7 +102,7 @@ export async function generateWaiverPdf(data: WaiverPdfData): Promise<Uint8Array
   // ===== HEADER =====
   page.drawText('6CUPS', { x: margin, y, size: 20, font: fontBold, color: rgb(0.96, 0.09, 0.07) });
   y -= 22;
-  page.drawText('BEER PONG TOURNAMENT — THE FALL CLASSIC', { x: margin, y, size: 10, font: fontBold });
+  page.drawText('BEER PONG TOURNAMENT — TABLE ZERO', { x: margin, y, size: 10, font: fontBold });
   y -= 16;
   page.drawText('EVENT WAIVER, RELEASE OF LIABILITY, ASSUMPTION OF RISK & INDEMNIFICATION AGREEMENT', { x: margin, y, size: 7, font: fontBold });
   y -= 12;

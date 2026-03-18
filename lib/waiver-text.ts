@@ -1,7 +1,7 @@
 // Full waiver text and rules extracted from 6CUPS_Waiver_v3_FINAL.docx and 6CUPS_Rules_Safety_Guidelines.docx
 
 export const WAIVER_HEADER = `6CUPS
-BEER PONG TOURNAMENT — THE FALL CLASSIC
+BEER PONG TOURNAMENT — TABLE ZERO
 
 EVENT WAIVER, RELEASE OF LIABILITY,
 ASSUMPTION OF RISK & INDEMNIFICATION AGREEMENT
@@ -27,7 +27,7 @@ export const WAIVER_SECTIONS = [
   {
     number: 1,
     title: "EVENT DESCRIPTION",
-    content: `The 6CUPS Beer Pong Tournament, "The Fall Classic" ("the Event") is a competitive recreational beer pong tournament taking place on March 22, 2026, at the Venue located at 90 Cawthra Avenue, Toronto, Ontario. The Event involves, but is not limited to: the consumption of alcoholic beverages, competitive beer pong gameplay, physical activity, standing, moving through crowded indoor spaces, and the use of shared equipment including ping pong balls, cups, and tables.
+    content: `The 6CUPS Beer Pong Tournament, "TABLE ZERO" ("the Event") is a competitive recreational beer pong tournament taking place on March 22, 2026, at the Venue located at 90 Cawthra Avenue, Toronto, Ontario. The Event involves, but is not limited to: the consumption of alcoholic beverages, competitive beer pong gameplay, physical activity, standing, moving through crowded indoor spaces, and the use of shared equipment including ping pong balls, cups, and tables.
 
 This Agreement applies to ALL persons who enter the Venue on the date of the Event regardless of their role or capacity, including but not limited to: active tournament players, substitutes, team supporters, spectators, guests, bystanders, and any other person present on the premises. Every such person is a "Participant" or "Attendee" for purposes of this Agreement.
 
@@ -199,7 +199,7 @@ No representations have been made to them by any Released Party that are not con
 ];
 
 export const RULES_HEADER = `6CUPS
-BEER PONG TOURNAMENT — THE FALL CLASSIC
+BEER PONG TOURNAMENT — TABLE ZERO
 
 EVENT RULES & SAFETY GUIDELINES
 
