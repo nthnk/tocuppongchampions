@@ -929,9 +929,9 @@ const CupPongBrandingV6 = () => {
                   lineHeight: 1.15,
                   position: 'relative',
                 }}>
-                  The Fall
+                  Table
                   <br />
-                  <span style={{ color: palette.red }}>Classic</span>
+                  <span style={{ color: palette.red }}>Zero</span>
                 </h3>
                 
                 <div style={{

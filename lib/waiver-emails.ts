@@ -141,7 +141,7 @@ export function buildConfirmationEmail(data: {
   <div class="container">
     <div class="header">
       <p>6CUPS PRESENTS</p>
-      <h1>THE FALL <span>CLASSIC</span></h1>
+      <h1>TABLE <span>ZERO</span></h1>
     </div>
 
     <div class="content">
