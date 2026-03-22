@@ -54,7 +54,7 @@ const faqs = [
   },
   {
     question: "HOW DO I GET A REFUND?",
-    answer: "Email info@tocuppongchampions.ca with the email you used to register and let us know which email you'd like us to send the e-transfer refund to. We'll get it sorted."
+    answer: "Email info@tocuppongchampions.ca with the email you used to register and let us know which email you'd like us to send the e-transfer refund to. We'll get it sorted. Please note that refunds cannot be issued after the event starts."
   }
 ];
 

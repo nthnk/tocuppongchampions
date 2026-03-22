@@ -265,7 +265,7 @@ export async function POST(request: NextRequest) {
       <div class="info-section">
         <h3>Event Details</h3>
         <p><strong>Date:</strong> March 22, 2026</p>
-        <p><strong>Time:</strong> 12:00 PM – 6:00 PM</p>
+        <p><strong>Time:</strong> 12:00 PM – 5:00 PM</p>
         <p><strong>Format:</strong> 32 teams, bracket style</p>
       </div>
 
