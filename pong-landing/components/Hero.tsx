@@ -36,6 +36,7 @@ export function Hero() {
   useEffect(() => {
     // March 22, 2026 at 12:00 PM EDT (UTC-4)
     const eventDate = new Date('2026-03-22T12:00:00-04:00');
+    let interval: ReturnType<typeof setInterval> | null = null;
 
     const updateCountdown = () => {
       const now = new Date();
@@ -43,7 +44,8 @@ export function Hero() {
 
       if (diff <= 0) {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        return clearInterval(interval);
+        if (interval) clearInterval(interval);
+        return;
       }
 
       setTimeLeft({
@@ -55,8 +57,8 @@ export function Hero() {
     };
 
     updateCountdown();
-    const interval = setInterval(updateCountdown, 1000);
-    return () => clearInterval(interval);
+    interval = setInterval(updateCountdown, 1000);
+    return () => { if (interval) clearInterval(interval); };
   }, []);
 
   return (
