@@ -34,6 +34,7 @@ export type EventCanon = {
   recap: string[];
   stats: { value: string; label: string }[];
   photos: { src: string; tag?: string; caption?: string }[];
+  prizes?: { title: string; description: string; photos: string[] };
   standings: Standing[];
   bracket: BracketRound[];
   champion: { team: string; members: string; neighbourhood: string };
@@ -56,7 +57,7 @@ export const EVENTS: EventCanon[] = [
       '16 teams. 4 hours. The first 6CUPS event, played out on a Saturday afternoon at Nickel 9.',
     recap: [
       'Sixteen teams. Round robin to seed, single elim through the Round of 16 and Quarter Finals, best-of-three from the Semis on.',
-      'Solo Dolo took it 2–0 over The Watchmen in the final. Packed room, last cup pending.',
+      'Solo Dolo took it 2–0 over The Watchmen in the final. Packed room, last cup pending. Champions walked off with custom 6CUPS tees.',
     ],
     stats: [
       { value: '16', label: 'Teams Played' },
@@ -64,7 +65,7 @@ export const EVENTS: EventCanon[] = [
       { value: '4 HRS', label: 'Floor Time' },
     ],
     photos: [
-      { src: '/event_photos/winners_1.jpg' },
+      { src: '/event_photos/winners_1.jpg', caption: 'Harrison K. & Tony Q. of Solo Dolo, your Table Zero champions.' },
       { src: '/event_photos/winners_2.jpg' },
       { src: '/event_photos/winners_3.jpg' },
       { src: '/event_photos/winners_4.jpg' },
@@ -94,7 +95,33 @@ export const EVENTS: EventCanon[] = [
       { src: '/event_photos/_dsf0633.jpg' },
       { src: '/event_photos/_dsf0702.jpg' },
       { src: '/event_photos/_dsf0784.jpg' },
+      { src: '/event_photos/_dsf0473.jpg' },
+      { src: '/event_photos/_dsf0497.jpg' },
+      { src: '/event_photos/_dsf0542.jpg' },
+      { src: '/event_photos/_dsf0567.jpg' },
+      { src: '/event_photos/_dsf0574.jpg' },
+      { src: '/event_photos/_dsf0576.jpg' },
+      { src: '/event_photos/_dsf0599.jpg' },
+      { src: '/event_photos/_dsf0606.jpg' },
+      { src: '/event_photos/_dsf0620.jpg' },
+      { src: '/event_photos/_dsf0623.jpg' },
+      { src: '/event_photos/_dsf0632.jpg' },
+      { src: '/event_photos/_dsf0641.jpg' },
+      { src: '/event_photos/_dsf0653.jpg' },
+      { src: '/event_photos/_dsf0657.jpg' },
+      { src: '/event_photos/_dsf0681.jpg' },
+      { src: '/event_photos/_dsf0686.jpg' },
+      { src: '/event_photos/_dsf0704.jpg' },
+      { src: '/event_photos/_dsf0712.jpg' },
+      { src: '/event_photos/_dsf0721.jpg' },
+      { src: '/event_photos/_dsf0758.jpg' },
     ],
+    prizes: {
+      title: 'Custom 6CUPS Tees',
+      description:
+        'Champions walked off with custom 6CUPS tees, hand-screened just for the duo who took it. One-of-one until the next Table.',
+      photos: ['/event_photos/prize_1.jpg', '/event_photos/prize_2.jpg'],
+    },
     standings: [
       { rank: 1, team: 'Solo Dolo',           members: 'Harrison K. & Tony Q.',    neighbourhood: 'North York/Yonge-Sheppard', result: 'Champion' },
       { rank: 2, team: 'The Watchmen',        members: 'Dwight H. & Jaquan C.',    neighbourhood: 'Weston',                    result: 'Runner-Up' },

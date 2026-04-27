@@ -9,6 +9,7 @@ import { PhotoSlideshow } from '@/components/event/PhotoSlideshow';
 import { Bracket } from '@/components/event/Bracket';
 import { Leaderboard } from '@/components/event/Leaderboard';
 import { ChampionCard } from '@/components/event/ChampionCard';
+import { Prizes } from '@/components/event/Prizes';
 import { VenueCard } from '@/components/event/VenueCard';
 import { EVENTS, getEvent } from '@/lib/events';
 
@@ -44,7 +45,14 @@ export default async function EventPage(
         <EventHero event={event} />
         <StatBar stats={event.stats} />
         <ChampionCard event={event} />
-        <RecapBody paragraphs={event.recap} kicker="From The Floor" title="How It Played" />
+        <RecapBody paragraphs={event.recap} kicker="The Recap" title="Quick Recap" />
+        {event.prizes && (
+          <Prizes
+            title={event.prizes.title}
+            description={event.prizes.description}
+            photos={event.prizes.photos}
+          />
+        )}
         <PhotoSlideshow photos={event.photos} />
         <Bracket rounds={event.bracket} />
         <Leaderboard rows={event.standings} />

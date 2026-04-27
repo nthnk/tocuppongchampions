@@ -15,11 +15,11 @@ export function VenueCard({ event }: { event: EventCanon }) {
       }}
     >
       <Image
-        src="/samara_brewery.jpg"
+        src="/event_photos/_dsf0784.jpg"
         alt=""
         fill
         sizes="100vw"
-        style={{ objectFit: 'cover' }}
+        style={{ objectFit: 'cover', objectPosition: 'center' }}
       />
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.55)' }} />
 

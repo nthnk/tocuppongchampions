@@ -5,8 +5,8 @@ import type { BracketRound } from '@/lib/events';
 
 export function Bracket({
   rounds,
-  title = 'How It Played Out',
-  tag = 'Bracket',
+  title = 'The Bracket',
+  tag = 'Playoffs',
 }: {
   rounds: BracketRound[];
   title?: string;

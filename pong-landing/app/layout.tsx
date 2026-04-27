@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import { PageTransition } from "@/components/PageTransition";
 
 const outfit = Outfit({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
@@ -34,7 +35,7 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} ${posterama.variable} antialiased`}
       >
-        {children}
+        <PageTransition>{children}</PageTransition>
       </body>
     </html>
   );

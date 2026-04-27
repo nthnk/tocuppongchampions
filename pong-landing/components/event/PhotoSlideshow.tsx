@@ -18,6 +18,7 @@ export function PhotoSlideshow({
 }) {
   const [idx, setIdx] = useState(0);
   const [paused, setPaused] = useState(false);
+  const cur = photos[idx];
 
   useEffect(() => {
     if (!autoplay || paused) return;
@@ -48,7 +49,7 @@ export function PhotoSlideshow({
         >
           <SectionHeader
             tag="From The Floor"
-            headline="In Frame"
+            headline="How It Played Out"
             tone="on-dark"
           />
           <div className="t-tag" style={{ opacity: 0.55, fontVariantNumeric: 'tabular-nums' }}>
@@ -80,6 +81,35 @@ export function PhotoSlideshow({
               }}
             />
           ))}
+
+          {cur.caption && (
+            <div
+              style={{
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                bottom: 0,
+                padding: '20px 24px 24px',
+                background:
+                  'linear-gradient(to top, rgba(0,0,0,0.85) 30%, rgba(0,0,0,0) 100%)',
+                pointerEvents: 'none',
+              }}
+            >
+              <p
+                style={{
+                  margin: 0,
+                  maxWidth: 'calc(100% - 120px)',
+                  fontFamily: fonts.body,
+                  fontSize: 15,
+                  lineHeight: 1.45,
+                  color: palette.foam,
+                  fontWeight: 500,
+                }}
+              >
+                {cur.caption}
+              </p>
+            </div>
+          )}
 
           <div
             style={{
