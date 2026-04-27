@@ -1,31 +1,33 @@
-// 6CUPS Brand Theme
-// Bold, warm, gritty — Social club meets street culture
+// 6CUPS Brand Theme — per Design System (Foam-default, square corners, no shadows)
 
 export const palette = {
-  // Core darks (warm, not cold)
-  black: '#0a0808',
-  darkSlate: '#111010',
-  slate: '#1c1917',
-  darkMaroon: '#1a0a08',
-
   // Primary
-  red: '#f61813',
-  redDark: '#c41410',
-  redLight: '#ff3b36',
+  cupRed:   '#F00B1F',
+  blackout: '#000000',
+  foam:     '#FFFBEC',
 
-  // Accents
-  gold: '#eab308',
-  blue: '#3b82f6',
+  // Secondary (use sparingly)
+  blueSolo: '#1C26E8',
+  beerRun:  '#FFD939',
+  lager:    '#37010B',
 
-  // Neutrals (warm cream, not stark white)
-  white: '#FFFFFF',
-  cream: '#f5efe6',
-  gray400: '#a8a29e',
-  gray600: '#57534e',
+  // Legacy aliases (kept so older sections compile while we refactor)
+  red:        '#F00B1F',
+  redDark:    '#B30816',
+  redLight:   '#FF3B36',
+  black:      '#000000',
+  darkSlate:  '#0a0808',
+  slate:      '#1c1917',
+  darkMaroon: '#37010B',
+  cream:      '#FFFBEC',
+  white:      '#FFFFFF',
+  gold:       '#FFD939',
+  blue:       '#1C26E8',
+  gray400:    'rgba(0,0,0,0.55)',
+  gray600:    'rgba(0,0,0,0.75)',
 };
 
 export const fonts = {
-  // Posterama for headings, Outfit for body
-  heading: 'var(--font-posterama), var(--font-outfit), Verdana, Geneva, sans-serif',
-  body: 'var(--font-outfit), Verdana, Geneva, sans-serif',
+  heading: 'var(--font-posterama), var(--font-outfit), Arial Black, Arial, sans-serif',
+  body:    'var(--font-outfit), Arial, sans-serif',
 };

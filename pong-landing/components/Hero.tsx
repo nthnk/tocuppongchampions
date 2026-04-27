@@ -1,284 +1,140 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import { palette, fonts } from '@/lib/theme';
+import { Pill } from '@/components/brand/Primitives';
+import { Button } from '@/components/brand/Button';
+import { Reveal } from '@/components/brand/Reveal';
 
 export function Hero() {
-  const scrollToRegister = () => {
-    document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [timeLeft, setTimeLeft] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      const progress = Math.max(
-        0,
-        Math.min(1, (windowHeight - rect.top + windowHeight * 0.5) / (windowHeight * 0.4))
-      );
-
-      setScrollProgress(progress);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    // March 22, 2026 at 12:00 PM EDT (UTC-4)
-    const eventDate = new Date('2026-03-22T12:00:00-04:00');
-    let interval: ReturnType<typeof setInterval> | null = null;
-
-    const updateCountdown = () => {
-      const now = new Date();
-      const diff = eventDate.getTime() - now.getTime();
-
-      if (diff <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        if (interval) clearInterval(interval);
-        return;
-      }
-
-      setTimeLeft({
-        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((diff / (1000 * 60)) % 60),
-        seconds: Math.floor((diff / 1000) % 60),
-      });
-    };
-
-    updateCountdown();
-    interval = setInterval(updateCountdown, 1000);
-    return () => { if (interval) clearInterval(interval); };
-  }, []);
-
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background - warm black */}
-      <div
-        className="absolute inset-0"
-        style={{ background: palette.black }}
-      />
-
-      {/* Hero video background */}
+    <section
+      style={{
+        position: 'relative',
+        minHeight: 720,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        background: palette.blackout,
+        color: palette.foam,
+      }}
+    >
       <video
         autoPlay
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-70"
+        preload="auto"
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          opacity: 0.6,
+        }}
       >
         <source src="/landing-video.mp4" type="video/mp4" />
       </video>
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background:
+            'linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.65) 60%, rgba(0,0,0,0.9))',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: 4,
+          background: palette.cupRed,
+        }}
+      />
 
-      {/* Warm dark overlay with slight gradient */}
-      <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${palette.black}50, ${palette.black}90)` }} />
-
-      {/* Bottom accent */}
-      <div className="absolute bottom-0 left-0 right-0 h-1" style={{ background: palette.red }} />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-32 text-center">
-        {/* Small tag above — social club feel */}
-        <div
-          className="mb-6"
-          style={{
-            opacity: scrollProgress * 0.6,
-            transform: `translateY(${(1 - scrollProgress) * 20}px)`,
-            transition: 'opacity 0.4s ease-out, transform 0.4s ease-out',
-          }}
-        >
-          <span
-            className="text-xs font-bold uppercase tracking-[0.4em]"
-            style={{ fontFamily: fonts.body, color: palette.cream }}
-          >
-            TORONTO&apos;S BEER PONG TOURNAMENT
-          </span>
-        </div>
-
-        {/* Main headline — massive, editorial */}
-        <h1
-          className="text-8xl sm:text-9xl md:text-[10rem] lg:text-[13rem] font-black tracking-tight mb-6"
-          style={{
-            fontFamily: fonts.heading,
-            color: palette.cream,
-            opacity: scrollProgress,
-            transform: `translateY(${(1 - scrollProgress) * 30}px)`,
-            transition: 'opacity 0.4s ease-out 0.1s, transform 0.4s ease-out 0.1s',
-            lineHeight: 0.85,
-          }}
-        >
-          <span style={{ color: palette.red }}>6</span>CUPS
-        </h1>
-
-        {/* Event tag — Table Zero bordered tag */}
-        <div
-          className="mb-10"
-          style={{
-            opacity: scrollProgress,
-            transform: `translateY(${(1 - scrollProgress) * 30}px)`,
-            transition: 'opacity 0.4s ease-out 0.15s, transform 0.4s ease-out 0.15s',
-          }}
-        >
-          <span
-            className="inline-block text-sm sm:text-base font-bold uppercase tracking-[0.3em] px-5 py-2.5"
-            style={{
-              fontFamily: fonts.heading,
-              color: palette.cream,
-              border: `2px solid ${palette.red}`,
-            }}
-          >
-            TABLE ZERO — MARCH 22, 2026 — 12–5PM
-          </span>
-        </div>
-
-        {/* Tagline — warmer, more human tone */}
-        <p
-          className="text-base sm:text-lg md:text-xl max-w-lg mx-auto mb-14 leading-relaxed"
-          style={{
-            fontFamily: fonts.body,
-            color: palette.cream,
-            opacity: scrollProgress * 0.7,
-            transform: `translateY(${(1 - scrollProgress) * 30}px)`,
-            transition: 'opacity 0.4s ease-out 0.2s, transform 0.4s ease-out 0.2s',
-          }}
-        >
-          32 teams. 4 brackets. 1 champion.
-        </p>
-
-        {/* Countdown Timer */}
-        {timeLeft && (
-          <div
-            className="flex justify-center items-center gap-3 sm:gap-5 mb-14"
-            style={{
-              opacity: scrollProgress,
-              transform: `translateY(${(1 - scrollProgress) * 30}px)`,
-              transition: 'opacity 0.4s ease-out 0.25s, transform 0.4s ease-out 0.25s',
-            }}
-          >
-            {[
-              { value: timeLeft.days, label: 'Days' },
-              { value: timeLeft.hours, label: 'Hours' },
-              { value: timeLeft.minutes, label: 'Min' },
-              { value: timeLeft.seconds, label: 'Sec' },
-            ].map((unit, i) => (
-              <div key={i} className="flex items-center gap-3 sm:gap-5">
-                <div className="text-center">
-                  <div
-                    className="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center text-3xl sm:text-4xl font-black"
-                    style={{
-                      fontFamily: fonts.heading,
-                      color: palette.cream,
-                      border: `2px solid ${palette.red}`,
-                      background: `${palette.black}80`,
-                    }}
-                  >
-                    {String(unit.value).padStart(2, '0')}
-                  </div>
-                  <div
-                    className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] mt-2"
-                    style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.5 }}
-                  >
-                    {unit.label}
-                  </div>
-                </div>
-                {i < 3 && (
-                  <span
-                    className="text-2xl sm:text-3xl font-black -mt-5"
-                    style={{ color: palette.red, fontFamily: fonts.heading }}
-                  >
-                    :
-                  </span>
-                )}
-              </div>
-            ))}
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 10,
+          maxWidth: 1200,
+          padding: 'clamp(96px, 12vw, 140px) clamp(20px, 5vw, 24px)',
+          textAlign: 'center',
+          width: '100%',
+        }}
+      >
+        <Reveal delay={0} duration={600}>
+          <div className="t-tag" style={{ opacity: 0.7, marginBottom: 16 }}>
+            Toronto&apos;s Beer Pong Tournament
           </div>
-        )}
+        </Reveal>
 
-        {/* Stats row — cleaner, editorial */}
-        <div
-          className="flex flex-wrap justify-center items-center gap-8 sm:gap-12 mb-14"
-          style={{
-            opacity: scrollProgress,
-            transform: `translateY(${(1 - scrollProgress) * 30}px)`,
-            transition: 'opacity 0.4s ease-out 0.3s, transform 0.4s ease-out 0.3s',
-          }}
-        >
-          {[
-            { big: '32', small: 'Teams' },
-            { big: '$10', small: 'Per Duo' },
-            { big: 'MAR 22', small: '2026' },
-          ].map((stat, i) => (
-            <div key={i} className="text-center">
-              <div
-                className="text-3xl sm:text-4xl font-black"
-                style={{ fontFamily: fonts.heading, color: palette.red }}
-              >
-                {stat.big}
-              </div>
-              <div
-                className="text-xs font-bold uppercase tracking-widest mt-1"
-                style={{ fontFamily: fonts.body, color: palette.cream, opacity: 0.5 }}
-              >
-                {stat.small}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* CTA Button */}
-        <div
-          style={{
-            opacity: scrollProgress,
-            transform: `translateY(${(1 - scrollProgress) * 30}px)`,
-            transition: 'opacity 0.4s ease-out 0.4s, transform 0.4s ease-out 0.4s',
-          }}
-        >
-          <button
-            onClick={scrollToRegister}
-            className="inline-flex items-center gap-3 px-14 py-5 text-lg font-black uppercase tracking-widest transition-all duration-300 hover:scale-105"
+        <Reveal delay={120} duration={700}>
+          <h1
             style={{
-              background: palette.red,
-              color: palette.cream,
               fontFamily: fonts.heading,
-              animation: 'pulse-red 3s ease-in-out infinite',
+              fontSize: 'clamp(5rem, 14vw, 11rem)',
+              lineHeight: 0.85,
+              textTransform: 'uppercase',
+              letterSpacing: '-0.02em',
+              margin: 0,
+              color: palette.foam,
             }}
           >
-            REGISTER NOW
-          </button>
-        </div>
+            <span style={{ color: palette.cupRed }}>6</span>CUPS
+          </h1>
+        </Reveal>
 
-        {/* Location — subtle */}
-        <div
-          className="mt-10"
-          style={{
-            opacity: scrollProgress * 0.4,
-            transform: `translateY(${(1 - scrollProgress) * 20}px)`,
-            transition: 'opacity 0.4s ease-out 0.5s, transform 0.4s ease-out 0.5s',
-          }}
-        >
-          <span
-            className="text-xs font-bold tracking-[0.3em] uppercase"
-            style={{ fontFamily: fonts.body, color: palette.cream }}
+        <Reveal delay={260} duration={700}>
+          <p
+            style={{
+              fontFamily: fonts.body,
+              fontSize: 20,
+              opacity: 0.95,
+              maxWidth: 640,
+              margin: '32px auto 12px',
+              lineHeight: 1.5,
+              fontWeight: 500,
+            }}
           >
-            90 Cawthra Ave Unit 101, Toronto, ON M6N 3C2
-          </span>
-        </div>
+            Come as you are &amp; join a game.
+          </p>
+        </Reveal>
+        <Reveal delay={320} duration={700}>
+          <p
+            style={{
+              fontFamily: fonts.body,
+              fontSize: 16,
+              opacity: 0.75,
+              maxWidth: 580,
+              margin: '0 auto 36px',
+              lineHeight: 1.55,
+            }}
+          >
+            Toronto&apos;s cup pong tournament series. Where strangers become friends.
+          </p>
+        </Reveal>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg className="w-6 h-6" style={{ color: palette.cream, opacity: 0.3 }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
-        </div>
+        <Reveal delay={360} duration={700}>
+          <div style={{ marginBottom: 44 }}>
+            <Pill variant="foam-outline" size="md">More Events Coming</Pill>
+          </div>
+        </Reveal>
+
+        <Reveal delay={460} duration={700}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 14, flexWrap: 'wrap' }}>
+            <Link href="https://www.instagram.com/play6cups" target="_blank" rel="noopener noreferrer">
+              <Button variant="primary" size="xl" pulse>Follow For The Drop</Button>
+            </Link>
+            <Link href="/events/table-zero">
+              <Button variant="ghost-foam" size="xl">See The Last Event</Button>
+            </Link>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

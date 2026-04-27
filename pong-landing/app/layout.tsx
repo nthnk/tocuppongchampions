@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 
 const outfit = Outfit({
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
   variable: "--font-outfit",
 });
@@ -17,8 +17,8 @@ const posterama = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "6CUPS | Table Zero - Toronto Beer Pong",
-  description: "32 teams. Toronto's premier beer pong tournament. Register your team now.",
+  title: "6CUPS · Toronto's Beer Pong Tournament",
+  description: "Toronto's premier beer pong tournament series. Come as you are & join a game.",
   icons: {
     icon: "/favicon.svg",
   },

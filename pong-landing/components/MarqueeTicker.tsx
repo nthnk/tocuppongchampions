@@ -1,76 +1,53 @@
 'use client';
 
 import { palette, fonts } from '@/lib/theme';
+import { Star } from '@/components/brand/Primitives';
 
-const topItems = [
-  '32 TEAMS',
-  '$10 ENTRY',
-  'APRIL 2026',
-  'TORONTO',
-  'BRACKET STYLE',
-  'ONE CHAMPION',
-];
-
-const bottomItems = [
+const ITEMS = [
   'COME AS YOU ARE',
   'JOIN A GAME',
-  'BEER PONG',
-  'SOCIAL CLUB',
-  'DOWNTOWN',
-  'TABLE ZERO',
+  'GAMES ★ DRINKS ★ COMMUNITY',
+  'WHERE STRANGERS BECOME FRIENDS',
+  'TORONTO',
+  '6CUPS',
 ];
 
-export function MarqueeTicker() {
-  const repeatedTop = [...topItems, ...topItems, ...topItems, ...topItems];
-  const repeatedBottom = [...bottomItems, ...bottomItems, ...bottomItems, ...bottomItems];
+export function MarqueeTicker({
+  variant = 'red',
+  speed = 30,
+}: {
+  variant?: 'red' | 'ink' | 'foam';
+  speed?: number;
+}) {
+  const v =
+    variant === 'red'
+      ? { bg: palette.cupRed, fg: palette.foam }
+      : variant === 'ink'
+      ? { bg: palette.blackout, fg: palette.foam }
+      : { bg: palette.foam, fg: palette.blackout };
+
+  const repeated = [...ITEMS, ...ITEMS, ...ITEMS, ...ITEMS];
 
   return (
-    <div style={{ background: palette.red }}>
-      {/* Top row — scrolls left */}
-      <div className="overflow-hidden" style={{ borderBottom: `1px solid rgba(255,255,255,0.15)` }}>
-        <div
-          className="flex items-center whitespace-nowrap py-3"
-          style={{
-            animation: 'marquee 25s linear infinite',
-            fontFamily: fonts.heading,
-            color: palette.cream,
-          }}
-        >
-          {repeatedTop.map((item, i) => (
-            <span
-              key={i}
-              className="text-sm font-bold uppercase tracking-widest flex items-center"
-              style={{ paddingLeft: '2rem', paddingRight: '2rem' }}
-            >
-              {item}
-              <span className="ml-8" style={{ opacity: 0.4 }}>✦</span>
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Bottom row — scrolls right */}
-      <div className="overflow-hidden">
-        <div
-          className="flex items-center whitespace-nowrap py-3"
-          style={{
-            animation: 'marquee-reverse 30s linear infinite',
-            fontFamily: fonts.body,
-            color: palette.cream,
-            opacity: 0.85,
-          }}
-        >
-          {repeatedBottom.map((item, i) => (
-            <span
-              key={i}
-              className="text-xs font-bold uppercase tracking-[0.3em] flex items-center"
-              style={{ paddingLeft: '2rem', paddingRight: '2rem' }}
-            >
-              {item}
-              <span className="ml-8" style={{ opacity: 0.3 }}>—</span>
-            </span>
-          ))}
-        </div>
+    <div style={{ background: v.bg, color: v.fg, overflow: 'hidden', padding: '14px 0' }}>
+      <div
+        style={{
+          whiteSpace: 'nowrap',
+          animation: `marquee ${speed}s linear infinite`,
+          fontFamily: fonts.heading,
+          fontSize: 22,
+          lineHeight: 1,
+          textTransform: 'uppercase',
+          letterSpacing: '0.02em',
+          willChange: 'transform',
+        }}
+      >
+        {repeated.map((item, i) => (
+          <span key={i} style={{ display: 'inline-block' }}>
+            {item}
+            <Star color={v.fg} size="0.85em" />
+          </span>
+        ))}
       </div>
     </div>
   );
