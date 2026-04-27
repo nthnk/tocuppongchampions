@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* ============================================================
+   6CUPS — Tokens (per Brand Guidelines / Design System)
+   ============================================================ */
+
 @font-face {
   font-family: 'Posterama';
   src: url('/fonts/Posterama Text Bold.ttf') format('truetype');
@@ -9,9 +13,43 @@
 }
 
 :root {
-  --background: #0a0808;
-  --foreground: #f5efe6;
-  --font-posterama: 'Posterama', sans-serif;
+  /* Primary palette */
+  --cup-red:   #F00B1F;
+  --blackout:  #000000;
+  --foam:      #FFFBEC;
+
+  /* Secondary palette */
+  --blue-solo: #1C26E8;
+  --beer-run:  #FFD939;
+  --lager:     #37010B;
+
+  /* Surfaces / fg */
+  --bg-primary: var(--foam);
+  --bg-inverse: var(--blackout);
+  --bg-feature: var(--cup-red);
+  --bg-deep:    var(--lager);
+  --fg-primary: var(--blackout);
+  --fg-on-red:  var(--foam);
+  --fg-on-dark: var(--foam);
+  --fg-muted:      rgba(0, 0, 0, 0.55);
+  --fg-muted-dark: rgba(255, 251, 236, 0.65);
+  --border-strong:  var(--blackout);
+  --border-on-dark: var(--foam);
+  --border-accent:  var(--cup-red);
+
+  --background: var(--foam);
+  --foreground: var(--blackout);
+  --font-posterama: 'Posterama', 'Arial Black', Arial, sans-serif;
+
+  /* Tracking */
+  --tracking-tight: -0.02em;
+  --tracking-wide:  0.1em;
+  --tracking-wider: 0.2em;
+  --tracking-widest:0.3em;
+
+  /* Easing */
+  --ease-snap: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
@@ -20,25 +58,43 @@
   --font-sans: var(--font-outfit);
 }
 
+/* Brand uses square corners by default. Pills/balls opt-in. */
 * {
   border-radius: 0 !important;
 }
+[data-pill]   { border-radius: 999px !important; }
+[data-ball]   { border-radius: 50%   !important; }
+[data-rounded]{ border-radius: 7px   !important; }
 
-[data-rounded] {
-  border-radius: 7px !important;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background: #0a0808;
-  color: var(--foreground);
-  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
+  background: var(--foam);
+  color: var(--blackout);
+  font-family: var(--font-outfit), Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Type utilities */
+.t-tag {
+  font-family: var(--font-outfit), Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
 }
 
-/* Film grain overlay — gives that analog, moodboard texture */
+/* Five-point star divider */
+.star {
+  color: var(--cup-red);
+  display: inline-block;
+  transform: translateY(-0.05em);
+  margin: 0 0.4em;
+  font-family: var(--font-posterama);
+}
+
+/* Subtle film grain — keeps a touch of analog texture without breaking the foam ground */
 .grain-overlay::after {
   content: '';
   position: fixed;
@@ -49,42 +105,105 @@ html {
   width: 200%;
   height: 200%;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity: 0.3;
+  opacity: 0.18;
   pointer-events: none;
   z-index: 9999;
+  mix-blend-mode: multiply;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-12px) scale(1.1); }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
+/* Animations */
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-@keyframes slideInUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulse-red {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(246, 24, 19, 0.4); }
-  50% { box-shadow: 0 0 20px 10px rgba(246, 24, 19, 0.1); }
-}
-
 @keyframes marquee-reverse {
   0% { transform: translateX(-50%); }
   100% { transform: translateX(0); }
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(240, 11, 31, 0.4); }
+  50%      { box-shadow: 0 0 0 14px rgba(240, 11, 31, 0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.7; }
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translate3d(0, 24px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes ball-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-6px) rotate(2deg); }
+}
+
+@keyframes drop-in {
+  0%   { opacity: 0; transform: translate3d(0, -18px, 0) scale(0.96); }
+  60%  { opacity: 1; transform: translate3d(0, 4px, 0) scale(1.01); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Hover lift used on cards (Past Events, Sponsors, Champion tiles) */
+.lift {
+  transition:
+    transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.lift:hover { transform: translate3d(0, -6px, 0); }
+
+/* Subtle bg-fill sweep used by ghost buttons */
+.btn-sweep { position: relative; overflow: hidden; }
+.btn-sweep::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--cup-red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+.btn-sweep:hover::after { transform: scaleX(1); }
+.btn-sweep > * { position: relative; z-index: 1; }
+
+/* Underline-grow used by inline text links */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1.5px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover { background-size: 100% 1.5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
