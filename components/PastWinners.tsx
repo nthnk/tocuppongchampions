@@ -202,15 +202,6 @@ export function PastWinners() {
           </p>
         </Reveal>
       </div>
-
-      <style jsx>{`
-        .winners-table-desktop { display: none; }
-        .winners-cards-mobile { display: grid; }
-        @media (min-width: 900px) {
-          .winners-table-desktop { display: block; }
-          .winners-cards-mobile { display: none; }
-        }
-      `}</style>
     </section>
   );
 }

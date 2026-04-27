@@ -163,6 +163,16 @@ body {
   to   { opacity: 1; }
 }
 
+/* Past Winners — table on desktop, card stack on mobile.
+   Lives in global CSS (not styled-jsx) because the table wrapper is rendered
+   by the <Reveal> component and would otherwise miss the scoped className. */
+.winners-table-desktop { display: none; }
+.winners-cards-mobile  { display: grid; }
+@media (min-width: 900px) {
+  .winners-table-desktop { display: block; }
+  .winners-cards-mobile  { display: none; }
+}
+
 /* Hover lift used on cards (Past Events, Sponsors, Champion tiles) */
 .lift {
   transition:
