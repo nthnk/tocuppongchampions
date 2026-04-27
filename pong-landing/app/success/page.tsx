@@ -151,7 +151,7 @@ function SuccessContent() {
 
 export default function SuccessPage() {
   return (
-    <main className="min-h-screen relative grain-overlay" style={{ background: palette.black }}>
+    <main className="min-h-screen relative" style={{ background: palette.black }}>
       <div className="relative z-10">
         <Header />
         <Suspense

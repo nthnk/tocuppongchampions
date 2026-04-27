@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${outfit.variable} ${posterama.variable} antialiased`}
+        className={`${outfit.variable} ${posterama.variable} antialiased grain-overlay`}
       >
         <PageTransition>{children}</PageTransition>
       </body>

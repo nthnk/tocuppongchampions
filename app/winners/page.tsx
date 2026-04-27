@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function WinnersPage() {
   return (
-    <main className="min-h-screen relative grain-overlay" style={{ background: 'var(--foam)' }}>
+    <main className="min-h-screen relative" style={{ background: 'var(--foam)' }}>
       <div className="relative z-10">
         <Header />
 

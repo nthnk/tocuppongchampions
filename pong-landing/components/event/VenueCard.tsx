@@ -15,7 +15,7 @@ export function VenueCard({ event }: { event: EventCanon }) {
       }}
     >
       <Image
-        src="/event_photos/_dsf0784.jpg"
+        src="/event_photos/venue_background.jpg"
         alt=""
         fill
         sizes="100vw"
