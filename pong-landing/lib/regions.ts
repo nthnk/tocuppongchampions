@@ -32,11 +32,11 @@ const NEIGHBOURHOOD_REGION: Record<string, RegionKey> = {
   'East Danforth': 'NE',
   // South West
   'Long Branch': 'SW',
+  'Kensington Market': 'SW',
+  'The Annex': 'SW',
   // South East
   'St. Lawrence Market': 'SE',
   'Church/Wellesley': 'SE',
-  'The Annex': 'SE',
-  'Kensington Market': 'SE',
   'Scarborough Village': 'SE',
 };
 
