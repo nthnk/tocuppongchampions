@@ -29,7 +29,6 @@ const NEIGHBOURHOOD_REGION: Record<string, RegionKey> = {
   'Milliken': 'NE',
   'Scarborough Town Centre': 'NE',
   'Pleasantview': 'NE',
-  'East Danforth': 'NE',
   // South West
   'Long Branch': 'SW',
   'Kensington Market': 'SW',
@@ -38,6 +37,7 @@ const NEIGHBOURHOOD_REGION: Record<string, RegionKey> = {
   'St. Lawrence Market': 'SE',
   'Church/Wellesley': 'SE',
   'Scarborough Village': 'SE',
+  'East Danforth': 'SE',
 };
 
 export function regionOf(neighbourhood: string): Region {
